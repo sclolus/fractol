@@ -6,18 +6,27 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/25 16:55:51 by sclolus           #+#    #+#             */
-/*   Updated: 2017/06/25 18:17:09 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/06/25 22:42:25 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
+/*
+** DEBUG
+*/
+
+# define CHECK(x) do {ft_putendl_fd("_______", 2);ft_putendl_fd(#x, 2);ft_putendl_fd("_______", 2);}while(0);
+
 # include <stdint.h>
 # include "key_codes_macos.h"
 # include "events.h"
 # include "mlx.h"
 # include "libft.h"
+# include <fcntl.h>
+
+# include <stdio.h> //
 
 typedef void* MLX_WIN;
 typedef void* MLX_IMG;
@@ -25,6 +34,7 @@ typedef void* MLX_PTR;
 
 # define WINDOW_NAME "fdf"
 
+# define STDIN_NOFILE 0
 typedef struct	s_mem_block
 {
 	uint64_t			capacity;
@@ -35,9 +45,9 @@ typedef struct	s_mem_block
 
 typedef struct	s_matrice
 {
-	uint64_t	x;
-	uint64_t	y;
-	uint64_t	z;
+	int64_t		x;
+	int64_t		y;
+	int64_t		z;
 }				t_matrice;
 
 typedef struct	s_point
@@ -50,12 +60,17 @@ typedef struct	s_point
 */
 
 #define MEM_BLOCK_LIMIT 256
-#define DEFAULT_MEM_BLOCK_SIZE 1U << 32
+#define DEFAULT_MEM_BLOCK_SIZE sizeof(t_point) * (10000)
 
 void		*ft_mem_block_push_back_elem(t_mem_block *mem_block
 									, void *elem, uint32_t size);
 t_mem_block	*ft_create_mem_block(uint64_t capacity);
 
+/*
+** Parsing
+*/
+
+t_mem_block		*ft_parse_file(char *filename);
 
 /*
 ** Error handling
@@ -66,4 +81,5 @@ t_mem_block	*ft_create_mem_block(uint64_t capacity);
 # define MLX_INIT_ERROR "mlx_init() failed"
 # define MLX_NEW_WIN_ERROR "mlx_new_window() failed"
 # define MLX_NEW_IMG_ERROR "mlx_new_image() failed"
+# define OPEN_FILE_FAILED "open() failed"
 #endif

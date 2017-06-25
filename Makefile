@@ -1,5 +1,9 @@
 NAME= fdf
-SRC= srcs/main.c
+SRC= srcs/main.c \
+	srcs/ft_parse_file.c \
+	srcs/ft_create_mem_block.c \
+	srcs/ft_mem_block_push_back_elem.c
+HDRS= includes/fdf.h
 OBJ= $(SRC:.c=.o)
 HDR_PATH= ./libft/includes/
 CC= gcc

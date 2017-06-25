@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/25 14:04:28 by sclolus           #+#    #+#             */
-/*   Updated: 2017/06/25 16:56:18 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/06/25 22:44:02 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,12 @@ void	*ft_mem_block_push_back_elem(t_mem_block *mem_block
 {
 	while (mem_block->next)
 		mem_block = mem_block->next;
-	if (mem_block->offset + size < mem_block->capacity)
+			printf("offset: %lld, capacity: %lld, size: %d\n", mem_block->offset, mem_block->capacity, size);
+
+	if (mem_block->offset + size <= mem_block->capacity)
 	{
-		ft_memcpy(mem_block + mem_block->offset, elem, size);
+		ft_memcpy((unsigned char*)mem_block->block
+				+ mem_block->offset, elem, size);
 		mem_block->offset += size;
 	}
 	else
