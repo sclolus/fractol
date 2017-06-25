@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/25 20:57:51 by sclolus           #+#    #+#             */
-/*   Updated: 2017/06/25 21:54:39 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/06/25 22:54:51 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,6 @@ t_mem_block		*ft_parse_file(char *filename)
 	if ((fd = open(filename, O_RDONLY)) == -1)
 		ft_error_exit(2, (char*[]){filename, OPEN_FILE_FAILED}, EXIT_FAILURE);
 	while (get_next_line(fd, &line) > 0)
-	{
-		ft_putendl(line);
 		ft_get_data_from_line(line, data);
-	}
 	return (data);
 }
