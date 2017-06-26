@@ -6,12 +6,11 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/25 20:57:51 by sclolus           #+#    #+#             */
-/*   Updated: 2017/06/25 22:54:51 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/06/26 18:02:59 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
 static void		ft_get_data_from_line(char *line, t_mem_block *data)
 {
 	static int64_t	y = 0;
@@ -28,7 +27,7 @@ static void		ft_get_data_from_line(char *line, t_mem_block *data)
 			i++;
 		z = ft_atoi(line + i);
 		ft_mem_block_push_back_elem(data
-			, &(t_point){{x, y, z}}, sizeof(t_point));
+									, &(t_point){NULL, {(double)(x), (double)(y), (double)(z)}}, sizeof(t_point));
 		while (ft_isdigit(line[i]))
 			i++;
 		x++;
