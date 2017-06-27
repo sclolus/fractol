@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_get_conjugate_quat.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/25 16:54:59 by sclolus           #+#    #+#             */
-/*   Updated: 2017/06/25 16:55:16 by sclolus          ###   ########.fr       */
+/*   Created: 2017/06/27 09:04:26 by sclolus           #+#    #+#             */
+/*   Updated: 2017/06/27 09:05:41 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	main(int argc, char **argv)
+t_quat	ft_get_conjugate_quat(t_quat *quat)
 {
-	return (0);
+	return ((t_quat){-quat->x, -quat->y, -quat->z, quat->w});
 }

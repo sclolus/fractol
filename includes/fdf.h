@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/25 16:55:51 by sclolus           #+#    #+#             */
-/*   Updated: 2017/06/27 08:09:55 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/06/27 09:29:09 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,21 @@ typedef struct	s_mlx_image_data
 	int32_t	endian;
 }				t_mlx_image_data;
 
+typedef struct	s_vec
+{
+	double	x;
+	double	y;
+	double	z;
+}				t_vec;
+
+typedef struct	s_quat
+{
+	double	x;
+	double	y;
+	double	z;
+	double	w;
+}				t_quat;
+
 /*
 ** Mem_block handling
 */
@@ -143,6 +158,16 @@ void		ft_handler_pad_divide(void *param);
 void		ft_handler_q(void *param);
 void		ft_handler_e(void *param);
 void		ft_handler_pad_multiply(void *param);
+
+/*
+** Quaternions
+*/
+
+double		ft_get_quat_magnitude(t_quat *quat);
+t_quat		ft_normalize_quat(t_quat *quat);
+t_quat		ft_get_conjugate_quat(t_quat *quat);
+t_quat		ft_multiply_quat(t_quat *a, t_quat *b);
+void		ft_quat_rotate_points(t_vec *axis, double angle, t_mem_block *data);
 
 /*
 ** Error handling
