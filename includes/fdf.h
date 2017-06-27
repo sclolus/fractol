@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/25 16:55:51 by sclolus           #+#    #+#             */
-/*   Updated: 2017/06/27 16:03:20 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/06/27 16:25:04 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ typedef struct	s_quat
 void		*ft_mem_block_push_back_elem(t_mem_block *mem_block
 									, void *elem, uint32_t size);
 t_mem_block	*ft_create_mem_block(uint64_t capacity);
-void		ft_set_lines(t_mem_block *mem_block);
+t_mem_block	*ft_set_lines(t_mem_block *mem_block);
 
 /*
 ** Isometric Perspective

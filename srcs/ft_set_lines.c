@@ -6,13 +6,13 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/26 14:41:45 by sclolus           #+#    #+#             */
-/*   Updated: 2017/06/26 18:53:56 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/06/27 16:44:32 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	ft_set_lines(t_mem_block *mem_block)
+t_mem_block		*ft_set_lines(t_mem_block *mem_block)
 {
 	t_mem_block	*tmp;
 	uint64_t	offset;
@@ -26,7 +26,7 @@ void	ft_set_lines(t_mem_block *mem_block)
 		if (((t_point*)mem_block->block + i)->coords.y
 			< (((t_point*)mem_block->block + i + 1))->coords.y)
 		{
-			i++;
+			i += 1;
 			break ;
 		}
 		i++;
@@ -49,4 +49,5 @@ void	ft_set_lines(t_mem_block *mem_block)
 			&& tmp->next && !(offset = 0))
 			tmp = tmp->next;
 	}
+	return (NULL);
 }
