@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_handler_right.c                                 :+:      :+:    :+:   */
+/*   ft_handler_pad_down.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/26 21:27:20 by sclolus           #+#    #+#             */
-/*   Updated: 2017/06/27 08:09:36 by sclolus          ###   ########.fr       */
+/*   Created: 2017/06/27 06:51:08 by sclolus           #+#    #+#             */
+/*   Updated: 2017/06/27 07:26:28 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	ft_handler_right(void *param)
+void	ft_handler_pad_down(void *param)
 {
 	t_mem_block	*data;
 	t_mem_block	*tmp;
@@ -23,11 +23,13 @@ void	ft_handler_right(void *param)
 	i = 0;
 	while (i * sizeof(t_point) < tmp->offset)
 	{
-		((t_point*)tmp->block + i)->coords.x += MOVE_COEFFICIENT;
+		((t_point*)tmp->block + i)->coords.x *= 0.97;
+		((t_point*)tmp->block + i)->coords.z *= 0.97;
+		((t_point*)tmp->block + i)->coords.y *= 0.97;
 		i++;
 		if (i * sizeof(t_point) >= tmp->offset && tmp->next && !(i = 0))
 			tmp = tmp->next;
 	}
 	ft_draw_lines(((MLX_PTR)((char**)param)[0]), (MLX_PTR)((char**)param)[1]
-		, (MLX_IMG)((char**)param)[2], (t_mem_block*)((t_mem_block**)param)[3]);
+		, (MLX_IMG)((char**)param)[2],(t_mem_block*)((t_mem_block**)param)[3]);
 }

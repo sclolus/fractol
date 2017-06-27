@@ -12,7 +12,15 @@ SRC= srcs/main.c \
 	srcs/ft_handler_right.c \
 	srcs/ft_handler_left.c \
 	srcs/ft_handler_up.c \
-	srcs/ft_handler_down.c
+	srcs/ft_handler_down.c \
+	srcs/ft_handler_pad_up.c \
+	srcs/ft_handler_pad_down.c \
+	srcs/ft_handler_q.c \
+	srcs/ft_handler_e.c \
+	srcs/ft_handler_pad_divide.c \
+	srcs/ft_handler_pad_multiply.c \
+	srcs/ft_get_reduction_coefficient.c \
+	srcs/ft_get_perspective_angle.c
 HDRS= includes/fdf.h
 OBJ= $(SRC:.c=.o)
 HDR_PATH= ./libft/includes/

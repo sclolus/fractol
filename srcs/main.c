@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/25 16:54:59 by sclolus           #+#    #+#             */
-/*   Updated: 2017/06/27 00:15:15 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/06/27 08:07:44 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,17 +63,10 @@ int	main(int argc, char **argv)
 			ft_error_exit(1, (char*[]){MLX_NEW_IMG_ERROR}, EXIT_FAILURE);
 		ft_set_3d(data);
 		ft_set_lines(data);
-		/* ft_draw_line(connector, win, &(t_point){NULL, {10, 1000, 10}}, &(t_point){NULL, {1910, 1000, 10}}); */
-		/* ft_draw_line(connector, win, &(t_point){NULL, {10, 1000, 1070}}, &(t_point){NULL, {1910, 1000, 1070}}); */
-		/* ft_draw_line(connector, win, &(t_point){NULL, {10, 1000, 10}}, &(t_point){NULL, {10, 1000, 1070}}); */
-		/* ft_draw_line(connector, win, &(t_point){NULL, {1970, 1000, 1070}}, &(t_point){NULL, {1970, 1000, 10}}); */
-
-
-		/* ft_draw_line(connector, win, &(t_point){NULL, {10, 1000, 10}}, &(t_point){NULL, {1910, 1000, 1070}}); */
-		/* ft_draw_line(connector, win, &(t_point){NULL, {1910, 1000, 10}}, &(t_point){NULL, {10, 1000, 1070}}); */
 		ft_draw_lines(connector, win, image, data);
 		printf("data: %p\n", (void*)data);
-		mlx_key_hook(win, &ft_handler_keys, (void*[]){connector, win, image, data});
+//		mlx_key_hook(win, &ft_handler_keys, (void*[]){connector, win, image, data});
+		mlx_hook(win, KeyPress, KeyPressMask | KeymapStateMask, &ft_handler_keys, (void*[]){connector, win, image, data});
 		mlx_loop(connector);
 	}
 }

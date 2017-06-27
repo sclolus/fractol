@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/25 16:55:51 by sclolus           #+#    #+#             */
-/*   Updated: 2017/06/26 23:34:22 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/06/27 08:09:55 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,10 @@ typedef void* MLX_PTR;
 # define WINDOW_HEIGHT 1080
 
 # define PI 3.14159265359
-# define K 0.75
-# define ANGLE 45
+# define K 0.5
+# define ANGLE 120
+
+# define MOVE_COEFFICIENT 3.5
 
 # define STDIN_NOFILE 0
 typedef struct	s_mem_block
@@ -98,30 +100,49 @@ t_mem_block	*ft_create_mem_block(uint64_t capacity);
 void		ft_set_lines(t_mem_block *mem_block);
 
 /*
+** Isometric Perspective
+*/
+
+void		ft_sus_perspective_angle(void);
+void		ft_add_perspective_angle(void);
+double		*ft_get_perspective_angle(void);
+
+double		*ft_get_reduction_coefficient(void);
+void		ft_sus_reduction_coefficient(void);
+void		ft_add_reduction_coefficient(void);
+/*
 ** Parsing
 */
 
-t_mem_block		*ft_parse_file(char *filename);
+t_mem_block	*ft_parse_file(char *filename);
 
 /*
 ** Line drawing
 */
 
-void	ft_set_3d(t_mem_block *data);
-void	ft_draw_line(t_mlx_data *mlx_data, t_point *a, t_point *b);
-void	ft_draw_lines(MLX_PTR connector, MLX_WIN win, MLX_IMG image, t_mem_block *data);
-int		ft_draw_lines_hook(void *param);
+void		ft_set_3d(t_mem_block *data);
+void		ft_draw_line(t_mlx_data *mlx_data, t_point *a, t_point *b);
+void		ft_draw_lines(MLX_PTR connector, MLX_WIN win, MLX_IMG image
+						, t_mem_block *data);
+int			ft_draw_lines_hook(void *param);
 
 /*
 ** Key handling
 */
 
 int			ft_handler_keys(int keycode, void *param);
-void		ft_handler_esc(void *param __attribute__((unused))) __attribute__((noreturn));
+void		ft_handler_esc(void *param __attribute__((unused)))
+			__attribute__((noreturn));
 void		ft_handler_right(void *param);
 void		ft_handler_left(void *param);
 void		ft_handler_down(void *param);
 void		ft_handler_up(void *param);
+void		ft_handler_pad_down(void *param);
+void		ft_handler_pad_up(void *param);
+void		ft_handler_pad_divide(void *param);
+void		ft_handler_q(void *param);
+void		ft_handler_e(void *param);
+void		ft_handler_pad_multiply(void *param);
 
 /*
 ** Error handling

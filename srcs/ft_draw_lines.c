@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/25 23:20:15 by sclolus           #+#    #+#             */
-/*   Updated: 2017/06/26 23:38:30 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/06/27 06:47:58 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,6 @@ void	ft_draw_lines(MLX_PTR connector, MLX_WIN win, MLX_IMG image,  t_mem_block *
 		}
 	}
 	mlx_put_image_to_window(connector, win, image, 0, 0);
+	ft_bzero(mlx_get_data_addr(image, &(int){1}, &(int){1}, &(int){1}), WINDOW_HEIGHT * WINDOW_WIDTH * 4);
+
 }
