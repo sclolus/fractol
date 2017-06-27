@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/26 23:12:08 by sclolus           #+#    #+#             */
-/*   Updated: 2017/06/27 08:10:59 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/06/27 10:33:24 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_handler_down(void *param)
 	i = 0;
 	while (i * sizeof(t_point) < tmp->offset)
 	{
-		((t_point*)tmp->block + i)->coords.z += MOVE_COEFFICIENT;
+		((t_point*)tmp->block + i)->coords.y += MOVE_COEFFICIENT;
 		i++;
 		if (i * sizeof(t_point) >= tmp->offset && tmp->next && !(i = 0))
 			tmp = tmp->next;

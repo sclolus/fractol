@@ -17,10 +17,21 @@ SRC= srcs/main.c \
 	srcs/ft_handler_pad_down.c \
 	srcs/ft_handler_q.c \
 	srcs/ft_handler_e.c \
+	srcs/ft_handler_a.c \
+	srcs/ft_handler_d.c \
+	srcs/ft_handler_s.c \
+	srcs/ft_handler_w.c \
 	srcs/ft_handler_pad_divide.c \
 	srcs/ft_handler_pad_multiply.c \
 	srcs/ft_get_reduction_coefficient.c \
-	srcs/ft_get_perspective_angle.c
+	srcs/ft_get_perspective_angle.c \
+	srcs/quaternions/ft_get_conjugate_quat.c \
+	srcs/quaternions/ft_get_quat_magnitude.c \
+	srcs/quaternions/ft_multiply_quat.c \
+	srcs/quaternions/ft_normalize_quat.c \
+	srcs/quaternions/ft_quat_rotate_points.c \
+	srcs/quaternions/ft_rotate_points.c
+
 HDRS= includes/fdf.h
 OBJ= $(SRC:.c=.o)
 HDR_PATH= ./libft/includes/
@@ -33,7 +44,7 @@ FLAGS= -L$(MLX_PATH) -lmlx -L$(LIBFT_PATH) -lft -I$(HDR_PATH) -I./includes -I$(M
 all: submodule $(NAME)
 
 submodule:
-	@make -C minilibx_macos
+#	@make -C minilibx_macos
 	@make -C libft/
 
 $(NAME): $(OBJ)
@@ -44,7 +55,7 @@ $(NAME): $(OBJ)
 clean:
 	rm -f $(OBJ)
 	make -C $(LIBFT_PATH) clean
-	make -C $(MLX_PATH) clean
+#	make -C $(MLX_PATH) clean
 fclean: clean
 	rm -f $(NAME)
 	make -C $(LIBFT_PATH) fclean

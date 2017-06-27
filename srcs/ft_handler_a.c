@@ -1,33 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_handler_up.c                                    :+:      :+:    :+:   */
+/*   ft_handler_a.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/26 23:11:38 by sclolus           #+#    #+#             */
-/*   Updated: 2017/06/27 10:33:07 by sclolus          ###   ########.fr       */
+/*   Created: 2017/06/27 12:19:03 by sclolus           #+#    #+#             */
+/*   Updated: 2017/06/27 12:23:49 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	ft_handler_up(void *param)
+void	ft_handler_a(void *param)
 {
-	t_mem_block	*data;
-	t_mem_block	*tmp;
-	uint32_t	i;
-
-	data = ((t_mem_block**)param)[3];
-	tmp = data;
-	i = 0;
-	while (i * sizeof(t_point) < tmp->offset)
-	{
-		((t_point*)tmp->block + i)->coords.y -= MOVE_COEFFICIENT;
-		i++;
-		if (i * sizeof(t_point) >= tmp->offset && tmp->next && !(i = 0))
-			tmp = tmp->next;
-	}
+	ft_quat_rotate_points(&(t_vec){1, 0, 0}, ROTATION_SPEED * PI / 180, (t_mem_block*)((t_mem_block**)param)[3]);
 	ft_draw_lines(((MLX_PTR)((char**)param)[0]), (MLX_PTR)((char**)param)[1]
-		, (MLX_IMG)((char**)param)[2],(t_mem_block*)((t_mem_block**)param)[3]);
+				  , (MLX_IMG)((char**)param)[2],(t_mem_block*)((t_mem_block**)param)[3]);
 }

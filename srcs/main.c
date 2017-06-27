@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/25 16:54:59 by sclolus           #+#    #+#             */
-/*   Updated: 2017/06/27 09:31:31 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/06/27 12:16:42 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,9 @@ int	main(int argc, char **argv)
 			ft_error_exit(1, (char*[]){MLX_NEW_WIN_ERROR}, EXIT_FAILURE);
 		if (!(image = mlx_new_image(connector, WINDOW_WIDTH, WINDOW_HEIGHT)))
 			ft_error_exit(1, (char*[]){MLX_NEW_IMG_ERROR}, EXIT_FAILURE);
-//		ft_set_3d(data);
 		ft_set_lines(data);
-		ft_quat_rotate_points(&(t_vec){2, 3, 4}, 45, data);
+		ft_quat_rotate_points(&(t_vec){1, 0.5, 1},  -45 * PI / 180, data);
 		ft_draw_lines(connector, win, image, data);
-		printf("data: %p\n", (void*)data);
-//		mlx_key_hook(win, &ft_handler_keys, (void*[]){connector, win, image, data});
 		mlx_hook(win, KeyPress, KeyPressMask | KeymapStateMask, &ft_handler_keys, (void*[]){connector, win, image, data});
 		mlx_loop(connector);
 	}

@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/25 16:55:51 by sclolus           #+#    #+#             */
-/*   Updated: 2017/06/27 09:29:09 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/06/27 12:23:48 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** DEBUG
 */
 
-# define DEBUG 1
+# define DEBUG 0
 
 # define CHECK(x) do {ft_putendl_fd("_______", 2);ft_putendl_fd(#x, 2);ft_putendl_fd("_______", 2);}while(0);
 
@@ -42,7 +42,8 @@ typedef void* MLX_PTR;
 # define K 0.5
 # define ANGLE 120
 
-# define MOVE_COEFFICIENT 3.5
+# define MOVE_COEFFICIENT 10
+# define ROTATION_SPEED 0.5
 
 # define STDIN_NOFILE 0
 typedef struct	s_mem_block
@@ -157,6 +158,10 @@ void		ft_handler_pad_up(void *param);
 void		ft_handler_pad_divide(void *param);
 void		ft_handler_q(void *param);
 void		ft_handler_e(void *param);
+void		ft_handler_w(void *param);
+void		ft_handler_s(void *param);
+void		ft_handler_d(void *param);
+void		ft_handler_a(void *param);
 void		ft_handler_pad_multiply(void *param);
 
 /*
@@ -166,7 +171,7 @@ void		ft_handler_pad_multiply(void *param);
 double		ft_get_quat_magnitude(t_quat *quat);
 t_quat		ft_normalize_quat(t_quat *quat);
 t_quat		ft_get_conjugate_quat(t_quat *quat);
-t_quat		ft_multiply_quat(t_quat *a, t_quat *b);
+t_quat		ft_multiply_quat(t_quat a, t_quat b);
 void		ft_quat_rotate_points(t_vec *axis, double angle, t_mem_block *data);
 
 /*
