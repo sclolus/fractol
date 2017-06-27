@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/25 23:22:11 by sclolus           #+#    #+#             */
-/*   Updated: 2017/06/27 11:49:50 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/06/27 13:38:17 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	ft_draw_line(t_mlx_data *mlx_data, t_point *a, t_point *b)
 
 	image_rgb = (void*)mlx_get_data_addr(mlx_data->image, &img_data.bits_per_pixel
 								, &img_data.size_line, &img_data.endian);
-//	printf("bits_per_pixel: %d\n", img_data.size_line);
 	if (a->coords.x > WINDOW_WIDTH || a->coords.x < 0 || b->coords.x > WINDOW_WIDTH || b->coords.x < 0
 		|| a->coords.y > WINDOW_HEIGHT || a->coords.y < 0 || b->coords.y > WINDOW_HEIGHT || b->coords.y < 0)
 		return ;
@@ -34,7 +33,7 @@ void	ft_draw_line(t_mlx_data *mlx_data, t_point *a, t_point *b)
 		while (x < a->coords.x)
 		{
 			((int*)image_rgb)[(int)((ordonne + e * x)) * WINDOW_WIDTH + (int)x] = 0xFFFFFF;
-			x += 0.5L;
+			x += 1L;
 		}
 		return ;
 	}
@@ -44,6 +43,6 @@ void	ft_draw_line(t_mlx_data *mlx_data, t_point *a, t_point *b)
 	while (x < b->coords.x)
 	{
 		((int*)image_rgb)[(int)((ordonne + e * x)) * WINDOW_WIDTH + (int)x] = 0xFFFFFF;
-		x += 0.5L;
+		x += 1L;
 	}
 }

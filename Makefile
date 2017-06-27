@@ -21,8 +21,6 @@ SRC= srcs/main.c \
 	srcs/ft_handler_d.c \
 	srcs/ft_handler_s.c \
 	srcs/ft_handler_w.c \
-	srcs/ft_handler_pad_divide.c \
-	srcs/ft_handler_pad_multiply.c \
 	srcs/ft_get_reduction_coefficient.c \
 	srcs/ft_get_perspective_angle.c \
 	srcs/quaternions/ft_get_conjugate_quat.c \
