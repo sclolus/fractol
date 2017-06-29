@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/26 21:05:42 by sclolus           #+#    #+#             */
-/*   Updated: 2017/06/27 16:33:24 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/06/28 14:52:44 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int			ft_handler_keys_release(int keycode, void *param __attribute__((unused)))
 	i = 0;
 	if (!keycodes_f)
 		keycodes_f = ft_get_keycodes_f();
-//	printf("keycode: %d \n", keycode);
 	while (i < NBR_KEY_HOOKS)
 	{
 		if (keycodes_f[i].keycode == keycode)

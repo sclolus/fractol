@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/26 23:10:15 by sclolus           #+#    #+#             */
-/*   Updated: 2017/06/27 12:05:35 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/06/28 15:05:00 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,12 @@ void	ft_handler_left(void *param)
 	data = ((t_mem_block**)param)[3];
 	tmp = data;
 	i = 0;
-	while (i * sizeof(t_point) < tmp->offset)
+	while (i * sizeof(t_line) < tmp->offset)
 	{
-		((t_point*)tmp->block + i)->coords.x -= MOVE_COEFFICIENT;
+		((t_line*)tmp->block + i)->start.x -= MOVE_COEFFICIENT;
+		((t_line*)tmp->block + i)->end.x -= MOVE_COEFFICIENT;
 		i++;
-		if (i * sizeof(t_point) >= tmp->offset && tmp->next && !(i = 0))
+		if (i * sizeof(t_line) >= tmp->offset && tmp->next && !(i = 0))
 			tmp = tmp->next;
 	}
 	ft_draw_lines(((MLX_PTR)((char**)param)[0]), (MLX_PTR)((char**)param)[1]

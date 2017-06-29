@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 06:49:50 by sclolus           #+#    #+#             */
-/*   Updated: 2017/06/27 07:26:11 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/06/29 06:35:55 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,20 @@ void	ft_handler_pad_up(void *param)
 	data = ((t_mem_block**)param)[3];
 	tmp = data;
 	i = 0;
-	while (i * sizeof(t_point) < tmp->offset)
+	while (i * sizeof(t_line) < tmp->offset)
 	{
-		((t_point*)tmp->block + i)->coords.x *= 1.03;
-		((t_point*)tmp->block + i)->coords.z *= 1.03;
-		((t_point*)tmp->block + i)->coords.y *= 1.03;
+		((t_line*)tmp->block + i)->start.x *= ZOOM_RATIO;
+		((t_line*)tmp->block + i)->start.z *= ZOOM_RATIO;
+		((t_line*)tmp->block + i)->start.y *= ZOOM_RATIO;
+		((t_line*)tmp->block + i)->end.x *= ZOOM_RATIO;
+		((t_line*)tmp->block + i)->end.z *= ZOOM_RATIO;
+		((t_line*)tmp->block + i)->end.y *= ZOOM_RATIO;
+		/* ((t_line*)tmp->block + i)->dx = ((t_line*)tmp->block + i)->start.x - ((t_line*)tmp->block + i)->end.x; */
+		/* ((t_line*)tmp->block + i)->dy = ((t_line*)tmp->block + i)->start.y - ((t_line*)tmp->block + i)->end.y; */
+		/* ((t_line*)tmp->block + i)->e = ((t_line*)tmp->block + i)->dy / ((t_line*)tmp->block + i)->dx; */
+
 		i++;
-		if (i * sizeof(t_point) >= tmp->offset && tmp->next && !(i = 0))
+		if (i * sizeof(t_line) >= tmp->offset && tmp->next && !(i = 0))
 			tmp = tmp->next;
 	}
 	ft_draw_lines(((MLX_PTR)((char**)param)[0]), (MLX_PTR)((char**)param)[1]

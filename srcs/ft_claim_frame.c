@@ -1,20 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_handler_s.c                                     :+:      :+:    :+:   */
+/*   ft_claim_frame.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/27 12:22:01 by sclolus           #+#    #+#             */
-/*   Updated: 2017/06/28 17:57:21 by sclolus          ###   ########.fr       */
+/*   Created: 2017/06/28 21:16:04 by sclolus           #+#    #+#             */
+/*   Updated: 2017/06/28 21:27:07 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	ft_handler_s(void *param)
+t_image_frame	*ft_claim_image_frame(t_image_frame *frames)
 {
-	ft_quat_rotate_points(&(t_vec){0, 1, 0}, -ROTATION_SPEED * PI / 180, (t_mem_block*)((t_mem_block**)param)[3]);
-	ft_draw_lines(((MLX_PTR)((char**)param)[0]), (MLX_PTR)((char**)param)[1]
-				  , (MLX_IMG)((char**)param)[2],(t_mem_block*)((t_mem_block**)param)[3]);
+	uint32_t	i;
+
+	i = 0;
+	while (i < NBR_IMAGE_FRAME)
+	{
+		if (frames[i].state == AVAILABLE)
+		{
+			frames[i].state = USED;
+			return (frames + i);
+		}
+		i++;
+		i %= 8;
+	}
+	return (frames);
 }
