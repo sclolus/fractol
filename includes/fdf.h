@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/25 16:55:51 by sclolus           #+#    #+#             */
-/*   Updated: 2017/06/29 06:22:21 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/06/29 12:31:10 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ typedef void* MLX_IMG;
 typedef void* MLX_PTR;
 
 # define WINDOW_NAME "fdf"
-# define WINDOW_WIDTH 2160
-# define WINDOW_HEIGHT 1440
+# define WINDOW_WIDTH 1920
+# define WINDOW_HEIGHT 1080
 
 # define PI 3.14159265359
 # define K 0.5
@@ -52,6 +52,8 @@ typedef void* MLX_PTR;
 # define NBR_IMAGE_FRAME 8
 
 # define STDIN_NOFILE 0
+
+# define ABS(x) (x < 0 ? -x : x)
 
 typedef struct	s_vec t_vec;
 
