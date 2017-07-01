@@ -6,11 +6,29 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/25 23:20:15 by sclolus           #+#    #+#             */
-/*   Updated: 2017/06/29 12:15:01 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/01 05:53:49 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+t_line	*ft_get_line(double x0, double y0, double x1, double y1)
+{
+	static	t_line	line;
+
+	line.start.x = x0 - WINDOW_WIDTH / 2;
+	line.start.y = y0 - WINDOW_HEIGHT / 2;
+	line.end.x = x1 - WINDOW_WIDTH / 2;
+	line.end.y = y1 - WINDOW_HEIGHT /2 ;
+	line.dx =  x1 - x0;
+	line.dy =  y1 - y0;
+	printf("line.dx: %lf, line.dy: %lf", line.dx, line.dy);
+	line.e = line.dy / line.dx;
+	printf("line.e: %lf\n", line.e);
+	return (&line);
+}
+
+
 
 void	ft_draw_lines(MLX_PTR connector, MLX_WIN win, t_image_frame *frames,  t_mem_block *data)
 {

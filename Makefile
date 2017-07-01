@@ -32,7 +32,10 @@ SRC= srcs/main.c \
 	srcs/quaternions/ft_multiply_quat.c \
 	srcs/quaternions/ft_normalize_quat.c \
 	srcs/quaternions/ft_quat_rotate_points.c \
-	srcs/quaternions/ft_rotate_points.c
+	srcs/quaternions/ft_rotate_points.c \
+	srcs/ft_get_lerp.c \
+	srcs/ft_get_z_coord.c \
+	srcs/ft_get_color_interpolation.c
 
 HDRS= includes/fdf.h
 OBJ= $(SRC:.c=.o)

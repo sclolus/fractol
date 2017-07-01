@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/25 16:55:51 by sclolus           #+#    #+#             */
-/*   Updated: 2017/06/29 12:31:10 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/01 16:40:48 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef void* MLX_PTR;
 # define ANGLE 120
 
 # define MOVE_COEFFICIENT 15
-# define ROTATION_SPEED 5
+# define ROTATION_SPEED 9
 # define ZOOM_RATIO 1.13
 # define DEZOOM_RATIO 1 / ZOOM_RATIO
 
@@ -222,6 +222,20 @@ t_quat			ft_multiply_quat(t_quat a, t_quat b);
 void			ft_quat_rotate_points(t_vec *axis, double angle, t_mem_block *data);
 
 /*
+** Interpolation
+*/
+
+# define COLOR_MIN_Z 0x00F000
+//# define COLOR_MIN_Z 0xFFFFFF
+# define COLOR_MAX_Z 0x000500
+//# define COLOR_MAX_Z 0xFFFFFF
+
+int32_t			ft_get_color_interpolation(t_line *line, t_vec *point);
+double			ft_get_z_coord(t_line *line, t_vec *point);
+int32_t			ft_get_lerp(double z1, double z2, double z);
+
+
+/*
 ** Error handling
 */
 
@@ -230,6 +244,6 @@ void			ft_quat_rotate_points(t_vec *axis, double angle, t_mem_block *data);
 # define MLX_INIT_ERROR "mlx_init() failed"
 # define MLX_NEW_WIN_ERROR "mlx_new_window() failed"
 # define MLX_NEW_IMG_ERROR "mlx_new_image() failed"
-# define MLX_IMG_FRAMES_ERROR "mallc() failed to alloc image frames"
+# define MLX_IMG_FRAMES_ERROR "malloc() failed to alloc image frames"
 # define OPEN_FILE_FAILED "open() failed"
 #endif
