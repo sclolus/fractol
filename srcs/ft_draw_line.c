@@ -6,32 +6,11 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/25 23:22:11 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/01 16:00:14 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/01 18:34:30 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-/* static void	ft_case_2(t_mlx_data *mlx_data, t_line *line) */
-/* { */
-/* 	int					*image_rgb; */
-/* 	double				e; */
-/* 	double				ordonne; */
-/* 	double				x; */
-/* 	double				y; */
-
-/* 	image_rgb = (int*)mlx_data->frame->buffer; */
-/* 	e = line->e; */
-/* 	ordonne = line->end.y - (e * line->end.x); */
-/* 	x = line->end.x; */
-/* 	y = line->end.y; */
-/* 	while (x < line->start.x) */
-/* 	{ */
-/* 		y = ordonne + e * x; */
-/* 		((int*)image_rgb)[(int)(y + WINDOW_HEIGHT / 2) * WINDOW_WIDTH + (int)x + WINDOW_WIDTH / 2] = 0xFFFFFF; */
-/* 		x += 1L; */
-/* 	} */
-/* } */
 
 static void	ft_case_1(t_mlx_data *mlx_data, t_line *line)
 {

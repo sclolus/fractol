@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/25 16:54:59 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/01 04:49:49 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/01 18:33:56 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	main(int argc, char **argv)
 	if (argc != 0 && argv)
 	{
 		data = ft_parse_file(argv[1]);
-		ft_putendl_fd("Charged map", 2);
 		if (!(connector = mlx_init()))
 			ft_error_exit(1, (char*[]){MLX_INIT_ERROR}, EXIT_FAILURE);
 		if (!(win = mlx_new_window(connector, WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME)))

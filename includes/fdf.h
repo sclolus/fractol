@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/25 16:55:51 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/01 16:40:48 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/01 18:53:34 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,10 +225,10 @@ void			ft_quat_rotate_points(t_vec *axis, double angle, t_mem_block *data);
 ** Interpolation
 */
 
-# define COLOR_MIN_Z 0x00F000
-//# define COLOR_MIN_Z 0xFFFFFF
-# define COLOR_MAX_Z 0x000500
-//# define COLOR_MAX_Z 0xFFFFFF
+//# define COLOR_MIN_Z 0x00F000
+# define COLOR_MIN_Z 0xF00000
+//# define COLOR_MAX_Z 0x000500
+# define COLOR_MAX_Z 0xE00000
 
 int32_t			ft_get_color_interpolation(t_line *line, t_vec *point);
 double			ft_get_z_coord(t_line *line, t_vec *point);
