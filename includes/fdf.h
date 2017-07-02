@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/25 16:55:51 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/01 18:53:34 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/02 20:23:43 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,12 +110,12 @@ typedef struct	s_mlx_data
 	t_image_frame	*frame;
 }				t_mlx_data;
 
-typedef struct	s_mlx_image_data
+typedef struct	s_pthread_execution_data
 {
-	int32_t	bits_per_pixel;
-	int32_t	size_line;
-	int32_t	endian;
-}				t_mlx_image_data;
+	t_mlx_data	mlx_data;
+	uint32_t	offset;
+	t_mem_block	*data;
+}				t_pthread_execution_data;
 
 typedef struct	s_quat
 {
@@ -188,6 +188,17 @@ int				ft_draw_lines_hook(void *param);
 t_line			*ft_line_clipping(t_line *line);
 
 /*
+** Pthread drawing
+*/
+
+# define DRAWING_THREAD_NBR 8
+
+pthread_t	*ft_pthread_create_lines_drawing_threads(MLX_PTR connector
+			, MLX_WIN win, t_image_frame *frame, t_mem_block *data);
+void		ft_pthread_wait_drawing_threads(pthread_t *thread_tab);
+void		*ft_pthread_lines_drawing_routine(void *arg);
+
+/*
 ** Key handling
 */
 
@@ -226,9 +237,9 @@ void			ft_quat_rotate_points(t_vec *axis, double angle, t_mem_block *data);
 */
 
 //# define COLOR_MIN_Z 0x00F000
-# define COLOR_MIN_Z 0xF00000
+# define COLOR_MIN_Z 0xE00000
 //# define COLOR_MAX_Z 0x000500
-# define COLOR_MAX_Z 0xE00000
+# define COLOR_MAX_Z 0xF00000
 
 int32_t			ft_get_color_interpolation(t_line *line, t_vec *point);
 double			ft_get_z_coord(t_line *line, t_vec *point);

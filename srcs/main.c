@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/25 16:54:59 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/01 18:33:56 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/02 20:27:20 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	main(int argc, char **argv)
 		mlx_hook(win, KeyRelease, KeyReleaseMask | KeymapStateMask
 				, &ft_handler_keys_release, (void*[]){connector
 				, win, frames, lines, data});
-		mlx_put_image_to_window(connector, win, frames[0].frame, 0, 0);
 		mlx_loop(connector);
 	}
 
