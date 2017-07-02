@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/25 16:55:51 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/02 20:23:43 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/02 20:33:51 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,6 +192,7 @@ t_line			*ft_line_clipping(t_line *line);
 */
 
 # define DRAWING_THREAD_NBR 8
+# define ERR_PTHREAD_FAIL "pthread_create() failed"
 
 pthread_t	*ft_pthread_create_lines_drawing_threads(MLX_PTR connector
 			, MLX_WIN win, t_image_frame *frame, t_mem_block *data);

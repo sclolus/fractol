@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/01 18:41:09 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/02 20:12:15 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/02 20:34:11 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@ pthread_t	*ft_pthread_create_lines_drawing_threads(MLX_PTR connector
 	{
 		pthread_data[i] = (t_pthread_execution_data){{connector, win, frame}
 						, i + 1, data};
-		pthread_create(threat_tab + i, NULL, &ft_pthread_lines_drawing_routine
-						, pthread_data + i);
+		if (pthread_create(threat_tab + i, NULL, &ft_pthread_lines_drawing_routine
+						, pthread_data + i))
+			ft_error_exit(1, (char*[]){ERR_PTHREAD_FAIL}, EXIT_FAILURE);
 		i++;
 	}
 	return (threat_tab);

@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/25 16:54:59 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/02 20:27:20 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/02 20:34:10 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@ int	main(int argc, char **argv)
 			ft_error_exit(1, (char*[]){MLX_NEW_WIN_ERROR}, EXIT_FAILURE);
 		frames = ft_get_image_frames(connector, NBR_IMAGE_FRAME);
 		lines = ft_set_lines(data);
-		pthread_create(&thread, NULL, &ft_pthread_frame_clear_routine, frames);
-		pthread_create(&thread, NULL, &ft_pthread_frame_clear_routine, frames);
+		if (pthread_create(&thread, NULL, &ft_pthread_frame_clear_routine, frames) ||
+			pthread_create(&thread, NULL, &ft_pthread_frame_clear_routine, frames))
+			ft_error_exit(1, (char*[]){ERR_PTHREAD_FAIL}, EXIT_FAILURE);
 		ft_quat_rotate_points(&(t_vec){1, 0.5, 1},  -45 * PI / 180, lines);
 		ft_draw_lines(connector, win, frames, lines);
 		mlx_hook(win, KeyPress, KeyPressMask | KeymapStateMask

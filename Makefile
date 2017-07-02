@@ -35,7 +35,6 @@ SRC= srcs/main.c \
 	srcs/quaternions/ft_multiply_quat.c \
 	srcs/quaternions/ft_normalize_quat.c \
 	srcs/quaternions/ft_quat_rotate_points.c \
-	srcs/quaternions/ft_rotate_points.c \
 	srcs/ft_get_lerp.c \
 	srcs/ft_get_z_coord.c \
 	srcs/ft_get_color_interpolation.c
@@ -44,7 +43,7 @@ HDRS= includes/fdf.h
 OBJ= $(SRC:.c=.o)
 HDR_PATH= ./libft/includes/
 CC= gcc
-CC_FLAGS= -v  -Wall -Werror -Wextra  #-g3 -fsanitize=address -fsanitize-blacklist=my_ignores.txt
+CC_FLAGS= -v  -Wall -Werror -Wextra  -g3 -fsanitize=address -fsanitize-blacklist=my_ignores.txt
 MLX_PATH=./minilibx_macos/
 LIBFT_PATH=./libft/
 FLAGS= -L$(MLX_PATH) -lmlx -L$(LIBFT_PATH) -lft -I$(HDR_PATH) -I./includes -I$(MLX_PATH) -framework OpenGL -framework AppKit
