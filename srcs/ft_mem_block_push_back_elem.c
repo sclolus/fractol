@@ -6,13 +6,11 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/25 14:04:28 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/02 23:35:41 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/03 06:23:20 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-uint32_t	test = 0;
 
 void	*ft_mem_block_push_back_elem(t_mem_block *mem_block
 									, void *elem, uint32_t size)
