@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/26 14:41:45 by sclolus           #+#    #+#             */
-/*   Updated: 2017/06/28 16:47:59 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/03 01:24:05 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,14 @@ t_mem_block		*ft_set_lines(t_mem_block *mem_block)
 			, 0, 0, 0, ((t_point*)mem_block->block + i)
 			, ((t_point*)mem_block->block + i + 1)}, sizeof(t_line));
 		i++;
-		if ((i + 1) * sizeof(t_point) >= mem_block->offset
+		if ((i) * sizeof(t_point) >= mem_block->offset
 			&& mem_block->next)
 		{
 			mem_block = mem_block->next;
 			i = 0;
 		}
 	}
-	while ((i) * sizeof(t_point) < mem_block->offset)
+	while ((i + 1) * sizeof(t_point) < mem_block->offset)
 	{
 		if ((int)((t_point*)mem_block->block + i)->coords.y
 			== (int)(((t_point*)mem_block->block + i + 1))->coords.y)

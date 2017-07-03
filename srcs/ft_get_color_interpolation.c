@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/01 15:54:27 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/01 16:59:31 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/03 02:38:17 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,19 @@ int32_t	ft_get_color_interpolation(t_line *line, t_vec *point)
 {
 	double	z1;
 	double	z2;
+	double	z3;
 
-	if (line->start.z < line->end.z)
-	{
-		z1 = line->start.z;
-		z2 = line->end.z;
-	}
+	z1 = line->start.z;
+	z2 = line->end.z;
+	if (line->point_1->coords.z == line->point_2->coords.z)
+		return (line->point_1->color);
 	else
-	{
-		z1 = line->end.z;
-		z2 = line->start.z;
-	}
-	return (ft_get_lerp(z1, z2, ft_get_z_coord(line, point)));
+		z3 = ((line->point_1->coords.z * (z2 - ft_get_z_coord(line, point)) + line->point_2->coords.z
+			   * (ft_get_z_coord(line, point) - z1)) / (z2 - z1));
+/* 	if (z3 == z2 || z2 == z1) */
+/* 		return (line->point_2->color); */
+/* 	else if (z3 == z1) */
+/* 		return (line->point_1->color); */
+	return ((int32_t)((line->point_1->color * (line->point_2->coords.z - z3) + line->point_2->color
+					   * (z3 - line->point_1->coords.z)) / (line->point_2->coords.z - line->point_1->coords.z)));
 }

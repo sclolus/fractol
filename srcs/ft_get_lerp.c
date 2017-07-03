@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/01 12:28:29 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/01 16:36:56 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/03 01:22:49 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 int32_t	ft_get_lerp(double z1, double z2, double z)
 {
-	return ((int32_t)((COLOR_MAX_Z * (z2 - z) + COLOR_MIN_Z
-					   * (z - z1)) / (z2 - z1)));
+	return ((int32_t)(((COLOR_MAX_Z * (z2 - z)) + (COLOR_MIN_Z
+			* (z - z1))) / (z2 - z1)));
 }

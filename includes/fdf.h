@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/25 16:55:51 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/02 20:33:51 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/03 02:44:07 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef void* MLX_PTR;
 # define K 0.5
 # define ANGLE 120
 
-# define MOVE_COEFFICIENT 15
+# define MOVE_COEFFICIENT 7
 # define ROTATION_SPEED 9
 # define ZOOM_RATIO 1.13
 # define DEZOOM_RATIO 1 / ZOOM_RATIO
@@ -75,6 +75,7 @@ typedef struct	s_vec
 typedef struct	s_point
 {
 	t_vec				coords;
+	int					color;
 }				t_point;
 
 typedef struct	s_keycode_f
@@ -237,10 +238,8 @@ void			ft_quat_rotate_points(t_vec *axis, double angle, t_mem_block *data);
 ** Interpolation
 */
 
-//# define COLOR_MIN_Z 0x00F000
-# define COLOR_MIN_Z 0xE00000
-//# define COLOR_MAX_Z 0x000500
-# define COLOR_MAX_Z 0xF00000
+# define COLOR_MIN_Z 0xF00000
+# define COLOR_MAX_Z 0xFFFFFF
 
 int32_t			ft_get_color_interpolation(t_line *line, t_vec *point);
 double			ft_get_z_coord(t_line *line, t_vec *point);
@@ -257,5 +256,5 @@ int32_t			ft_get_lerp(double z1, double z2, double z);
 # define MLX_NEW_WIN_ERROR "mlx_new_window() failed"
 # define MLX_NEW_IMG_ERROR "mlx_new_image() failed"
 # define MLX_IMG_FRAMES_ERROR "malloc() failed to alloc image frames"
-# define OPEN_FILE_FAILED "open() failed"
+# define OPEN_FILE_FAILED ": open() failed"
 #endif
