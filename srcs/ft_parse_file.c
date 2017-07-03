@@ -6,11 +6,11 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/25 20:57:51 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/03 04:45:13 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/03 06:21:45 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fractol.h"
 
 static t_vec		*ft_get_data_from_line(char *line, t_mem_block *data)
 {

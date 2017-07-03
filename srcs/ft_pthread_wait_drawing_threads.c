@@ -6,11 +6,11 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/02 18:09:54 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/02 19:33:51 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/03 06:21:45 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fractol.h"
 
 void	ft_pthread_wait_drawing_threads(pthread_t *thread_tab)
 {

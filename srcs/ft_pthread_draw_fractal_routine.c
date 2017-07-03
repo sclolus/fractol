@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_conjugate_quat.c                            :+:      :+:    :+:   */
+/*   ft_pthread_draw_fractal_routine.c                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/27 09:04:26 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/03 06:21:45 by sclolus          ###   ########.fr       */
+/*   Created: 2017/07/03 10:59:08 by sclolus           #+#    #+#             */
+/*   Updated: 2017/07/03 11:13:05 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-t_quat	ft_get_conjugate_quat(t_quat *quat)
+void	*ft_pthread_draw_fractal_routine(void *arg)
 {
-	return ((t_quat){-quat->x, -quat->y, -quat->z, quat->w});
+	(*((t_pthread_execution_data*)arg)->f)(arg);
+	pthread_exit(((t_pthread_execution_data*)arg)->mlx_data.frame);
 }

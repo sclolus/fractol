@@ -6,11 +6,11 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/25 23:22:11 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/01 18:34:30 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/03 06:21:42 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fractol.h"
 
 static void	ft_case_1(t_mlx_data *mlx_data, t_line *line)
 {

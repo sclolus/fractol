@@ -6,11 +6,11 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/26 21:05:42 by sclolus           #+#    #+#             */
-/*   Updated: 2017/06/28 14:52:44 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/03 06:21:45 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fractol.h"
 
 static t_keycode_f	*ft_get_keycodes_f(void)
 {

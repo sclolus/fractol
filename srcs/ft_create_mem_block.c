@@ -6,11 +6,11 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/25 13:56:03 by sclolus           #+#    #+#             */
-/*   Updated: 2017/06/28 14:30:22 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/03 06:22:30 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fractol.h"
 
 #include <stdio.h>
 
@@ -18,7 +18,7 @@ t_mem_block	*ft_create_mem_block(uint64_t capacity)
 {
 	t_mem_block	*mem_block;
 
-	if (capacity % sizeof(t_point) || capacity % sizeof(t_line))
+	if (capacity % sizeof(t_point))
 		ft_error_exit(1, (char*[]){INVALID_MEM_CAPACITY}, EXIT_FAILURE);
 	while (!(mem_block = (t_mem_block*)ft_memalloc(capacity
 			+ sizeof(t_mem_block))))

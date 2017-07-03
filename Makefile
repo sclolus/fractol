@@ -1,20 +1,27 @@
-NAME= fdf
+NAME= fractol
 SRC= srcs/main.c \
-	srcs/ft_parse_file.c \
-	srcs/ft_parse_color.c \
 	srcs/ft_create_mem_block.c \
 	srcs/ft_mem_block_push_back_elem.c \
 	srcs/ft_get_image_frames.c \
 	srcs/ft_pthread_frame_clear_routine.c \
 	srcs/ft_claim_frame.c \
-	srcs/ft_draw_line.c \
-	srcs/ft_draw_lines.c \
-	srcs/ft_pthread_create_lines_drawing_threads.c \
 	srcs/ft_pthread_wait_drawing_threads.c \
-	srcs/ft_pthread_lines_drawing_routine.c \
-	srcs/ft_line_clipping.c \
-	srcs/ft_set_3d.c \
-	srcs/ft_set_lines.c \
+	srcs/ft_pthread_create_drawing_threads.c \
+	srcs/ft_pthread_draw_fractal_routine.c \
+	srcs/ft_mandelbrot.c \
+	srcs/ft_draw_fractal.c \
+	srcs/quaternions/ft_get_conjugate_quat.c \
+	srcs/quaternions/ft_get_quat_magnitude.c \
+	srcs/quaternions/ft_multiply_quat.c \
+	srcs/quaternions/ft_normalize_quat.c \
+	srcs/complexes/ft_multiply_complexe.c \
+	srcs/complexes/ft_square_complexe.c \
+	srcs/complexes/ft_add_complexe.c \
+	srcs/complexes/ft_get_complexe_magnitude.c
+#	srcs/ft_get_z_coord.c \
+	srcs/quaternions/ft_quat_rotate_points.c \
+	srcs/ft_get_color_interpolation.c \
+	srcs/ft_get_lerp.c \
 	srcs/ft_handler_keys.c \
 	srcs/ft_handler_esc.c \
 	srcs/ft_handler_right.c \
@@ -29,22 +36,12 @@ SRC= srcs/main.c \
 	srcs/ft_handler_d.c \
 	srcs/ft_handler_s.c \
 	srcs/ft_handler_w.c \
-	srcs/ft_get_reduction_coefficient.c \
-	srcs/ft_get_perspective_angle.c \
-	srcs/quaternions/ft_get_conjugate_quat.c \
-	srcs/quaternions/ft_get_quat_magnitude.c \
-	srcs/quaternions/ft_multiply_quat.c \
-	srcs/quaternions/ft_normalize_quat.c \
-	srcs/quaternions/ft_quat_rotate_points.c \
-	srcs/ft_get_lerp.c \
-	srcs/ft_get_z_coord.c \
-	srcs/ft_get_color_interpolation.c
 
-HDRS= includes/fdf.h
+HDRS= includes/fractol.h
 OBJ= $(SRC:.c=.o)
 HDR_PATH= ./libft/includes/
 CC= gcc
-CC_FLAGS= -v  -Wall -Werror -Wextra  #-g3 -fsanitize=address -fsanitize-blacklist=my_ignores.txt
+CC_FLAGS= -v -Weverything -Ofast -Wall -Werror -Wextra # -g3 -fsanitize=address -fsanitize-blacklist=my_ignores.txt
 MLX_PATH=./minilibx_macos/
 LIBFT_PATH=./libft/
 FLAGS= -L$(MLX_PATH) -lmlx -L$(LIBFT_PATH) -lft -I$(HDR_PATH) -I./includes -I$(MLX_PATH) -framework OpenGL -framework AppKit

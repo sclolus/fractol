@@ -6,11 +6,11 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 18:43:15 by sclolus           #+#    #+#             */
-/*   Updated: 2017/06/28 21:34:25 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/03 06:21:44 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fractol.h"
 
 t_image_frame	*ft_get_image_frames(MLX_PTR connector, uint32_t nbr_frames)
 {

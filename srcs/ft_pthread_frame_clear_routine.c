@@ -6,11 +6,11 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:16:58 by sclolus           #+#    #+#             */
-/*   Updated: 2017/06/28 21:38:22 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/03 06:21:45 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fractol.h"
 
 void	*ft_pthread_frame_clear_routine(void *arg)
 {

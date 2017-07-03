@@ -6,11 +6,11 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/25 23:20:15 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/03 00:06:08 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/03 06:21:42 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fractol.h"
 
 void	ft_draw_lines(MLX_PTR connector, MLX_WIN win, t_image_frame *frames
 					,  t_mem_block *data)

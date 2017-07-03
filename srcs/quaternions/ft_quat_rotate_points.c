@@ -6,11 +6,11 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 09:21:26 by sclolus           #+#    #+#             */
-/*   Updated: 2017/06/29 10:45:47 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/03 06:21:45 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fractol.h"
 
 void	ft_quat_rotate_points(t_vec *axis, double angle, t_mem_block *data)
 {

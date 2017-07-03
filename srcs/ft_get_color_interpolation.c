@@ -6,11 +6,11 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/01 15:54:27 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/03 03:56:16 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/03 06:21:43 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fractol.h"
 
 int32_t	ft_get_color_interpolation(t_line *line, t_vec *point)
 {

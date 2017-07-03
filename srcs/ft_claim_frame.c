@@ -6,11 +6,11 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 21:16:04 by sclolus           #+#    #+#             */
-/*   Updated: 2017/06/28 21:27:07 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/03 06:21:41 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fractol.h"
 
 t_image_frame	*ft_claim_image_frame(t_image_frame *frames)
 {
