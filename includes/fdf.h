@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/25 16:55:51 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/03 02:44:07 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/03 04:24:01 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef void* MLX_PTR;
 # define ABS(x) (x < 0 ? -x : x)
 
 typedef struct	s_vec t_vec;
+typedef struct	s_color_set t_color_set;
 
 typedef struct	s_mem_block
 {
@@ -173,7 +174,13 @@ void			ft_add_reduction_coefficient(void);
 ** Parsing
 */
 
-t_mem_block	*ft_parse_file(char *filename);
+# define HEXA_CHARSET "0123456789ABCDEF"
+# define ERR_COLOR_NBR "Invalid number of color in color file"
+# define ERR_COLOR_INVALID_FILE_SIZE "Invalid file size for color file"
+# define ERR_INVALID_CHAR_COLOR_FILE "Invalid characters in color file"
+
+t_mem_block		*ft_parse_file(char *filename, char *filename_color);
+t_color_set		ft_parse_color(char *filename_color);
 
 /*
 ** Line drawing
@@ -241,10 +248,16 @@ void			ft_quat_rotate_points(t_vec *axis, double angle, t_mem_block *data);
 # define COLOR_MIN_Z 0xF00000
 # define COLOR_MAX_Z 0xFFFFFF
 
+typedef struct	s_color_set
+{
+	int	color_min;
+	int	color_max;
+}				t_color_set;
+
 int32_t			ft_get_color_interpolation(t_line *line, t_vec *point);
 double			ft_get_z_coord(t_line *line, t_vec *point);
-int32_t			ft_get_lerp(double z1, double z2, double z);
-
+int32_t			ft_get_lerp(double z1, double z2
+				, double z, t_color_set color_set);
 
 /*
 ** Error handling
@@ -257,4 +270,6 @@ int32_t			ft_get_lerp(double z1, double z2, double z);
 # define MLX_NEW_IMG_ERROR "mlx_new_image() failed"
 # define MLX_IMG_FRAMES_ERROR "malloc() failed to alloc image frames"
 # define OPEN_FILE_FAILED ": open() failed"
+# define ERR_PARSE_COLOR_READ "read() failed"
+
 #endif
