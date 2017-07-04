@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/25 16:54:59 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/03 10:37:11 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/04 03:36:41 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(int argc, char **argv)
 		if (pthread_create(&thread, NULL, &ft_pthread_frame_clear_routine, frames) ||
 			pthread_create(&thread, NULL, &ft_pthread_frame_clear_routine, frames))
 			ft_error_exit(1, (char*[]){ERR_PTHREAD_FAIL}, EXIT_FAILURE);
-		ft_draw_fractal(connector, win, frames);
+		ft_draw_fractal(connector, win, frames, MANDELBROT);
 /* 		mlx_hook(win, KeyPress, KeyPressMask | KeymapStateMask */
 /* 				, &ft_handler_keys, (void*[]){connector */
 /* 				, win, frames, data}); */

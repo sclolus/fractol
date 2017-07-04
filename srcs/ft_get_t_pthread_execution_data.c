@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/03 23:41:33 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/03 23:43:20 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/04 03:43:04 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_pthread_execution_data	*ft_get_t_pthread_execution_data(void)
 {
-	static t_pthread_execution_data	pthread_data[NBR_DRAWING_THREAD];
+	static t_pthread_execution_data	pthread_data[DRAWING_THREAD_NBR + 1];
 
 	return (pthread_data);
 }

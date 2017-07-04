@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/03 07:39:39 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/03 11:20:32 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/04 04:04:15 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,23 +39,25 @@ void			ft_mandelbrot(t_pthread_execution_data *pthread_data)
 	uint32_t		u;
 	int32_t			color;
 
-	i = (WINDOW_HEIGHT / (DRAWING_THREAD_NBR + 1)) * pthread_data->cadran;
+	i = pthread_data->win_cadran.min.y;
 	image = pthread_data->mlx_data.frame->buffer;
-	c = (t_complexe){-2, -1};
-	while (i < (WINDOW_HEIGHT / (DRAWING_THREAD_NBR + 1)) * (pthread_data->cadran + 1))
+	c = pthread_data->complexe_cadran.min;
+	printf("c.min.x: %lf, c.min.y: %lf, c.max.x: %lf, c.max.y: %lf\n", c.real_part, c.imaginary_part
+		   , pthread_data->complexe_cadran.max.real_part, pthread_data->complexe_cadran.max.imaginary_part);
+	while (i < pthread_data->win_cadran.max.y)
 	{
-		u = (WINDOW_WIDTH / (DRAWING_THREAD_NBR + 1)) * pthread_data->cadran;
-		while (u < WINDOW_WIDTH / (DRAWING_THREAD_NBR + 1) * (pthread_data->cadran + 1))
+		u = pthread_data->win_cadran.min.x;
+		while (u < pthread_data->win_cadran.max.x)
 		{
 			if (!(color = ft_is_bounded(c)))
 				image[(int)((int)i * (WINDOW_WIDTH)) + (int)u] = 0;
 			else
 				image[(int)((int)i * (WINDOW_WIDTH)) + (int)u] = color;
-			c.real_part += (3 / (double)WINDOW_WIDTH);
+			c.real_part += pthread_data->c_augmentation_rate.real_part;
 			u++;
 		}
-		c.real_part = -2;
-		c.imaginary_part += 2 / (double)WINDOW_HEIGHT;
+		c.real_part = pthread_data->complexe_cadran.min.real_part;
+		c.imaginary_part += pthread_data->c_augmentation_rate.imaginary_part;
 		i++;
 	}
 }
