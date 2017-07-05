@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/25 16:54:59 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/05 17:36:12 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/05 18:56:39 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,13 @@ int	main(int argc, char **argv)
 		ft_draw_fractal(&(t_mlx_data){connector, win, frames}, MANDELBROT);
 		mlx_hook(win, KeyPress, KeyPressMask | KeymapStateMask
 				, &ft_handler_keys, (void*[]){&(t_mlx_data){connector, win, frames}});
+		mlx_hook(win, ButtonPress, KeyPressMask | KeymapStateMask
+				, &ft_handler_buttons, (void*[]){&(t_mlx_data){connector, win, frames}});
 		mlx_hook(win, KeyRelease, KeyReleaseMask | KeymapStateMask
 				, &ft_handler_keys_release, (void*[]){&(t_mlx_data){connector, win, frames}});
+		mlx_hook(win, ButtonRelease, KeyReleaseMask | KeymapStateMask
+				, &ft_handler_buttons_release, (void*[]){&(t_mlx_data){connector, win, frames}});
+
 		mlx_loop(connector);
 	}
 

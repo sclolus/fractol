@@ -27,6 +27,8 @@ SRC= srcs/main.c \
 	srcs/ft_handler_esc.c \
 	srcs/ft_handler_right.c \
 	srcs/ft_handler_left.c \
+	srcs/ft_handler_buttons.c \
+	srcs/ft_handler_button5.c \
 	srcs/ft_double_distance.c
 #	srcs/ft_get_z_coord.c \
 	srcs/quaternions/ft_quat_rotate_points.c \
