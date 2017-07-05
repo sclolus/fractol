@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/03 06:13:14 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/05 20:22:05 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/05 20:25:42 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -279,12 +279,13 @@ void			ft_handler_a(void *param);
 ** Button handling
 */
 
-# define NBR_BUTTON_HOOKS 1
+# define NBR_BUTTON_HOOKS 2
 # define INVALID_BUTTONS_HOOKS_NBR "Invalid buttons_hooks number provided in macro expansion"
 
 int				ft_handler_buttons_release(int keycode, void *param __attribute__((unused)));
 int				ft_handler_buttons(int keycode, int x, int y, void *param);
 void			ft_handler_button5(int x, int y, void *param);
+void			ft_handler_button4(int x, int y, void *param);
 
 /*
 ** Quaternions
