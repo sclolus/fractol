@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_handler_left.c                                  :+:      :+:    :+:   */
+/*   ft_get_complexe_magnitude.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/26 23:10:15 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/05 17:52:37 by sclolus          ###   ########.fr       */
+/*   Created: 2017/07/03 07:54:39 by sclolus           #+#    #+#             */
+/*   Updated: 2017/07/03 07:56:39 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	ft_handler_left(void *param)
+double	ft_get_complexe_magnitude(t_complexe *z)
 {
-	t_fractal_data	*fractal_data;
-	t_fractal_type	fractal_type;
-
-	fractal_data = ft_get_t_fractal_data();
-	fractal_type = MANDELBROT;
-
-	fractal_data[fractal_type].c.min.real_part -= 0.01;
-	fractal_data[fractal_type].c.max.real_part -= 0.01;
-	ft_draw_fractal((t_mlx_data*)((t_mlx_data**)param)[0], MANDELBROT);
+	return (sqrt(pow(z->real_part, 2) + pow(z->imaginary_part, 2)));
 }

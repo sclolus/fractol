@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/03 23:38:42 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/04 04:10:05 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/05 17:11:13 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,15 @@ t_pthread_execution_data	*ft_pthread_init_thread_execution_data(uint32_t thread_
 	while (i < thread_nbr)
 	{
 		pthread_data[i] = (t_pthread_execution_data){{NULL, NULL, NULL}
-		, {{(WINDOW_WIDTH / thread_nbr) * i, (WINDOW_HEIGHT / thread_nbr) * i}
+		, {{(WINDOW_WIDTH / thread_nbr) * i, /* (WINDOW_HEIGHT / thread_nbr) * i */0}
 		, {(WINDOW_WIDTH / thread_nbr) * (i + 1)
-		, (WINDOW_HEIGHT / thread_nbr) * (i + 1)}}
-		, {{complexe_delta.real_part * i - ABS(complexe_cadran.min.real_part)
-		, complexe_delta.imaginary_part * i - ABS(complexe_cadran.min.imaginary_part)}
-		, {complexe_delta.real_part * (i + 1) - ABS(complexe_cadran.min.real_part)
-		, complexe_delta.imaginary_part
-		* (i + 1) - ABS(complexe_cadran.min.imaginary_part)}}
-		, {0, 0}, NULL, i, {0}};
+		, /* (WINDOW_HEIGHT / thread_nbr) * (i + 1) */ WINDOW_HEIGHT}}
+		, {{complexe_delta.real_part * i  + complexe_cadran.min.real_part
+			, /* complexe_delta.imaginary_part * i + complexe_cadran.min.imaginary_part */complexe_cadran.min.imaginary_part}
+		, {complexe_delta.real_part * (i + 1) + complexe_cadran.min.real_part
+		, /* complexe_delta.imaginary_part */
+		   /* 		   * (i + 1) + complexe_cadran.min.imaginary_part} */complexe_cadran.max.imaginary_part}}
+		   , {0, 0}, NULL, i, {0}};
 		ft_pthread_init_c_augmentation_rate(pthread_data, i);
 		i++;
 	}

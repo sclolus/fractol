@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 06:49:50 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/03 06:21:45 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/05 17:52:14 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,15 @@
 
 void	ft_handler_pad_up(void *param)
 {
-	t_mem_block	*data;
-	t_mem_block	*tmp;
-	uint32_t	i;
+	t_fractal_data	*fractal_data;
+	t_fractal_type	fractal_type;
 
-	data = ((t_mem_block**)param)[3];
-	tmp = data;
-	i = 0;
-	while (i * sizeof(t_line) < tmp->offset)
-	{
-		((t_line*)tmp->block + i)->start.x *= ZOOM_RATIO;
-		((t_line*)tmp->block + i)->start.z *= ZOOM_RATIO;
-		((t_line*)tmp->block + i)->start.y *= ZOOM_RATIO;
-		((t_line*)tmp->block + i)->end.x *= ZOOM_RATIO;
-		((t_line*)tmp->block + i)->end.z *= ZOOM_RATIO;
-		((t_line*)tmp->block + i)->end.y *= ZOOM_RATIO;
-		/* ((t_line*)tmp->block + i)->dx = ((t_line*)tmp->block + i)->start.x - ((t_line*)tmp->block + i)->end.x; */
-		/* ((t_line*)tmp->block + i)->dy = ((t_line*)tmp->block + i)->start.y - ((t_line*)tmp->block + i)->end.y; */
-		/* ((t_line*)tmp->block + i)->e = ((t_line*)tmp->block + i)->dy / ((t_line*)tmp->block + i)->dx; */
+	fractal_data = ft_get_t_fractal_data();
+	fractal_type = MANDELBROT;
 
-		i++;
-		if (i * sizeof(t_line) >= tmp->offset && tmp->next && !(i = 0))
-			tmp = tmp->next;
-	}
-	ft_draw_lines(((MLX_PTR)((char**)param)[0]), (MLX_PTR)((char**)param)[1]
-		, (MLX_IMG)((char**)param)[2],(t_mem_block*)((t_mem_block**)param)[3]);
+	fractal_data[fractal_type].c.min.real_part *= DEZOOM_RATIO;
+	fractal_data[fractal_type].c.min.imaginary_part *= DEZOOM_RATIO;
+	fractal_data[fractal_type].c.max.real_part *= DEZOOM_RATIO;
+	fractal_data[fractal_type].c.max.imaginary_part *= DEZOOM_RATIO;
+	ft_draw_fractal((t_mlx_data*)((t_mlx_data**)param)[0], MANDELBROT);
 }

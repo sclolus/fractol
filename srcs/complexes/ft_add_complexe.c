@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_handler_left.c                                  :+:      :+:    :+:   */
+/*   ft_add_complexe.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/26 23:10:15 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/05 17:52:37 by sclolus          ###   ########.fr       */
+/*   Created: 2017/07/03 06:52:58 by sclolus           #+#    #+#             */
+/*   Updated: 2017/07/03 06:54:47 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	ft_handler_left(void *param)
+t_complexe	ft_add_complexe(t_complexe *z1, t_complexe *z2)
 {
-	t_fractal_data	*fractal_data;
-	t_fractal_type	fractal_type;
-
-	fractal_data = ft_get_t_fractal_data();
-	fractal_type = MANDELBROT;
-
-	fractal_data[fractal_type].c.min.real_part -= 0.01;
-	fractal_data[fractal_type].c.max.real_part -= 0.01;
-	ft_draw_fractal((t_mlx_data*)((t_mlx_data**)param)[0], MANDELBROT);
+	return ((t_complexe){z1->real_part + z2->real_part
+				, z1->imaginary_part + z2->imaginary_part});
 }

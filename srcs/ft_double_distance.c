@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_handler_left.c                                  :+:      :+:    :+:   */
+/*   ft_double_distance.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/26 23:10:15 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/05 17:52:37 by sclolus          ###   ########.fr       */
+/*   Created: 2017/07/04 03:33:53 by sclolus           #+#    #+#             */
+/*   Updated: 2017/07/04 03:37:17 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	ft_handler_left(void *param)
+double	ft_double_distance(double a, double b)
 {
-	t_fractal_data	*fractal_data;
-	t_fractal_type	fractal_type;
-
-	fractal_data = ft_get_t_fractal_data();
-	fractal_type = MANDELBROT;
-
-	fractal_data[fractal_type].c.min.real_part -= 0.01;
-	fractal_data[fractal_type].c.max.real_part -= 0.01;
-	ft_draw_fractal((t_mlx_data*)((t_mlx_data**)param)[0], MANDELBROT);
+	if (b > a)
+		return (b - a);
+	else
+		return (a - b);
 }
