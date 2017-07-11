@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/05 18:45:57 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/05 20:25:04 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/11 06:54:59 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int			ft_handler_buttons(int keycode, int x, int y, void *param)
 {
 	static t_keycode_f	*keycodes_f = NULL;
 	uint32_t			i;
-	uint32_t			bool;
+	uint32_t			boolean;
 
 	i = 0;
 	if (!keycodes_f)
@@ -63,16 +63,16 @@ int			ft_handler_buttons(int keycode, int x, int y, void *param)
 		i++;
 	}
 	i = 0;
-	bool = 0;
+	boolean = 0;
 	while (i < NBR_BUTTON_HOOKS)
 	{
 		if (keycodes_f[i].used)
 		{
 			keycodes_f[i].f(x, y, param);
-			bool = 1;
+			boolean = 1;
 		}
 		i++;
-		if (i == NBR_BUTTON_HOOKS && !bool)
+		if (i == NBR_BUTTON_HOOKS && !boolean)
 			break ;
 	}
 	return (0);

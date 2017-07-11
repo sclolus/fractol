@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/03 06:13:14 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/05 20:25:42 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/11 06:39:19 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,19 @@
 # include <math.h>
 # include <stdio.h> //
 
+# ifdef __APPLE__
+#  include <OpenCL/opencl.h>
+# else
+#  include <CL/cl.h>
+#endif
+
 typedef void* MLX_WIN;
 typedef void* MLX_IMG;
 typedef void* MLX_PTR;
 
 # define WINDOW_NAME "fractol"
-# define WINDOW_WIDTH 800
-# define WINDOW_HEIGHT 800
+# define WINDOW_WIDTH 1920
+# define WINDOW_HEIGHT 1080
 
 # define PI 3.14159265359
 # define K 0.5
@@ -54,6 +60,8 @@ typedef void* MLX_PTR;
 # define STDIN_NOFILE 0
 
 # define ABS(x) (x < 0 ? -x : x)
+
+# define FRACTOL_USAGE "usage: ./fractol (\"mandelbrot\" | \"julia\")"
 
 typedef struct	s_vec t_vec;
 typedef struct	s_color_set t_color_set;
@@ -140,6 +148,13 @@ typedef struct	s_quat
 	double	w;
 }				t_quat;
 
+typedef enum	e_fractal_type
+{
+	MANDELBROT = 0,
+	JULIA = 1,
+	SUPPORTED_FRACTAL_NBR,
+}				t_fractal_type;
+
 
 /*
 ** Mem_block handling
@@ -182,21 +197,14 @@ void			ft_add_reduction_coefficient(void);
 # define ERR_COLOR_INVALID_FILE_SIZE "Invalid file size for color file"
 # define ERR_INVALID_CHAR_COLOR_FILE "Invalid characters in color file"
 
-t_mem_block		*ft_parse_file(char *filename, char *filename_color);
-t_color_set		ft_parse_color(char *filename_color);
+t_fractal_type	ft_parse(char *fractal_name);
 
 /*
 ** Fractals
 */
 
-# define BASE_COLOR 0x101010
-# define ITERATION_NUMBER 1024
-
-typedef enum	e_fractal_type
-{
-	MANDELBROT = 0,
-	SUPPORTED_FRACTAL_NBR,
-}				t_fractal_type;
+# define BASE_COLOR 0x110000
+# define ITERATION_NUMBER 7
 
 typedef struct	s_fractal_data
 {
@@ -204,7 +212,7 @@ typedef struct	s_fractal_data
 	t_complexe_cadran	c;
 	f_draw_fractal		*f;
 	uint32_t			degree;
-	char				pad[4];
+	uint32_t			iteration_number;
 }				t_fractal_data;
 
 void			ft_draw_fractal(t_mlx_data *mlx_data
@@ -212,6 +220,7 @@ void			ft_draw_fractal(t_mlx_data *mlx_data
 
 t_fractal_data	*ft_get_t_fractal_data(void);
 void			ft_mandelbrot(t_pthread_execution_data *pthread_data);
+void			ft_julia(t_pthread_execution_data *pthread_data);
 
 /*
 ** Pthread drawing
@@ -288,6 +297,13 @@ void			ft_handler_button5(int x, int y, void *param);
 void			ft_handler_button4(int x, int y, void *param);
 
 /*
+** Mouse motion handling
+*/
+
+int				ft_handler_mouse_motion(int x, int y, void *param);
+void			ft_handler_mouse_motion_julia(int x, int y, void *param);
+
+/*
 ** Quaternions
 */
 
@@ -305,6 +321,7 @@ t_complexe	ft_square_complexe(t_complexe *z1);
 t_complexe	ft_multiply_complexe(t_complexe *z1, t_complexe *z2);
 t_complexe	ft_add_complexe(t_complexe *z1, t_complexe *z2);
 double		ft_get_complexe_magnitude(t_complexe *z);
+t_complexe	ft_pow_complexe(t_complexe *z, uint32_t degree);
 
 /*
 ** Miscellaneous functions
@@ -342,5 +359,23 @@ int32_t			ft_get_lerp(double z1, double z2
 # define MLX_IMG_FRAMES_ERROR "malloc() failed to alloc image frames"
 # define OPEN_FILE_FAILED ": open() failed"
 # define ERR_PARSE_COLOR_READ "read() failed"
+
+void	ft_print_usage(void) __attribute__((noreturn));
+
+/*
+** TEST
+*/ //
+
+typedef struct	s_cl_execution_data
+{
+	cl_program			program;
+	cl_kernel			kernel;
+	cl_context			context;
+	cl_command_queue	cmd_queue;
+	cl_device_id		device_id;
+	cl_mem				mem_obj;
+}				t_cl_execution_data;
+
+void	ft_test(int argc, char **argv);
 
 #endif

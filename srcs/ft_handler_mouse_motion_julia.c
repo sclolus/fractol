@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_t_fractal_data.c                            :+:      :+:    :+:   */
+/*   ft_handler_mouse_motion_julia.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/05 17:25:25 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/08 19:12:57 by sclolus          ###   ########.fr       */
+/*   Created: 2017/07/08 17:12:40 by sclolus           #+#    #+#             */
+/*   Updated: 2017/07/08 19:48:21 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-t_fractal_data	*ft_get_t_fractal_data(void)
+void	ft_handler_mouse_motion_julia(int x, int y, void *param)
 {
-		static t_fractal_data	fractals_data[SUPPORTED_FRACTAL_NBR] = {
-			{{0, 0}, {{-2, -1}, {1, 1}}, *ft_mandelbrot, 2, 32},
-			{{0, 0}, {{-2, -1}, {1, 1}}, *ft_julia, 2, 32}};
-		return (fractals_data);
+	ft_get_t_fractal_data()[JULIA].z0 = (t_complexe){(double)x / WINDOW_WIDTH - 1, (double)y / WINDOW_HEIGHT - 1};
+	ft_draw_fractal((t_mlx_data*)((t_mlx_data**)param)[0], JULIA);
 }

@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_t_fractal_data.c                            :+:      :+:    :+:   */
+/*   ft_pow_complexe.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/05 17:25:25 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/08 19:12:57 by sclolus          ###   ########.fr       */
+/*   Created: 2017/07/08 20:11:50 by sclolus           #+#    #+#             */
+/*   Updated: 2017/07/08 20:13:49 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-t_fractal_data	*ft_get_t_fractal_data(void)
+t_complexe	ft_pow_complexe(t_complexe *z, uint32_t degree)
 {
-		static t_fractal_data	fractals_data[SUPPORTED_FRACTAL_NBR] = {
-			{{0, 0}, {{-2, -1}, {1, 1}}, *ft_mandelbrot, 2, 32},
-			{{0, 0}, {{-2, -1}, {1, 1}}, *ft_julia, 2, 32}};
-		return (fractals_data);
+	uint32_t	i;
+	t_complexe	tmp;
+
+	i = 0;
+	tmp = *z;
+	while (i < degree - 1)
+	{
+		tmp = ft_square_complexe(&tmp);
+		i++;
+	}
+	return (tmp);
 }

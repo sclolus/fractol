@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/26 21:05:42 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/05 18:50:21 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/11 06:54:45 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int			ft_handler_keys(int keycode, void *param)
 {
 	static t_keycode_f	*keycodes_f = NULL;
 	uint32_t			i;
-	uint32_t			bool;
+	uint32_t			boolean;
 
 	i = 0;
 	if (!keycodes_f)
@@ -73,16 +73,16 @@ int			ft_handler_keys(int keycode, void *param)
 		i++;
 	}
 	i = 0;
-	bool = 0;
+	boolean = 0;
 	while (i < NBR_KEY_HOOKS)
 	{
 		if (keycodes_f[i].used)
 		{
 			keycodes_f[i].f(param);
-			bool = 1;
+			boolean = 1;
 		}
 		i++;
-		if (i == NBR_KEY_HOOKS && !bool)
+		if (i == NBR_KEY_HOOKS && !boolean)
 			break ;
 	}
 	return (0);

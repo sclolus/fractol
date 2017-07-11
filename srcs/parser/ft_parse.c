@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_t_fractal_data.c                            :+:      :+:    :+:   */
+/*   ft_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/05 17:25:25 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/08 19:12:57 by sclolus          ###   ########.fr       */
+/*   Created: 2017/07/08 16:46:58 by sclolus           #+#    #+#             */
+/*   Updated: 2017/07/08 16:59:00 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-t_fractal_data	*ft_get_t_fractal_data(void)
+t_fractal_type	ft_parse(char *fractal_name)
 {
-		static t_fractal_data	fractals_data[SUPPORTED_FRACTAL_NBR] = {
-			{{0, 0}, {{-2, -1}, {1, 1}}, *ft_mandelbrot, 2, 32},
-			{{0, 0}, {{-2, -1}, {1, 1}}, *ft_julia, 2, 32}};
-		return (fractals_data);
+	char		*fractal_types[] =
+		{"mandelbrot", "julia"};
+	uint32_t	i;
+
+	i = 0;
+	while (i < sizeof(fractal_types) / sizeof(char*))
+	{
+		if (ft_strequ(fractal_name, fractal_types[i]))
+			return ((t_fractal_type)i);
+		i++;
+	}
+	ft_error(2, (char*[]){"illegal fractal name: ", fractal_name}, 0);
+	ft_print_usage();
 }

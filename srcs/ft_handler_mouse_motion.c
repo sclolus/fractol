@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_t_fractal_data.c                            :+:      :+:    :+:   */
+/*   ft_handler_mouse_motion.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/05 17:25:25 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/08 19:12:57 by sclolus          ###   ########.fr       */
+/*   Created: 2017/07/08 17:14:19 by sclolus           #+#    #+#             */
+/*   Updated: 2017/07/08 17:19:35 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-t_fractal_data	*ft_get_t_fractal_data(void)
+int	ft_handler_mouse_motion(int x, int y, void *param)
 {
-		static t_fractal_data	fractals_data[SUPPORTED_FRACTAL_NBR] = {
-			{{0, 0}, {{-2, -1}, {1, 1}}, *ft_mandelbrot, 2, 32},
-			{{0, 0}, {{-2, -1}, {1, 1}}, *ft_julia, 2, 32}};
-		return (fractals_data);
+	if (*((t_fractal_type*)((t_fractal_type**)param)[1]) == JULIA)
+		ft_handler_mouse_motion_julia(x, y, param);
+	return (0);
 }

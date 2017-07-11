@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/03 10:34:48 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/05 17:37:17 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/08 20:32:55 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ void	ft_draw_fractal(t_mlx_data *mlx_data
 												, fractals_data[fractal_type].f);
 	fractals_data[fractal_type].f(pthread_data);
 	ft_pthread_wait_drawing_threads(thread_tab);
+//	ft_memset(mlx_data->frame->buffer, 0xAA, WINDOW_HEIGHT * WINDOW_WIDTH * 4);
 	mlx_put_image_to_window(mlx_data->connector, mlx_data->win, mlx_data->frame->frame, 0, 0);
 }
