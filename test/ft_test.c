@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 01:58:23 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/11 06:53:38 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/12 20:12:54 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,16 +89,28 @@ cl_mem			ft_get_cl_buffer(cl_context context, cl_mem_flags mem_flags, uint64_t s
 	return (mem_obj);
 }
 
+uint32_t	ft_strlen_lol(char *str);
+uint32_t	ft_strlen_lol(char *str)
+{
+	uint32_t	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+
+}
+
 cl_program		ft_get_cl_program_from_source(cl_context context, char *filename)
 {
-	char		*source_str;
+	char			*source_str;
 	cl_program		program;
 	uint64_t		len;
 	cl_int			ret;
 
 	if (!(source_str = ft_get_file_content(filename)))
 		exit(EXIT_FAILURE);
-	len = (uint64_t)ft_strlen(source_str);
+	len = ft_strlen(source_str);
 	program = clCreateProgramWithSource(context, 1, (const char*[]){(const char*)source_str},
 										(const size_t*)&len, &ret);
 	if (ret != CL_SUCCESS)
@@ -129,6 +141,8 @@ void	ft_call_cl(t_mlx_data *mlx_data, t_fractal_type fractal_type)
 {
 	t_cl_execution_data	cl_data;
 	cl_int				ret;
+	int					win_width = WINDOW_WIDTH;
+	int					win_heigth = WINDOW_HEIGHT;
 
 	(void)fractal_type;
 	cl_data.device_id = ft_get_device_id();
@@ -138,6 +152,8 @@ void	ft_call_cl(t_mlx_data *mlx_data, t_fractal_type fractal_type)
 	cl_data.program = ft_get_cl_program_from_source(cl_data.context, MANDELBROT_FILENAME);
 	cl_data.kernel = ft_get_cl_kernel(cl_data.program, "mandelbrot", cl_data.device_id);
 	ret = clSetKernelArg(cl_data.kernel, 0, sizeof(cl_mem), (void*)&cl_data.mem_obj);
+	ret = clSetKernelArg(cl_data.kernel, 1, sizeof(int), (void*)&win_width);
+	ret = clSetKernelArg(cl_data.kernel, 2, sizeof(int), (void*)&win_heigth);
 	if (ret != CL_SUCCESS)
 		ft_error_exit(1, (char*[]){CL_ERR_SET_ARG}, EXIT_FAILURE);
 	ret = clEnqueueTask(cl_data.cmd_queue, cl_data.kernel, 0, NULL, NULL);
@@ -145,7 +161,9 @@ void	ft_call_cl(t_mlx_data *mlx_data, t_fractal_type fractal_type)
 		ft_error_exit(1, (char*[]){CL_ERR_KERNEL_LAUNCH}, EXIT_FAILURE);
 	ret = clEnqueueReadBuffer(cl_data.cmd_queue, cl_data.mem_obj, CL_TRUE, 0
 	, WINDOW_HEIGHT * WINDOW_WIDTH * 4, mlx_data->frame->buffer, 0, NULL, NULL);
-	mlx_put_image_to_window(mlx_data->connector, mlx_data->win, mlx_data->frame, 0, 0);
+	clFlush(cl_data.cmd_queue);
+	clFinish(cl_data.cmd_queue);
+	mlx_put_image_to_window(mlx_data->connector, mlx_data->win, mlx_data->frame->frame, 0, 0);
 }
 
 void	ft_test(int argc, char **argv)

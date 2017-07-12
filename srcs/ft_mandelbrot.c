@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/03 07:39:39 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/08 20:28:45 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/12 19:57:10 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ void			ft_mandelbrot(t_pthread_execution_data *pthread_data)
 	image = pthread_data->mlx_data.frame->buffer;
 	c = pthread_data->complexe_cadran.min;
 	iteration_number = ft_get_t_fractal_data()[MANDELBROT].iteration_number;
-	printf("c->augmentation_rate.real_part: %.128lf, c->augmentation_rate.imaginary_part: %.128lf\n", pthread_data->c_augmentation_rate.real_part, pthread_data->c_augmentation_rate.imaginary_part);
-	printf("pthread_data.complexe_cadran.min.real_part: %.128lf, pthread_data.complexe_cadran.min.imaginary_part: %.128lf\n", pthread_data->complexe_cadran.min.real_part, pthread_data->complexe_cadran.max.real_part);
 	while (i < pthread_data->win_cadran.max.y)
 	{
 		u = pthread_data->win_cadran.min.x;

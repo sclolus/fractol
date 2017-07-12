@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/25 16:54:59 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/11 06:39:33 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/12 19:02:05 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int	main(int argc, char **argv)
 /* 	} */
 /* 	else */
 /* 		ft_print_usage(); */
+/* 	(void)argv; */
+/* 	(void)argc; */
 	ft_test(argc, argv);
 	return (0);
 }

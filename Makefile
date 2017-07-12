@@ -55,10 +55,10 @@ HDRS= includes/fractol.h
 OBJ= $(SRC:.c=.o)
 HDR_PATH= ./libft/includes/
 CC= gcc
-CC_FLAGS= -v -Weverything -Ofast -Wall -Werror -Wextra  -g3 -fsanitize=address -fsanitize-blacklist=my_ignores.txt
-MLX_PATH=./minilibx_macos/
+CC_FLAGS= -v -Weverything -Wall -Werror -Wextra  #  -Ofast -g3 -fsanitize=address -fsanitize-blacklist=my_ignores.txt
+MLX_PATH=./minilibx_macos
 LIBFT_PATH=./libft/
-FLAGS= -L$(MLX_PATH) -lmlx -L$(LIBFT_PATH) -lft -I$(HDR_PATH) -I./includes -I$(MLX_PATH)  -framework AppKit  -framework OpenCL
+FLAGS= -L$(MLX_PATH) -I$(MLX_PATH) -lmlx -L$(LIBFT_PATH) -lft -I$(HDR_PATH) -I./includes  -framework AppKit  -framework OpenGL -framework OpenCL
 
 all: submodule $(NAME)
 
