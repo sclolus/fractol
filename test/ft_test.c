@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 01:58:23 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/12 20:12:54 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/15 01:25:05 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,18 +89,6 @@ cl_mem			ft_get_cl_buffer(cl_context context, cl_mem_flags mem_flags, uint64_t s
 	return (mem_obj);
 }
 
-uint32_t	ft_strlen_lol(char *str);
-uint32_t	ft_strlen_lol(char *str)
-{
-	uint32_t	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-
-}
-
 cl_program		ft_get_cl_program_from_source(cl_context context, char *filename)
 {
 	char			*source_str;
@@ -143,6 +131,7 @@ void	ft_call_cl(t_mlx_data *mlx_data, t_fractal_type fractal_type)
 	cl_int				ret;
 	int					win_width = WINDOW_WIDTH;
 	int					win_heigth = WINDOW_HEIGHT;
+	t_complexe_cadran	c;
 
 	(void)fractal_type;
 	cl_data.device_id = ft_get_device_id();
@@ -154,16 +143,22 @@ void	ft_call_cl(t_mlx_data *mlx_data, t_fractal_type fractal_type)
 	ret = clSetKernelArg(cl_data.kernel, 0, sizeof(cl_mem), (void*)&cl_data.mem_obj);
 	ret = clSetKernelArg(cl_data.kernel, 1, sizeof(int), (void*)&win_width);
 	ret = clSetKernelArg(cl_data.kernel, 2, sizeof(int), (void*)&win_heigth);
+	c = (ft_get_t_fractal_data()[fractal_type].c);
+	ret = clSetKernelArg(cl_data.kernel, 3, sizeof(t_complexe_cadran), (void*)&c);
+	ret = clSetKernelArg(cl_data.kernel, 4, sizeof(uint32_t), (void*)&ft_get_t_fractal_data()[fractal_type].iteration_number);
 	if (ret != CL_SUCCESS)
 		ft_error_exit(1, (char*[]){CL_ERR_SET_ARG}, EXIT_FAILURE);
-	ret = clEnqueueTask(cl_data.cmd_queue, cl_data.kernel, 0, NULL, NULL);
+//	ret = clEnqueueTask(cl_data.cmd_queue, cl_data.kernel, 0, NULL, NULL);
+
+	const size_t global_work_size[1] = {WINDOW_WIDTH * WINDOW_HEIGHT};
+	ret = clEnqueueNDRangeKernel(cl_data.cmd_queue, cl_data.kernel, 1, NULL, global_work_size, NULL, 0, NULL, NULL);
 	if (ret != CL_SUCCESS)
 		ft_error_exit(1, (char*[]){CL_ERR_KERNEL_LAUNCH}, EXIT_FAILURE);
 	ret = clEnqueueReadBuffer(cl_data.cmd_queue, cl_data.mem_obj, CL_TRUE, 0
 	, WINDOW_HEIGHT * WINDOW_WIDTH * 4, mlx_data->frame->buffer, 0, NULL, NULL);
 	clFlush(cl_data.cmd_queue);
-	clFinish(cl_data.cmd_queue);
 	mlx_put_image_to_window(mlx_data->connector, mlx_data->win, mlx_data->frame->frame, 0, 0);
+	printf("put image\n");
 }
 
 void	ft_test(int argc, char **argv)
@@ -185,15 +180,15 @@ void	ft_test(int argc, char **argv)
 		frames = ft_get_image_frames(connector, NBR_IMAGE_FRAME);
 		ft_call_cl(&(t_mlx_data){connector, win, frames}, fractal_type);
 //		ft_draw_fractal(&(t_mlx_data){connector, win, frames}, fractal_type);
-	/* 	mlx_hook(win, KeyPress, KeyPressMask | KeymapStateMask */
-/* 				 , &ft_handler_keys, (void*[]){&(t_mlx_data){connector, win, frames}, &fractal_type}); */
-/* 		mlx_hook(win, ButtonPress, KeyPressMask | KeymapStateMask */
-/* 				, &ft_handler_buttons, (void*[]){&(t_mlx_data){connector, win, frames}, &fractal_type}); */
-/* 		mlx_hook(win, KeyRelease, KeyReleaseMask | KeymapStateMask */
-/* 				, &ft_handler_keys_release, (void*[]){&(t_mlx_data){connector, win, frames}, &fractal_type}); */
-/* 		mlx_hook(win, ButtonRelease, KeyReleaseMask | KeymapStateMask */
-/* 				, &ft_handler_buttons_release, (void*[]){&(t_mlx_data){connector, win, frames}, &fractal_type}); */
-/* 		mlx_hook(win, MotionNotify, 0, &ft_handler_mouse_motion, (void*[]){&(t_mlx_data){connector, win, frames}, &fractal_type}); */
+		mlx_hook(win, KeyPress, KeyPressMask | KeymapStateMask
+				 , &ft_handler_keys, (void*[]){&(t_mlx_data){connector, win, frames}, &fractal_type});
+		mlx_hook(win, ButtonPress, KeyPressMask | KeymapStateMask
+				, &ft_handler_buttons, (void*[]){&(t_mlx_data){connector, win, frames}, &fractal_type});
+		mlx_hook(win, KeyRelease, KeyReleaseMask | KeymapStateMask
+				, &ft_handler_keys_release, (void*[]){&(t_mlx_data){connector, win, frames}, &fractal_type});
+		mlx_hook(win, ButtonRelease, KeyReleaseMask | KeymapStateMask
+				, &ft_handler_buttons_release, (void*[]){&(t_mlx_data){connector, win, frames}, &fractal_type});
+		mlx_hook(win, MotionNotify, 0, &ft_handler_mouse_motion, (void*[]){&(t_mlx_data){connector, win, frames}, &fractal_type});
 		mlx_loop(connector);
 	}
 	else

@@ -6,6 +6,12 @@ typedef struct	s_complexe
 	float	imaginary_part;
 }				t_complexe;
 
+typedef struct	s_complexe_cadran
+{
+	t_complexe	min;
+	t_complexe	max;
+}				t_complexe_cadran;
+
 static int	ft_is_bounded(t_complexe c, unsigned int iteration_number)
 {
 	t_complexe			z;
@@ -26,33 +32,32 @@ static int	ft_is_bounded(t_complexe c, unsigned int iteration_number)
 	return (0);
 }
 
-__kernel void mandelbrot(__global int *buffer, int width, int height)
+float	ft_float_distance(float a, float b)
 {
-	int					global_id = get_global_id(0);
-	t_complexe			c;
-	unsigned int		i;
-	unsigned int		u;
-	unsigned int		iteration_number;
-	int					color;
+	if (b > a)
+		return (b - a);
+	else
+		return (a - b);
+}
 
-	i = 0;
-	c = (t_complexe){-2, -1};
-	iteration_number = 32;
-	while (i < width)
+
+__kernel void mandelbrot(__global int *buffer, int width, int height, t_complexe_cadran cadran, unsigned int iteration_number)
+{
+	t_complexe				c;
+	int						global_id = get_global_id(0);
+	int						pos_x = global_id % width;
+	int						pos_y = global_id / width;
+	int						color;
+
+	c = cadran.min;
+	c.imaginary_part += (ft_float_distance(cadran.min.imaginary_part, cadran.max.imaginary_part) / (float)height) * pos_y;
+	c.real_part += (ft_float_distance(cadran.min.real_part, cadran.max.real_part) / (float)width) * pos_x;
+	if (!(color = ft_is_bounded(c, iteration_number)))
 	{
-		u = 0;
-		while (u < height)
-		{
-			if (!(color = ft_is_bounded(c, iteration_number)))
-				buffer[(int)((int)i * (width)) + (int)u] = 0;
-			else
-				buffer[(int)((int)i * (height)) + (int)u] = color;
-			c.real_part += 3 / (float)width;
-			u++;
-		}
-		c.real_part = -(float)2;
-		c.imaginary_part += 2 / (float)height;
-		i++;
+		buffer[(int)((int)pos_y * (width)) + (int)pos_x] = 0;
 	}
-
+	else
+	{
+		buffer[(int)((int)pos_y * (width)) + (int)pos_x] = color;
+	}
 }

@@ -6,13 +6,13 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/04 03:33:53 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/04 03:37:17 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/15 00:54:35 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-double	ft_double_distance(double a, double b)
+float	ft_float_distance(float a, float b)
 {
 	if (b > a)
 		return (b - a);

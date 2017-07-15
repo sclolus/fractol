@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/03 23:38:42 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/05 17:11:13 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/15 00:50:12 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ t_pthread_execution_data	*ft_pthread_init_thread_execution_data(uint32_t thread_
 	uint32_t					i;
 
 	pthread_data = ft_get_t_pthread_execution_data();
-	complexe_delta = (t_complexe){(ft_double_distance(complexe_cadran.min.real_part
+	complexe_delta = (t_complexe){(ft_float_distance(complexe_cadran.min.real_part
 								, complexe_cadran.max.real_part) / thread_nbr)
-								, (ft_double_distance(complexe_cadran.min.imaginary_part
+								, (ft_float_distance(complexe_cadran.min.imaginary_part
 								, complexe_cadran.max.imaginary_part) / thread_nbr)};
 	i = 0;
 	while (i < thread_nbr)

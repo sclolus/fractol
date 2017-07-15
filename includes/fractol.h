@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/03 06:13:14 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/12 20:13:02 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/15 01:19:02 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ typedef void* MLX_IMG;
 typedef void* MLX_PTR;
 
 # define WINDOW_NAME "fractol"
-# define WINDOW_WIDTH 800
-# define WINDOW_HEIGHT 800
+# define WINDOW_WIDTH 1920
+# define WINDOW_HEIGHT 1080
 
 # define PI 3.14159265359
 # define K 0.5
@@ -52,8 +52,8 @@ typedef void* MLX_PTR;
 
 # define MOVE_COEFFICIENT 7
 # define ROTATION_SPEED 9
-# define ZOOM_RATIO 0.8
-# define DEZOOM_RATIO 1 / ZOOM_RATIO
+# define ZOOM_RATIO 0.8f
+# define DEZOOM_RATIO 1.0f / ZOOM_RATIO
 
 # define NBR_IMAGE_FRAME 1
 
@@ -75,8 +75,8 @@ typedef struct	s_win_cadran t_win_cadran;
 
 typedef struct	s_complexe
 {
-	double	real_part;
-	double	imaginary_part;
+	float	real_part;
+	float	imaginary_part;
 }				t_complexe;
 
 typedef struct	s_complexe_cadran
@@ -175,18 +175,6 @@ t_mem_block		*ft_set_lines(t_mem_block *mem_block);
 t_image_frame	*ft_get_image_frames(MLX_PTR connector, uint32_t nbr_frames);
 void			*ft_pthread_frame_clear_routine(void *arg);
 t_image_frame	*ft_claim_image_frame(t_image_frame *frames);
-
-/*
-** Isometric Perspective
-*/
-
-void			ft_sus_perspective_angle(void);
-void			ft_add_perspective_angle(void);
-double			*ft_get_perspective_angle(void);
-
-double			*ft_get_reduction_coefficient(void);
-void			ft_sus_reduction_coefficient(void);
-void			ft_add_reduction_coefficient(void);
 
 /*
 ** Parsing
@@ -327,7 +315,8 @@ t_complexe	ft_pow_complexe(t_complexe *z, uint32_t degree);
 ** Miscellaneous functions
 */
 
-double		ft_double_distance(double a, double b);
+//double		ft_double_distance(double a, double b);
+float	ft_float_distance(float a, float b);
 
 /*
 ** Interpolation
@@ -377,5 +366,6 @@ typedef struct	s_cl_execution_data
 }				t_cl_execution_data;
 
 void	ft_test(int argc, char **argv);
+void	ft_call_cl(t_mlx_data *mlx_data, t_fractal_type fractal_type);
 
 #endif
