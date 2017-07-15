@@ -35,10 +35,6 @@ static int	ft_is_bounded(t_complexe c, unsigned int iteration_number)
 
 double	ft_double_distance(double a, double b)
 {
-/* 	unsigned long	cmp; */
-
-/* 	cmp = a > b; */
-/* 	return (xu(a & cmp) | (b & ~cmp)); */
 	if (a > b)
 		return (a - b);
 	return (b - a);
@@ -80,7 +76,7 @@ __kernel void mandelbrot(__global int *buffer, int width, int height, t_complexe
 						 , z.imaginary_part + c.imaginary_part};
 		if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4)
 		{
-			buffer[(pos_y * (width)) + pos_x] = (((i + (int)c.imaginary_part)) * BASE_COLOR  ) & 0xFAFAF;
+			buffer[(pos_y * (width)) + pos_x] = (((i + (int)c.imaginary_part)) * BASE_COLOR  ) & 0xFFFFFF;
 			return ;
 		}
 		z = (t_complexe){z.real_part * z.real_part - (z.imaginary_part
@@ -89,7 +85,7 @@ __kernel void mandelbrot(__global int *buffer, int width, int height, t_complexe
 						 , z.imaginary_part + c.imaginary_part};
 		if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4)
 		{
-			buffer[(pos_y * (width)) + pos_x] = (((i - (int)c.imaginary_part + 1) * BASE_COLOR  ) & 0xFCFFCF);
+			buffer[(pos_y * (width)) + pos_x] = (((i - (int)c.imaginary_part + 1) * BASE_COLOR  ) & 0xFFFFFF);
 			return ;
 		}
 		z = (t_complexe){z.real_part * z.real_part - (z.imaginary_part
@@ -98,7 +94,7 @@ __kernel void mandelbrot(__global int *buffer, int width, int height, t_complexe
 						 , z.imaginary_part + c.imaginary_part};
 		if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4)
 		{
-			buffer[(pos_y * (width)) + pos_x] = (((i * (int)c.imaginary_part + 2) * BASE_COLOR  ) & 0xFFF55F);
+			buffer[(pos_y * (width)) + pos_x] = (((i * (int)c.imaginary_part + 2) * BASE_COLOR  ) & 0xFFFFFF);
 			return ;
 		}
 		z = (t_complexe){z.real_part * z.real_part - (z.imaginary_part
@@ -107,7 +103,7 @@ __kernel void mandelbrot(__global int *buffer, int width, int height, t_complexe
 						 , z.imaginary_part + c.imaginary_part};
 		if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4)
 		{
-			buffer[(pos_y * (width)) + pos_x] = (((i / (int)c.imaginary_part + 3) * BASE_COLOR  ) & 0xFFEEF);
+			buffer[(pos_y * (width)) + pos_x] = (((i / (int)c.imaginary_part + 3) * BASE_COLOR  ) & 0xFFFFFF);
 			return ;
 		}
 		i += 4;

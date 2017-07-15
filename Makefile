@@ -16,6 +16,7 @@ SRC= srcs/main.c \
 	srcs/ft_mandelbrot.c \
 	srcs/ft_julia.c \
 	srcs/ft_draw_fractal.c \
+	srcs/ft_draw_cl_fractal.c \
 	srcs/ft_get_t_fractal_data.c \
 	srcs/quaternions/ft_get_conjugate_quat.c \
 	srcs/quaternions/ft_get_quat_magnitude.c \

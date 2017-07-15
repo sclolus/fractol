@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/03 06:13:14 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/15 05:55:45 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/16 00:40:27 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ typedef void* MLX_IMG;
 typedef void* MLX_PTR;
 
 # define WINDOW_NAME "fractol"
-# define WINDOW_WIDTH 1920
-# define WINDOW_HEIGHT 1080
+# define WINDOW_WIDTH 800
+# define WINDOW_HEIGHT 800
 
 # define PI 3.14159265359
 # define K 0.5
@@ -279,7 +279,6 @@ void			ft_handler_a(void *param);
 # define NBR_BUTTON_HOOKS 2
 # define INVALID_BUTTONS_HOOKS_NBR "Invalid buttons_hooks number provided in macro expansion"
 
-int				ft_handler_buttons_release(int keycode, void *param __attribute__((unused)));
 int				ft_handler_buttons(int keycode, int x, int y, void *param);
 void			ft_handler_button5(int x, int y, void *param);
 void			ft_handler_button4(int x, int y, void *param);
@@ -367,5 +366,7 @@ typedef struct	s_cl_execution_data
 
 void	ft_test(int argc, char **argv);
 void	ft_call_cl(t_mlx_data *mlx_data, t_fractal_type fractal_type);
+void	ft_draw_cl_fractal(t_mlx_data *mlx_data
+						, t_fractal_type fractal_type);
 
 #endif
