@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/05 18:45:57 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/11 06:54:59 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/15 05:29:26 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int			ft_handler_buttons(int keycode, int x, int y, void *param)
 	i = 0;
 	if (!keycodes_f)
 		keycodes_f = ft_get_buttoncodes_f();
-	printf("%d: \n", keycode);
 	while (i < NBR_BUTTON_HOOKS)
 	{
 		if (keycodes_f[i].keycode == keycode)

@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/03 06:13:14 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/15 01:19:02 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/15 05:55:45 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ typedef void* MLX_PTR;
 
 # define MOVE_COEFFICIENT 7
 # define ROTATION_SPEED 9
-# define ZOOM_RATIO 0.8f
-# define DEZOOM_RATIO 1.0f / ZOOM_RATIO
+# define ZOOM_RATIO 0.79
+# define DEZOOM_RATIO 1.0 / ZOOM_RATIO
 
 # define NBR_IMAGE_FRAME 1
 
@@ -75,8 +75,8 @@ typedef struct	s_win_cadran t_win_cadran;
 
 typedef struct	s_complexe
 {
-	float	real_part;
-	float	imaginary_part;
+	double	real_part;
+	double	imaginary_part;
 }				t_complexe;
 
 typedef struct	s_complexe_cadran
@@ -316,7 +316,7 @@ t_complexe	ft_pow_complexe(t_complexe *z, uint32_t degree);
 */
 
 //double		ft_double_distance(double a, double b);
-float	ft_float_distance(float a, float b);
+double	ft_double_distance(double a, double b);
 
 /*
 ** Interpolation

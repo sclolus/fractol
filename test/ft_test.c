@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 01:58:23 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/15 01:25:05 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/15 05:28:52 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,12 +145,16 @@ void	ft_call_cl(t_mlx_data *mlx_data, t_fractal_type fractal_type)
 	ret = clSetKernelArg(cl_data.kernel, 2, sizeof(int), (void*)&win_heigth);
 	c = (ft_get_t_fractal_data()[fractal_type].c);
 	ret = clSetKernelArg(cl_data.kernel, 3, sizeof(t_complexe_cadran), (void*)&c);
+	t_complexe	c_distance = (t_complexe){ft_double_distance(ft_get_t_fractal_data()[fractal_type].c.min.real_part, ft_get_t_fractal_data()[fractal_type].c.max.real_part), ft_double_distance(ft_get_t_fractal_data()[fractal_type].c.min.imaginary_part, ft_get_t_fractal_data()[fractal_type].c.max.imaginary_part)};
 	ret = clSetKernelArg(cl_data.kernel, 4, sizeof(uint32_t), (void*)&ft_get_t_fractal_data()[fractal_type].iteration_number);
+	ret = clSetKernelArg(cl_data.kernel, 5, sizeof(t_complexe), (void*)&c_distance);
 	if (ret != CL_SUCCESS)
 		ft_error_exit(1, (char*[]){CL_ERR_SET_ARG}, EXIT_FAILURE);
 //	ret = clEnqueueTask(cl_data.cmd_queue, cl_data.kernel, 0, NULL, NULL);
 
 	const size_t global_work_size[1] = {WINDOW_WIDTH * WINDOW_HEIGHT};
+//	printf("cadran.min.real_part: %.128lf, cadran.max.real_part: %.128lf\n", ft_get_t_fractal_data()[fractal_type].c.min.real_part, ft_get_t_fractal_data()[fractal_type].c.max.real_part);
+
 	ret = clEnqueueNDRangeKernel(cl_data.cmd_queue, cl_data.kernel, 1, NULL, global_work_size, NULL, 0, NULL, NULL);
 	if (ret != CL_SUCCESS)
 		ft_error_exit(1, (char*[]){CL_ERR_KERNEL_LAUNCH}, EXIT_FAILURE);
@@ -158,7 +162,7 @@ void	ft_call_cl(t_mlx_data *mlx_data, t_fractal_type fractal_type)
 	, WINDOW_HEIGHT * WINDOW_WIDTH * 4, mlx_data->frame->buffer, 0, NULL, NULL);
 	clFlush(cl_data.cmd_queue);
 	mlx_put_image_to_window(mlx_data->connector, mlx_data->win, mlx_data->frame->frame, 0, 0);
-	printf("put image\n");
+//	printf("put image\n");
 }
 
 void	ft_test(int argc, char **argv)
