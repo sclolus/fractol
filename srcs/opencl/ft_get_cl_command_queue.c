@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_t_fractal_data.c                            :+:      :+:    :+:   */
+/*   ft_get_cl_command_queue.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/05 17:25:25 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/16 04:01:28 by sclolus          ###   ########.fr       */
+/*   Created: 2017/07/16 02:10:16 by sclolus           #+#    #+#             */
+/*   Updated: 2017/07/16 02:10:59 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-t_fractal_data	*ft_get_t_fractal_data(void)
+cl_command_queue ft_get_cl_command_queue(cl_context context, cl_device_id device_id)
 {
-		static t_fractal_data	fractals_data[SUPPORTED_FRACTAL_NBR] = {
-			{"mandelbrot", MANDELBROT_FILENAME, {0, 0}, {{-2, -1}, {1, 1}}
-			, *ft_mandelbrot, *ft_cl_mandelbrot, 2, 64},
-			{"julia", JULIA_FILENAME, {0, 0}, {{-2, -1}, {1, 1}}
-			, *ft_julia, *ft_cl_julia, 2, 32}};
-		return (fractals_data);
+	cl_command_queue	cmd_queue;
+	cl_int				ret;
+
+	cmd_queue = clCreateCommandQueue(context, device_id, 0, &ret);
+	if (ret != CL_SUCCESS)
+		ft_error_exit(1, (char*[]){CL_ERR_COMMAND_QUEUE}, EXIT_FAILURE);
+	return (cmd_queue);
 }

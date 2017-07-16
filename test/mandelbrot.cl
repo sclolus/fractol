@@ -13,34 +13,6 @@ typedef struct	s_complexe_cadran
 	t_complexe	max;
 }				t_complexe_cadran;
 
-static int	ft_is_bounded(t_complexe c, unsigned int iteration_number)
-{
-	t_complexe			z;
-	unsigned int		i;
-
-	i = 0;
-	z = (t_complexe){0, 0};
-	while (i < iteration_number)
-	{
-		z = (t_complexe){z.real_part * z.real_part - (z.imaginary_part
-			* z.imaginary_part), 2 * z.real_part * z.imaginary_part};
-		z = (t_complexe){z.real_part + c.real_part
-						 , z.imaginary_part + c.imaginary_part};
-		if (sqrt((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part)) > 2)
-			return (((int)i * BASE_COLOR) & 0xFFFFFF);
-		i++;
-	}
-	return (0);
-}
-
-double	ft_double_distance(double a, double b)
-{
-	if (a > b)
-		return (a - b);
-	return (b - a);
-}
-
-
 __kernel void mandelbrot(__global int *buffer, int width, int height, t_complexe_cadran cadran, unsigned int iteration_number, t_complexe distance)
 {
 	t_complexe				c;
@@ -54,7 +26,7 @@ __kernel void mandelbrot(__global int *buffer, int width, int height, t_complexe
 					 , cadran.min.imaginary_part + (distance.imaginary_part/ height) * pos_y};
 	i = 0;
 	z = (t_complexe){0, 0};
-	while (i < (iteration_number & 4))
+	while (i < (iteration_number & 15))
 	{
 		z = (t_complexe){z.real_part * z.real_part - (z.imaginary_part
 			* z.imaginary_part), 2.0 * z.real_part * z.imaginary_part};
@@ -62,7 +34,7 @@ __kernel void mandelbrot(__global int *buffer, int width, int height, t_complexe
 						 , z.imaginary_part + c.imaginary_part};
 		if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4)
 		{
-			buffer[(pos_y * (width)) + pos_x] = (((i + (int)c.imaginary_part) * BASE_COLOR  ) & 0xFFFFFF);
+			buffer[(pos_y * (width)) + pos_x] = (((i) * BASE_COLOR  ) & 0xFFFFFF);
 			return ;
 		}
 		i++;
@@ -74,9 +46,10 @@ __kernel void mandelbrot(__global int *buffer, int width, int height, t_complexe
 			* z.imaginary_part), 2.0 * z.real_part * z.imaginary_part};
 		z = (t_complexe){z.real_part + c.real_part
 						 , z.imaginary_part + c.imaginary_part};
-		if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4)
+
+	if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4)
 		{
-			buffer[(pos_y * (width)) + pos_x] = (((i + (int)c.imaginary_part)) * BASE_COLOR  ) & 0xFFFFFF;
+			buffer[(pos_y * (width)) + pos_x] = (((i)) * BASE_COLOR  ) & 0xFFFFFF;
 			return ;
 		}
 		z = (t_complexe){z.real_part * z.real_part - (z.imaginary_part
@@ -85,7 +58,7 @@ __kernel void mandelbrot(__global int *buffer, int width, int height, t_complexe
 						 , z.imaginary_part + c.imaginary_part};
 		if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4)
 		{
-			buffer[(pos_y * (width)) + pos_x] = (((i - (int)c.imaginary_part + 1) * BASE_COLOR  ) & 0xFFFFFF);
+			buffer[(pos_y * (width)) + pos_x] = (((i  + 1) * BASE_COLOR  ) & 0xFFFFFF);
 			return ;
 		}
 		z = (t_complexe){z.real_part * z.real_part - (z.imaginary_part
@@ -94,7 +67,7 @@ __kernel void mandelbrot(__global int *buffer, int width, int height, t_complexe
 						 , z.imaginary_part + c.imaginary_part};
 		if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4)
 		{
-			buffer[(pos_y * (width)) + pos_x] = (((i * (int)c.imaginary_part + 2) * BASE_COLOR  ) & 0xFFFFFF);
+			buffer[(pos_y * (width)) + pos_x] = (((i + 2) * BASE_COLOR  ) & 0xFFFFFF);
 			return ;
 		}
 		z = (t_complexe){z.real_part * z.real_part - (z.imaginary_part
@@ -103,10 +76,122 @@ __kernel void mandelbrot(__global int *buffer, int width, int height, t_complexe
 						 , z.imaginary_part + c.imaginary_part};
 		if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4)
 		{
-			buffer[(pos_y * (width)) + pos_x] = (((i / (int)c.imaginary_part + 3) * BASE_COLOR  ) & 0xFFFFFF);
+			buffer[(pos_y * (width)) + pos_x] = (((i + 3) * BASE_COLOR  ) & 0xFFFFFF);
 			return ;
 		}
-		i += 4;
+		z = (t_complexe){z.real_part * z.real_part - (z.imaginary_part
+			* z.imaginary_part), 2.0 * z.real_part * z.imaginary_part};
+		z = (t_complexe){z.real_part + c.real_part
+						 , z.imaginary_part + c.imaginary_part};
+
+	if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4)
+		{
+			buffer[(pos_y * (width)) + pos_x] = (((i + 4)) * BASE_COLOR  ) & 0xFFFFFF;
+			return ;
+		}
+		z = (t_complexe){z.real_part * z.real_part - (z.imaginary_part
+			* z.imaginary_part), 2.0 * z.real_part * z.imaginary_part};
+		z = (t_complexe){z.real_part + c.real_part
+						 , z.imaginary_part + c.imaginary_part};
+		if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4)
+		{
+			buffer[(pos_y * (width)) + pos_x] = (((i + 5) * BASE_COLOR  ) & 0xFFFFFF);
+			return ;
+		}
+		z = (t_complexe){z.real_part * z.real_part - (z.imaginary_part
+			* z.imaginary_part), 2.0 * z.real_part * z.imaginary_part};
+		z = (t_complexe){z.real_part + c.real_part
+						 , z.imaginary_part + c.imaginary_part};
+		if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4)
+		{
+			buffer[(pos_y * (width)) + pos_x] = (((i + 6) * BASE_COLOR  ) & 0xFFFFFF);
+			return ;
+		}
+		z = (t_complexe){z.real_part * z.real_part - (z.imaginary_part
+			* z.imaginary_part), 2.0 * z.real_part * z.imaginary_part};
+		z = (t_complexe){z.real_part + c.real_part
+						 , z.imaginary_part + c.imaginary_part};
+		if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4)
+		{
+			buffer[(pos_y * (width)) + pos_x] = (((i + 7) * BASE_COLOR  ) & 0xFFFFFF);
+			return ;
+		}
+		z = (t_complexe){z.real_part * z.real_part - (z.imaginary_part
+			* z.imaginary_part), 2.0 * z.real_part * z.imaginary_part};
+		z = (t_complexe){z.real_part + c.real_part
+						 , z.imaginary_part + c.imaginary_part};
+
+	if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4)
+		{
+			buffer[(pos_y * (width)) + pos_x] = (((i + 8)) * BASE_COLOR  ) & 0xFFFFFF;
+			return ;
+		}
+		z = (t_complexe){z.real_part * z.real_part - (z.imaginary_part
+			* z.imaginary_part), 2.0 * z.real_part * z.imaginary_part};
+		z = (t_complexe){z.real_part + c.real_part
+						 , z.imaginary_part + c.imaginary_part};
+		if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4)
+		{
+			buffer[(pos_y * (width)) + pos_x] = (((i  + 9) * BASE_COLOR  ) & 0xFFFFFF);
+			return ;
+		}
+		z = (t_complexe){z.real_part * z.real_part - (z.imaginary_part
+			* z.imaginary_part), 2.0 * z.real_part * z.imaginary_part};
+		z = (t_complexe){z.real_part + c.real_part
+						 , z.imaginary_part + c.imaginary_part};
+		if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4)
+		{
+			buffer[(pos_y * (width)) + pos_x] = (((i + 10) * BASE_COLOR  ) & 0xFFFFFF);
+			return ;
+		}
+		z = (t_complexe){z.real_part * z.real_part - (z.imaginary_part
+			* z.imaginary_part), 2.0 * z.real_part * z.imaginary_part};
+		z = (t_complexe){z.real_part + c.real_part
+						 , z.imaginary_part + c.imaginary_part};
+		if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4)
+		{
+			buffer[(pos_y * (width)) + pos_x] = (((i + 11) * BASE_COLOR  ) & 0xFFFFFF);
+			return ;
+		}
+		z = (t_complexe){z.real_part * z.real_part - (z.imaginary_part
+			* z.imaginary_part), 2.0 * z.real_part * z.imaginary_part};
+		z = (t_complexe){z.real_part + c.real_part
+						 , z.imaginary_part + c.imaginary_part};
+
+	if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4)
+		{
+			buffer[(pos_y * (width)) + pos_x] = (((i + 12)) * BASE_COLOR  ) & 0xFFFFFF;
+			return ;
+		}
+		z = (t_complexe){z.real_part * z.real_part - (z.imaginary_part
+			* z.imaginary_part), 2.0 * z.real_part * z.imaginary_part};
+		z = (t_complexe){z.real_part + c.real_part
+						 , z.imaginary_part + c.imaginary_part};
+		if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4)
+		{
+			buffer[(pos_y * (width)) + pos_x] = (((i  + 13) * BASE_COLOR  ) & 0xFFFFFF);
+			return ;
+		}
+		z = (t_complexe){z.real_part * z.real_part - (z.imaginary_part
+			* z.imaginary_part), 2.0 * z.real_part * z.imaginary_part};
+		z = (t_complexe){z.real_part + c.real_part
+						 , z.imaginary_part + c.imaginary_part};
+		if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4)
+		{
+			buffer[(pos_y * (width)) + pos_x] = (((i + 14) * BASE_COLOR  ) & 0xFFFFFF);
+			return ;
+		}
+		z = (t_complexe){z.real_part * z.real_part - (z.imaginary_part
+			* z.imaginary_part), 2.0 * z.real_part * z.imaginary_part};
+		z = (t_complexe){z.real_part + c.real_part
+						 , z.imaginary_part + c.imaginary_part};
+		if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4)
+		{
+			buffer[(pos_y * (width)) + pos_x] = (((i + 15) * BASE_COLOR  ) & 0xFFFFFF);
+			return ;
+		}
+
+		i += 16;
 	}
 	buffer[(pos_y * (width)) + pos_x] = 0;
 }

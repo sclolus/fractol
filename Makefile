@@ -14,10 +14,19 @@ SRC= srcs/main.c \
 	srcs/ft_get_t_pthread_execution_data.c \
 	srcs/ft_pthread_init_thread_execution_data.c \
 	srcs/ft_mandelbrot.c \
+	srcs/opencl/ft_cl_mandelbrot.c\
+	srcs/opencl/ft_cl_julia.c\
 	srcs/ft_julia.c \
 	srcs/ft_draw_fractal.c \
 	srcs/ft_draw_cl_fractal.c \
 	srcs/ft_get_t_fractal_data.c \
+	srcs/opencl/ft_get_cl_buffer.c \
+	srcs/opencl/ft_get_cl_command_queue.c \
+	srcs/opencl/ft_get_cl_context.c \
+	srcs/opencl/ft_get_cl_execution_data.c \
+	srcs/opencl/ft_get_cl_kernel.c \
+	srcs/opencl/ft_get_cl_program_from_source.c \
+	srcs/opencl/ft_get_device_id.c \
 	srcs/quaternions/ft_get_conjugate_quat.c \
 	srcs/quaternions/ft_get_quat_magnitude.c \
 	srcs/quaternions/ft_multiply_quat.c \

@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/03 06:13:14 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/16 00:40:27 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/16 04:31:25 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ typedef void* MLX_IMG;
 typedef void* MLX_PTR;
 
 # define WINDOW_NAME "fractol"
-# define WINDOW_WIDTH 800
-# define WINDOW_HEIGHT 800
+# define WINDOW_WIDTH 1920
+# define WINDOW_HEIGHT 1080
 
 # define PI 3.14159265359
 # define K 0.5
@@ -68,10 +68,15 @@ typedef struct	s_color_set t_color_set;
 typedef struct	s_complexe t_complexe;
 typedef struct	s_pthread_execution_data t_pthread_execution_data;
 typedef			void (f_draw_fractal)(t_pthread_execution_data*);
+typedef struct	s_mlx_data t_mlx_data;
+typedef struct	s_fractal_data t_fractal_data;
+typedef struct	s_cl_execution_data t_cl_execution_data;
+typedef			void (f_cl_draw_fractal)(t_mlx_data *, t_fractal_data *, t_cl_execution_data *cl_data);
 typedef struct	s_complexe_cadran t_complexe_cadran;
 typedef struct	s_fractal_data t_fractal_data;
 typedef struct	s_win_coords t_win_coords;
 typedef struct	s_win_cadran t_win_cadran;
+
 
 typedef struct	s_complexe
 {
@@ -196,9 +201,12 @@ t_fractal_type	ft_parse(char *fractal_name);
 
 typedef struct	s_fractal_data
 {
+	char				*name;
+	char				*cl_filename;
 	t_complexe			z0;
 	t_complexe_cadran	c;
 	f_draw_fractal		*f;
+	f_cl_draw_fractal	*cl_f;
 	uint32_t			degree;
 	uint32_t			iteration_number;
 }				t_fractal_data;
@@ -351,8 +359,22 @@ int32_t			ft_get_lerp(double z1, double z2
 void	ft_print_usage(void) __attribute__((noreturn));
 
 /*
-** TEST
-*/ //
+** OpenCL
+*/
+
+# define MANDELBROT_FILENAME "./test/mandelbrot.cl"
+# define JULIA_FILENAME "./test/julia.cl"
+
+# define CL_ERR_COMMAND_QUEUE "Creation of command queue failed"
+# define CL_ERR_GET_DEVICE_IDS "clGetDeviceIDs() failed"
+# define CL_ERR_GET_PLATFORMS_IDS "clGetPlatformsIDs() failed"
+# define CL_ERR_CREATE_CONTEXT "clCreateContext() failed"
+# define CL_ERR_CREATE_BUFFER "clCreateBuffer() failed"
+# define CL_ERR_CREATE_PROGRAM_WITH_SOURCE "clCreateProgramWithSource() failed"
+# define CL_ERR_BUILD_PROGRAM "clBuildProgram() failed"
+# define CL_ERR_CREATE_KERNEL "clCreateKernel() failed"
+# define CL_ERR_SET_ARG "clSetKernelArg() failed"
+# define CL_ERR_KERNEL_LAUNCH "Kernel launch failed"
 
 typedef struct	s_cl_execution_data
 {
@@ -364,9 +386,28 @@ typedef struct	s_cl_execution_data
 	cl_mem				mem_obj;
 }				t_cl_execution_data;
 
+// typedef void	(*cl_f)(t_mlx_data *, t_fractal_data *);
+
 void	ft_test(int argc, char **argv);
-void	ft_call_cl(t_mlx_data *mlx_data, t_fractal_type fractal_type);
-void	ft_draw_cl_fractal(t_mlx_data *mlx_data
+void				ft_draw_cl_fractal(t_mlx_data *mlx_data
 						, t_fractal_type fractal_type);
+void				ft_call_cl(t_mlx_data *mlx_data, t_fractal_type fractal_type);
+t_cl_execution_data	*ft_get_cl_execution_data(t_fractal_type fractal_type);
+cl_kernel			ft_get_cl_kernel(cl_program program, char *name
+								, cl_device_id device_id);
+cl_program			ft_get_cl_program_from_source(cl_context context, char *filename);
+cl_mem				ft_get_cl_buffer(cl_context context, cl_mem_flags mem_flags, uint64_t size);
+cl_command_queue	ft_get_cl_command_queue(cl_context context, cl_device_id device_id);
+cl_context			ft_get_cl_context(cl_device_id device_id);
+cl_device_id		ft_get_device_id(void);
+
+/*
+** Opencl Fractals
+*/
+
+void	ft_cl_mandelbrot(t_mlx_data *mlx_data, t_fractal_data *fractal_data
+						, t_cl_execution_data *cl_data);
+void	ft_cl_julia(t_mlx_data *mlx_data, t_fractal_data *fractal_data
+						, t_cl_execution_data *cl_data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/03 10:34:48 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/15 22:36:25 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/16 04:24:58 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_draw_fractal(t_mlx_data *mlx_data
 	t_fractal_data						*fractals_data;
 
 	fractals_data = ft_get_t_fractal_data();
-	pthread_data = ft_pthread_init_thread_execution_data(DRAWING_THREAD_NBR
+ 	pthread_data = ft_pthread_init_thread_execution_data(DRAWING_THREAD_NBR
 					+ 1, fractals_data[fractal_type].c);
 	thread_tab = ft_pthread_create_drawing_threads(mlx_data, pthread_data
 												, fractals_data[fractal_type].f);

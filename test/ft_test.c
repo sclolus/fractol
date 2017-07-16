@@ -6,161 +6,42 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 01:58:23 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/16 00:39:29 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/16 04:24:59 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-# define MANDELBROT_FILENAME "./test/mandelbrot.cl"
-
-# define CL_ERR_COMMAND_QUEUE "Creation of command queue failed"
-# define CL_ERR_GET_DEVICE_IDS "clGetDeviceIDs() failed"
-# define CL_ERR_GET_PLATFORMS_IDS "clGetPlatformsIDs() failed"
-# define CL_ERR_CREATE_CONTEXT "clCreateContext() failed"
-# define CL_ERR_CREATE_BUFFER "clCreateBuffer() failed"
-# define CL_ERR_CREATE_PROGRAM_WITH_SOURCE "clCreateProgramWithSource() failed"
-# define CL_ERR_BUILD_PROGRAM "clBuildProgram() failed"
-# define CL_ERR_CREATE_KERNEL "clCreateKernel() failed"
-# define CL_ERR_SET_ARG "clSetKernelArg() failed"
-# define CL_ERR_KERNEL_LAUNCH "Kernel launch failed"
-
-cl_kernel		ft_get_cl_kernel(cl_program program, char *name
-								 , cl_device_id device_id);
-cl_device_id	ft_get_device_id(void);
-cl_context	ft_get_cl_context(cl_device_id device_id);
-cl_command_queue ft_get_cl_command_queue(cl_context context, cl_device_id device_id);
-cl_mem			ft_get_cl_buffer(cl_context context, cl_mem_flags mem_flags, uint64_t size);
-cl_program		ft_get_cl_program_from_source(cl_context context, char *filename);
-cl_kernel		ft_get_cl_kernel(cl_program program, char *name
-								 , cl_device_id device_id);
-void	ft_call_cl(t_mlx_data *mlx_data, t_fractal_type fractal_type);
-
-
-cl_device_id	ft_get_device_id(void)
-{
-	cl_platform_id	platform_id;
-	cl_device_id	device_id;
-	cl_uint			ret_num_platforms;
-	cl_uint			ret_num_devices;
-	cl_int			ret;
-
-	platform_id = NULL;
-	ret = clGetPlatformIDs(1, &platform_id, &ret_num_platforms);
-	if (ret != CL_SUCCESS)
-		ft_error_exit(1, (char*[]){CL_ERR_GET_DEVICE_IDS}, EXIT_FAILURE);
-	ret = clGetDeviceIDs(platform_id, CL_DEVICE_TYPE_GPU, 1, &device_id, &ret_num_devices);
-	if (ret != CL_SUCCESS)
-		ft_error_exit(1, (char*[]){CL_ERR_GET_PLATFORMS_IDS}, EXIT_FAILURE);
-	return (device_id);
-}
-
-cl_context	ft_get_cl_context(cl_device_id device_id)
-{
-	cl_context		context;
-	cl_int			ret;
-
-	context = NULL;
-	context = clCreateContext(NULL, 1, &device_id, NULL, NULL, &ret);
-	if (ret != CL_SUCCESS)
-		ft_error_exit(1, (char*[]){CL_ERR_CREATE_CONTEXT}, EXIT_FAILURE);
-	return (context);
-}
-
-cl_command_queue ft_get_cl_command_queue(cl_context context, cl_device_id device_id)
-{
-	cl_command_queue	cmd_queue;
-	cl_int				ret;
-
-	cmd_queue = clCreateCommandQueue(context, device_id, 0, &ret);
-	if (ret != CL_SUCCESS)
-		ft_error_exit(1, (char*[]){CL_ERR_COMMAND_QUEUE}, EXIT_FAILURE);
-	return (cmd_queue);
-}
-
-cl_mem			ft_get_cl_buffer(cl_context context, cl_mem_flags mem_flags, uint64_t size)
-{
-	cl_mem	mem_obj;
-	cl_int	ret;
-
-	mem_obj = clCreateBuffer(context, mem_flags, size, NULL, &ret);
-	if (ret != CL_SUCCESS)
-		ft_error_exit(1, (char*[]){CL_ERR_CREATE_BUFFER}, EXIT_FAILURE);
-	return (mem_obj);
-}
-
-cl_program		ft_get_cl_program_from_source(cl_context context, char *filename)
-{
-	char			*source_str;
-	cl_program		program;
-	uint64_t		len;
-	cl_int			ret;
-
-	if (!(source_str = ft_get_file_content(filename)))
-		exit(EXIT_FAILURE);
-	len = ft_strlen(source_str);
-	program = clCreateProgramWithSource(context, 1, (const char*[]){(const char*)source_str},
-										(const size_t*)&len, &ret);
-	if (ret != CL_SUCCESS)
-		ft_error_exit(1, (char*[]){CL_ERR_CREATE_PROGRAM_WITH_SOURCE}
-								, EXIT_FAILURE);
-	free(source_str);
-	return (program);
-}
-
-cl_kernel		ft_get_cl_kernel(cl_program program, char *name
-								, cl_device_id device_id)
-{
-	cl_int		ret;
-	cl_kernel	kernel;
-
-	ret = clBuildProgram(program, 1, &device_id, NULL, NULL, NULL);
-	if (ret != CL_SUCCESS)
-		ft_error_exit(1, (char*[]){CL_ERR_BUILD_PROGRAM}
-								, EXIT_FAILURE);
-	kernel = clCreateKernel(program, (const char*)name, &ret);
-	if (ret != CL_SUCCESS)
-		ft_error_exit(1, (char*[]){CL_ERR_CREATE_KERNEL}
-								, EXIT_FAILURE);
-	return (kernel);
-}
-
 void	ft_call_cl(t_mlx_data *mlx_data, t_fractal_type fractal_type)
 {
-	t_cl_execution_data	cl_data;
+	t_cl_execution_data	*cl_data;
 	cl_int				ret;
 	int					win_width = WINDOW_WIDTH;
 	int					win_heigth = WINDOW_HEIGHT;
 	t_complexe_cadran	c;
 
-	(void)fractal_type;
-	cl_data.device_id = ft_get_device_id();
-	cl_data.context = ft_get_cl_context(cl_data.device_id);
-	cl_data.cmd_queue = ft_get_cl_command_queue(cl_data.context, cl_data.device_id);
-	cl_data.mem_obj = ft_get_cl_buffer(cl_data.context, CL_MEM_READ_WRITE, WINDOW_HEIGHT * WINDOW_WIDTH * 4);
-	cl_data.program = ft_get_cl_program_from_source(cl_data.context, MANDELBROT_FILENAME);
-	cl_data.kernel = ft_get_cl_kernel(cl_data.program, "mandelbrot", cl_data.device_id);
-	ret = clSetKernelArg(cl_data.kernel, 0, sizeof(cl_mem), (void*)&cl_data.mem_obj);
-	ret = clSetKernelArg(cl_data.kernel, 1, sizeof(int), (void*)&win_width);
-	ret = clSetKernelArg(cl_data.kernel, 2, sizeof(int), (void*)&win_heigth);
+	cl_data = ft_get_cl_execution_data(fractal_type);
+ 	ret = clSetKernelArg(cl_data->kernel, 0, sizeof(cl_mem), (void*)&cl_data->mem_obj);
+	ret = clSetKernelArg(cl_data->kernel, 1, sizeof(int), (void*)&win_width);
+	ret = clSetKernelArg(cl_data->kernel, 2, sizeof(int), (void*)&win_heigth);
 	c = (ft_get_t_fractal_data()[fractal_type].c);
-	ret = clSetKernelArg(cl_data.kernel, 3, sizeof(t_complexe_cadran), (void*)&c);
+	ret = clSetKernelArg(cl_data->kernel, 3, sizeof(t_complexe_cadran), (void*)&c);
 	t_complexe	c_distance = (t_complexe){ft_double_distance(ft_get_t_fractal_data()[fractal_type].c.min.real_part, ft_get_t_fractal_data()[fractal_type].c.max.real_part), ft_double_distance(ft_get_t_fractal_data()[fractal_type].c.min.imaginary_part, ft_get_t_fractal_data()[fractal_type].c.max.imaginary_part)};
-	ret = clSetKernelArg(cl_data.kernel, 4, sizeof(uint32_t), (void*)&ft_get_t_fractal_data()[fractal_type].iteration_number);
-	ret = clSetKernelArg(cl_data.kernel, 5, sizeof(t_complexe), (void*)&c_distance);
+	ret = clSetKernelArg(cl_data->kernel, 4, sizeof(uint32_t), (void*)&ft_get_t_fractal_data()[fractal_type].iteration_number);
+	ret = clSetKernelArg(cl_data->kernel, 5, sizeof(t_complexe), (void*)&c_distance);
 	if (ret != CL_SUCCESS)
 		ft_error_exit(1, (char*[]){CL_ERR_SET_ARG}, EXIT_FAILURE);
-//	ret = clEnqueueTask(cl_data.cmd_queue, cl_data.kernel, 0, NULL, NULL);
+//	ret = clEnqueueTask(cl_data->cmd_queue, cl_data->kernel, 0, NULL, NULL);
 
 	const size_t global_work_size[1] = {WINDOW_WIDTH * WINDOW_HEIGHT};
 //	printf("cadran.min.real_part: %.128lf, cadran.max.real_part: %.128lf\n", ft_get_t_fractal_data()[fractal_type].c.min.real_part, ft_get_t_fractal_data()[fractal_type].c.max.real_part);
 
-	ret = clEnqueueNDRangeKernel(cl_data.cmd_queue, cl_data.kernel, 1, NULL, global_work_size, NULL, 0, NULL, NULL);
+	ret = clEnqueueNDRangeKernel(cl_data->cmd_queue, cl_data->kernel, 1, NULL, global_work_size, NULL, 0, NULL, NULL);
 	if (ret != CL_SUCCESS)
 		ft_error_exit(1, (char*[]){CL_ERR_KERNEL_LAUNCH}, EXIT_FAILURE);
-	ret = clEnqueueReadBuffer(cl_data.cmd_queue, cl_data.mem_obj, CL_TRUE, 0
+	ret = clEnqueueReadBuffer(cl_data->cmd_queue, cl_data->mem_obj, CL_TRUE, 0
 	, WINDOW_HEIGHT * WINDOW_WIDTH * 4, mlx_data->frame->buffer, 0, NULL, NULL);
-	clFlush(cl_data.cmd_queue);
+	clFlush(cl_data->cmd_queue);
 	mlx_put_image_to_window(mlx_data->connector, mlx_data->win, mlx_data->frame->frame, 0, 0);
 //	printf("put image\n");
 }
@@ -189,8 +70,6 @@ void	ft_test(int argc, char **argv)
 				, &ft_handler_keys_release, (void*[]){&(t_mlx_data){connector, win, frames}, &fractal_type});
 		mlx_hook(win, ButtonPress, ButtonPressMask
 				, &ft_handler_buttons, (void*[]){&(t_mlx_data){connector, win, frames}, &fractal_type});
-/* 		mlx_hook(win, ButtonRelease, ButtonReleaseMask */
-/* 				, &ft_handler_buttons_release, (void*[]){&(t_mlx_data){connector, win, frames}, &fractal_type}); */
 		mlx_hook(win, MotionNotify, 0, &ft_handler_mouse_motion, (void*[]){&(t_mlx_data){connector, win, frames}, &fractal_type});
 		mlx_loop(connector);
 	}
