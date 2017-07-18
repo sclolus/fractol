@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/16 04:01:37 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/16 06:10:02 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/16 06:24:32 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 void	ft_cl_mandelbrot(t_mlx_data *mlx_data, t_fractal_data *fractal_data
 						, t_cl_execution_data *cl_data)
 {
-	cl_int				ret;
-	static int			win_width = WINDOW_WIDTH;
-	static int			win_heigth = WINDOW_HEIGHT;
 	t_complexe			c_distance;
 	t_complexe_cadran	c;
+	static int			win_width = WINDOW_WIDTH;
+	static int			win_heigth = WINDOW_HEIGHT;
+	cl_int				ret;
 
 	c_distance = (t_complexe){ft_double_distance(
 			fractal_data->c.min.real_part
-			, fractal_data->c.max.real_part)
+			, fractal_data->c.max.real_part) / WINDOW_WIDTH
 			, ft_double_distance(fractal_data->c.min.imaginary_part
-			, fractal_data->c.max.imaginary_part)};
+			, fractal_data->c.max.imaginary_part) / WINDOW_HEIGHT};
 	ret = clSetKernelArg(cl_data->kernel, 0, sizeof(cl_mem), (void*)&cl_data->mem_obj);
 	ret = clSetKernelArg(cl_data->kernel, 1, sizeof(int), (void*)&win_width);
 	ret = clSetKernelArg(cl_data->kernel, 2, sizeof(int), (void*)&win_heigth);

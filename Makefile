@@ -42,18 +42,20 @@ SRC= srcs/main.c \
 	srcs/ft_handler_esc.c \
 	srcs/ft_handler_right.c \
 	srcs/ft_handler_left.c \
+	srcs/ft_handler_up.c \
+	srcs/ft_handler_down.c \
+	srcs/ft_handler_p.c \
 	srcs/ft_handler_buttons.c \
 	srcs/ft_handler_button5.c \
 	srcs/ft_handler_button4.c \
 	srcs/ft_double_distance.c \
 	srcs/ft_handler_mouse_motion.c \
 	srcs/ft_handler_mouse_motion_julia.c \
+	srcs/screenshot_bmp/ft_create_screenshot.c
 #	srcs/ft_get_z_coord.c \
 	srcs/quaternions/ft_quat_rotate_points.c \
 	srcs/ft_get_color_interpolation.c \
 	srcs/ft_get_lerp.c \
-	srcs/ft_handler_up.c \
-	srcs/ft_handler_down.c \
 	srcs/ft_handler_q.c \
 	srcs/ft_handler_e.c \
 	srcs/ft_handler_a.c \
@@ -65,7 +67,7 @@ HDRS= includes/fractol.h
 OBJ= $(SRC:.c=.o)
 HDR_PATH= ./libft/includes/
 CC= gcc
-CC_FLAGS= -v -Weverything -Wall -Werror -Wextra  -Ofast #   -g3 -fsanitize=address -fsanitize-blacklist=my_ignores.txt
+CC_FLAGS= -v -Weverything -Wall -Werror -Wextra  -Ofast    -g3 -fsanitize=address -fsanitize-blacklist=my_ignores.txt
 MLX_PATH=./minilibx_macos
 LIBFT_PATH=./libft/
 FLAGS= -L$(MLX_PATH) -I$(MLX_PATH) -lmlx -L$(LIBFT_PATH) -lft -I$(HDR_PATH) -I./includes  -framework AppKit  -framework OpenGL -framework OpenCL

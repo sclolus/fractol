@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 01:58:23 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/16 04:24:59 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/16 06:23:38 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_call_cl(t_mlx_data *mlx_data, t_fractal_type fractal_type)
 	ret = clSetKernelArg(cl_data->kernel, 2, sizeof(int), (void*)&win_heigth);
 	c = (ft_get_t_fractal_data()[fractal_type].c);
 	ret = clSetKernelArg(cl_data->kernel, 3, sizeof(t_complexe_cadran), (void*)&c);
-	t_complexe	c_distance = (t_complexe){ft_double_distance(ft_get_t_fractal_data()[fractal_type].c.min.real_part, ft_get_t_fractal_data()[fractal_type].c.max.real_part), ft_double_distance(ft_get_t_fractal_data()[fractal_type].c.min.imaginary_part, ft_get_t_fractal_data()[fractal_type].c.max.imaginary_part)};
+	t_complexe	c_distance = (t_complexe){ft_double_distance(ft_get_t_fractal_data()[fractal_type].c.min.real_part / WINDOW_WIDTH, ft_get_t_fractal_data()[fractal_type].c.max.real_part), ft_double_distance(ft_get_t_fractal_data()[fractal_type].c.min.imaginary_part, ft_get_t_fractal_data()[fractal_type].c.max.imaginary_part) / WINDOW_HEIGHT};
 	ret = clSetKernelArg(cl_data->kernel, 4, sizeof(uint32_t), (void*)&ft_get_t_fractal_data()[fractal_type].iteration_number);
 	ret = clSetKernelArg(cl_data->kernel, 5, sizeof(t_complexe), (void*)&c_distance);
 	if (ret != CL_SUCCESS)

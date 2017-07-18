@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_t_fractal_data.c                            :+:      :+:    :+:   */
+/*   ft_handler_p.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/05 17:25:25 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/16 06:29:23 by sclolus          ###   ########.fr       */
+/*   Created: 2017/07/16 09:27:10 by sclolus           #+#    #+#             */
+/*   Updated: 2017/07/16 09:30:54 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-t_fractal_data	*ft_get_t_fractal_data(void)
+void	ft_handler_p(void *param)
 {
-		static t_fractal_data	fractals_data[SUPPORTED_FRACTAL_NBR] = {
-			{"mandelbrot", MANDELBROT_FILENAME, {0, 0}, {{-2, -1}, {1, 1}}
-			, *ft_mandelbrot, *ft_cl_mandelbrot, 2, 128},
-			{"julia", JULIA_FILENAME, {0, 0}, {{-2, -1}, {1, 1}}
-			, *ft_julia, *ft_cl_julia, 2, 32}};
-		return (fractals_data);
+	t_mlx_data	*mlx_data;
+
+	mlx_data = (t_mlx_data*)((t_mlx_data**)param)[0];
+	ft_create_screenshot(mlx_data->frame->buffer, WINDOW_WIDTH, WINDOW_HEIGHT);
 }

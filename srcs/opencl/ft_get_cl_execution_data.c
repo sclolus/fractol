@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/16 02:03:57 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/16 06:07:32 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/16 06:28:15 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_cl_execution_data	*ft_get_cl_execution_data(t_fractal_type fractal_type)
 		cl_data.context = ft_get_cl_context(cl_data.device_id);
 		cl_data.cmd_queue = ft_get_cl_command_queue(cl_data.context
 								, cl_data.device_id);
-		cl_data.mem_obj = ft_get_cl_buffer(cl_data.context, CL_MEM_READ_WRITE
+		cl_data.mem_obj = ft_get_cl_buffer(cl_data.context, CL_MEM_WRITE_ONLY
 								, WINDOW_HEIGHT * WINDOW_WIDTH * 4);
 	}
 	if (current_fractal_type != fractal_type)

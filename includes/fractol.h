@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/03 06:13:14 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/16 04:31:25 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/17 18:31:47 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,7 +260,7 @@ t_pthread_execution_data	*ft_get_t_pthread_execution_data(void);
 ** Key handling
 */
 
-# define NBR_KEY_HOOKS 5
+# define NBR_KEY_HOOKS 8
 # define INVALID_KEYS_HOOKS_NBR "Invalid keys_hooks number provided in macro expansion"
 
 int				ft_handler_keys(int keycode, void *param);
@@ -279,6 +279,7 @@ void			ft_handler_w(void *param);
 void			ft_handler_s(void *param);
 void			ft_handler_d(void *param);
 void			ft_handler_a(void *param);
+void			ft_handler_p(void *param);
 
 /*
 ** Button handling
@@ -405,9 +406,21 @@ cl_device_id		ft_get_device_id(void);
 ** Opencl Fractals
 */
 
-void	ft_cl_mandelbrot(t_mlx_data *mlx_data, t_fractal_data *fractal_data
+void				ft_cl_mandelbrot(t_mlx_data *mlx_data, t_fractal_data *fractal_data
 						, t_cl_execution_data *cl_data);
-void	ft_cl_julia(t_mlx_data *mlx_data, t_fractal_data *fractal_data
+void				ft_cl_julia(t_mlx_data *mlx_data, t_fractal_data *fractal_data
 						, t_cl_execution_data *cl_data);
+
+/*
+** Screenshots
+*/
+
+# define RANDOM_FILE "/dev/urandom"
+# define ERR_OPEN_SCREENSHOT "failed to open() screenshot file"
+# define ERR_CLOSE_SCREENSHOT "failed to close() screenshot file"
+
+# define SCREENSHOT_FILENAME_HEADER "fractol_screenshot_"
+
+void			ft_create_screenshot(void *buffer, uint32_t width, uint32_t height);
 
 #endif
