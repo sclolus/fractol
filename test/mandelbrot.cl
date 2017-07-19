@@ -13,6 +13,99 @@ typedef struct	s_complexe_cadran
 	t_complexe	max;
 }				t_complexe_cadran;
 
+typedef struct	s_color_point
+{
+	t_complexe	point;
+	int			color;
+}				t_color_point;
+
+typedef struct	s_color_cadran
+{
+	t_color_point	x0_y0;
+	t_color_point	x1_y0;
+	t_color_point	x0_y1;
+	t_color_point	x1_y1;
+}				t_color_cadran;
+
+# define INTERPOLATION_X1 -2.0
+# define INTERPOLATION_X2 1.0
+# define INTERPOLATION_Y1 -1.0
+# define INTERPOLATION_Y2 1.0
+
+# define DISTANCE(a, b) (a > b ? a - b : b - a)
+
+/* const __constant t_color_cadran	color_cadran = { */
+/* 	{{INTERPOLATION_X1, INTERPOLATION_Y1}, 0x00010101}, */
+/* 	{{INTERPOLATION_X2, INTERPOLATION_Y1}, 0x00FA0000}, */
+/* 	{{INTERPOLATION_X1, INTERPOLATION_Y2}, 0x00C000CC}, */
+/* 	{{INTERPOLATION_X2, INTERPOLATION_Y2}, 0x00101010}, */
+/* }; */
+
+/*
+** Nice spyche
+*/
+
+/* const __constant t_color_cadran	color_cadran = { */
+/* 	{{INTERPOLATION_X1, INTERPOLATION_Y1}, 0x001F0000}, */
+/* 	{{INTERPOLATION_X2, INTERPOLATION_Y1}, 0x0000CF00}, */
+/* 	{{INTERPOLATION_X1, INTERPOLATION_Y2}, 0x000000AF}, */
+/* 	{{INTERPOLATION_X2, INTERPOLATION_Y2}, 0x00101010}, */
+/* }; */
+
+/*
+** COOL COLORS APPROVED BY ASIA
+*/
+
+const __constant t_color_cadran	color_cadran = {
+	{{INTERPOLATION_X1, INTERPOLATION_Y1}, 0x00FF0000},
+	{{INTERPOLATION_X2, INTERPOLATION_Y1}, 0x0000AA00},
+	{{INTERPOLATION_X1, INTERPOLATION_Y2}, 0x000000FF},
+	{{INTERPOLATION_X2, INTERPOLATION_Y2}, 0x00FF0000},
+};
+
+
+
+# define INTERPOLATION_DX(x) (x - INTERPOLATION_X1)
+# define INTERPOLATION_DY(y) (y - INTERPOLATION_Y1)
+
+# define EXTRACT_RED(x) (x & 0xFF0000)
+# define EXTRACT_GREEN(x) (x & 0x00FF00)
+# define EXTRACT_BLUE(x) (x & 0x0000FF)
+
+# define DELTA_INTERPOLATION_X_R (EXTRACT_RED(color_cadran.x1_y0.color) - EXTRACT_RED(color_cadran.x0_y0.color))
+# define DELTA_INTERPOLATION_Y_R (EXTRACT_RED(color_cadran.x0_y1.color) - EXTRACT_RED(color_cadran.x0_y0.color))
+# define DELTA_INTERPOLATION_XY_R (EXTRACT_RED(color_cadran.x0_y0.color) + EXTRACT_RED(color_cadran.x1_y1.color) \
+								 - EXTRACT_RED(color_cadran.x1_y0.color) - EXTRACT_RED(color_cadran.x0_y1.color))
+
+# define DELTA_INTERPOLATION_X_G (EXTRACT_GREEN(color_cadran.x1_y0.color) - EXTRACT_GREEN(color_cadran.x0_y0.color))
+# define DELTA_INTERPOLATION_Y_G (EXTRACT_GREEN(color_cadran.x0_y1.color) - EXTRACT_GREEN(color_cadran.x0_y0.color))
+# define DELTA_INTERPOLATION_XY_G (EXTRACT_GREEN(color_cadran.x0_y0.color) + EXTRACT_GREEN(color_cadran.x1_y1.color) \
+								 - EXTRACT_GREEN(color_cadran.x1_y0.color) - EXTRACT_GREEN(color_cadran.x0_y1.color))
+
+# define DELTA_INTERPOLATION_X_B (EXTRACT_BLUE(color_cadran.x1_y0.color) - EXTRACT_BLUE(color_cadran.x0_y0.color))
+# define DELTA_INTERPOLATION_Y_B (EXTRACT_BLUE(color_cadran.x0_y1.color) - EXTRACT_BLUE(color_cadran.x0_y0.color))
+# define DELTA_INTERPOLATION_XY_B (EXTRACT_BLUE(color_cadran.x0_y0.color) + EXTRACT_BLUE(color_cadran.x1_y1.color) \
+								 - EXTRACT_BLUE(color_cadran.x1_y0.color) - EXTRACT_BLUE(color_cadran.x0_y1.color))
+
+# define DELTA_X (INTERPOLATION_X2 - INTERPOLATION_X1)
+# define DELTA_Y (INTERPOLATION_Y2 - INTERPOLATION_Y1)
+
+# define BILINEAR_INTERPOLATION(c) (((int)((DELTA_INTERPOLATION_X_R) * (INTERPOLATION_DX(c.real_part) / DELTA_X) \
+									+ (DELTA_INTERPOLATION_Y_R) * (INTERPOLATION_DY(c.imaginary_part) / DELTA_Y) \
+									+ (DELTA_INTERPOLATION_XY_R) * (INTERPOLATION_DX(c.real_part) / DELTA_X) \
+									* (INTERPOLATION_DY(c.imaginary_part) / DELTA_Y) \
+										   + EXTRACT_RED(color_cadran.x0_y0.color)) & 0xFF0000) \
+									| ((int)((DELTA_INTERPOLATION_X_G) * (INTERPOLATION_DX(c.real_part) / DELTA_X) \
+									+ (DELTA_INTERPOLATION_Y_G) * (INTERPOLATION_DY(c.imaginary_part) / DELTA_Y) \
+									+ (DELTA_INTERPOLATION_XY_G) * (INTERPOLATION_DX(c.real_part) / DELTA_X) \
+									* (INTERPOLATION_DY(c.imaginary_part) / DELTA_Y) \
+											+ EXTRACT_GREEN(color_cadran.x0_y0.color)) & 0x00FF00) \
+									| ((int)((DELTA_INTERPOLATION_X_B) * (INTERPOLATION_DX(c.real_part) / DELTA_X) \
+									+ (DELTA_INTERPOLATION_Y_B) * (INTERPOLATION_DY(c.imaginary_part) / DELTA_Y) \
+									+ (DELTA_INTERPOLATION_XY_B) * (INTERPOLATION_DX(c.real_part) / DELTA_X) \
+									* (INTERPOLATION_DY(c.imaginary_part) / DELTA_Y) \
+											 + EXTRACT_BLUE(color_cadran.x0_y0.color)) & 0x0000FF))
+
 __kernel void mandelbrot(__global __write_only int * restrict buffer, const int width
 						 , const int height, const t_complexe_cadran cadran
 						 , const unsigned int iteration_number, const t_complexe distance)
@@ -36,7 +129,7 @@ __kernel void mandelbrot(__global __write_only int * restrict buffer, const int 
 						 , z.imaginary_part + c.imaginary_part};
 		if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4)
 		{
-			buffer[(pos_y * (width)) + pos_x] = (((i) * BASE_COLOR  ) & 0xFFFFFF);
+			buffer[(pos_y * (width)) + pos_x] = ((BILINEAR_INTERPOLATION(c) * i) & 0xFFFFFF);
 			return ;
 		}
 		i++;
@@ -48,9 +141,9 @@ __kernel void mandelbrot(__global __write_only int * restrict buffer, const int 
 		z = (t_complexe){z.real_part + c.real_part
 						 , z.imaginary_part + c.imaginary_part};
 
-	if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4)
+		if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4)
 		{
-			buffer[(pos_y * (width)) + pos_x] = (((i)) * BASE_COLOR  ) & 0xFFFFFF;
+			buffer[(pos_y * (width)) + pos_x] = ((BILINEAR_INTERPOLATION(c) * i) & 0xFFFFFF);
 			return ;
 		}
 		z = (t_complexe){z.real_part * z.real_part - (z.imaginary_part
@@ -59,7 +152,7 @@ __kernel void mandelbrot(__global __write_only int * restrict buffer, const int 
 						 , z.imaginary_part + c.imaginary_part};
 		if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4)
 		{
-			buffer[(pos_y * (width)) + pos_x] = (((i  + 1) * BASE_COLOR  ) & 0xFFFFFF);
+			buffer[(pos_y * (width)) + pos_x] = ((BILINEAR_INTERPOLATION(c) * (i + 1)) & 0xFFFFFF);
 			return ;
 		}
 		z = (t_complexe){z.real_part * z.real_part - (z.imaginary_part
@@ -68,7 +161,7 @@ __kernel void mandelbrot(__global __write_only int * restrict buffer, const int 
 						 , z.imaginary_part + c.imaginary_part};
 		if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4)
 		{
-			buffer[(pos_y * (width)) + pos_x] = (((i + 2) * BASE_COLOR  ) & 0xFFFFFF);
+			buffer[(pos_y * (width)) + pos_x] = ((BILINEAR_INTERPOLATION(c) * (i + 2)) & 0xFFFFFF);
 			return ;
 		}
 		z = (t_complexe){z.real_part * z.real_part - (z.imaginary_part
@@ -77,7 +170,7 @@ __kernel void mandelbrot(__global __write_only int * restrict buffer, const int 
 						 , z.imaginary_part + c.imaginary_part};
 		if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4)
 		{
-			buffer[(pos_y * (width)) + pos_x] = (((i + 3) * BASE_COLOR  ) & 0xFFFFFF);
+			buffer[(pos_y * (width)) + pos_x] = ((BILINEAR_INTERPOLATION(c) * (i + 3)) & 0xFFFFFF);
 			return ;
 		}
 		z = (t_complexe){z.real_part * z.real_part - (z.imaginary_part
@@ -87,7 +180,7 @@ __kernel void mandelbrot(__global __write_only int * restrict buffer, const int 
 
 	if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4)
 		{
-			buffer[(pos_y * (width)) + pos_x] = (((i + 4)) * BASE_COLOR  ) & 0xFFFFFF;
+			buffer[(pos_y * (width)) + pos_x] = ((BILINEAR_INTERPOLATION(c) * (i + 4)) & 0xFFFFFF);
 			return ;
 		}
 		z = (t_complexe){z.real_part * z.real_part - (z.imaginary_part
@@ -96,7 +189,7 @@ __kernel void mandelbrot(__global __write_only int * restrict buffer, const int 
 						 , z.imaginary_part + c.imaginary_part};
 		if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4)
 		{
-			buffer[(pos_y * (width)) + pos_x] = (((i + 5) * BASE_COLOR  ) & 0xFFFFFF);
+			buffer[(pos_y * (width)) + pos_x] = ((BILINEAR_INTERPOLATION(c) * (i + 5)) & 0xFFFFFF);
 			return ;
 		}
 		z = (t_complexe){z.real_part * z.real_part - (z.imaginary_part
@@ -105,7 +198,7 @@ __kernel void mandelbrot(__global __write_only int * restrict buffer, const int 
 						 , z.imaginary_part + c.imaginary_part};
 		if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4)
 		{
-			buffer[(pos_y * (width)) + pos_x] = (((i + 6) * BASE_COLOR  ) & 0xFFFFFF);
+			buffer[(pos_y * (width)) + pos_x] = ((BILINEAR_INTERPOLATION(c) * (i + 6)) & 0xFFFFFF);
 			return ;
 		}
 		z = (t_complexe){z.real_part * z.real_part - (z.imaginary_part
@@ -114,7 +207,7 @@ __kernel void mandelbrot(__global __write_only int * restrict buffer, const int 
 						 , z.imaginary_part + c.imaginary_part};
 		if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4)
 		{
-			buffer[(pos_y * (width)) + pos_x] = (((i + 7) * BASE_COLOR  ) & 0xFFFFFF);
+			buffer[(pos_y * (width)) + pos_x] = ((BILINEAR_INTERPOLATION(c) * (i + 7)) & 0xFFFFFF);
 			return ;
 		}
 		z = (t_complexe){z.real_part * z.real_part - (z.imaginary_part
@@ -124,7 +217,7 @@ __kernel void mandelbrot(__global __write_only int * restrict buffer, const int 
 
 	if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4)
 	{
-		buffer[(pos_y * (width)) + pos_x] = (((i + 8)) * BASE_COLOR  ) & 0xFFFFFF;
+		buffer[(pos_y * (width)) + pos_x] = ((BILINEAR_INTERPOLATION(c) * (i + 8)) & 0xFFFFFF);
 		return ;
 	}
 	z = (t_complexe){z.real_part * z.real_part - (z.imaginary_part
@@ -133,7 +226,7 @@ __kernel void mandelbrot(__global __write_only int * restrict buffer, const int 
 					 , z.imaginary_part + c.imaginary_part};
 	if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4)
 	{
-		buffer[(pos_y * (width)) + pos_x] = (((i  + 9) * BASE_COLOR  ) & 0xFFFFFF);
+		buffer[(pos_y * (width)) + pos_x] = ((BILINEAR_INTERPOLATION(c) * (i + 9)) & 0xFFFFFF);
 		return ;
 	}
 	z = (t_complexe){z.real_part * z.real_part - (z.imaginary_part
@@ -142,7 +235,7 @@ __kernel void mandelbrot(__global __write_only int * restrict buffer, const int 
 						 , z.imaginary_part + c.imaginary_part};
 		if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4)
 		{
-			buffer[(pos_y * (width)) + pos_x] = (((i + 10) * BASE_COLOR  ) & 0xFFFFFF);
+			buffer[(pos_y * (width)) + pos_x] = ((BILINEAR_INTERPOLATION(c) * (i + 10)) & 0xFFFFFF);
 			return ;
 		}
 		z = (t_complexe){z.real_part * z.real_part - (z.imaginary_part
@@ -151,7 +244,7 @@ __kernel void mandelbrot(__global __write_only int * restrict buffer, const int 
 						 , z.imaginary_part + c.imaginary_part};
 		if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4)
 		{
-			buffer[(pos_y * (width)) + pos_x] = (((i + 11) * BASE_COLOR  ) & 0xFFFFFF);
+			buffer[(pos_y * (width)) + pos_x] = ((BILINEAR_INTERPOLATION(c) * (i + 11)) & 0xFFFFFF);
 			return ;
 		}
 		z = (t_complexe){z.real_part * z.real_part - (z.imaginary_part
@@ -160,7 +253,7 @@ __kernel void mandelbrot(__global __write_only int * restrict buffer, const int 
 						 , z.imaginary_part + c.imaginary_part};
 	if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4)
 		{
-			buffer[(pos_y * (width)) + pos_x] = (((i + 12)) * BASE_COLOR  ) & 0xFFFFFF;
+			buffer[(pos_y * (width)) + pos_x] = ((BILINEAR_INTERPOLATION(c) * (i + 12)) & 0xFFFFFF);
 			return ;
 		}
 		z = (t_complexe){z.real_part * z.real_part - (z.imaginary_part
@@ -169,7 +262,7 @@ __kernel void mandelbrot(__global __write_only int * restrict buffer, const int 
 						 , z.imaginary_part + c.imaginary_part};
 		if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4)
 		{
-			buffer[(pos_y * (width)) + pos_x] = (((i  + 13) * BASE_COLOR  ) & 0xFFFFFF);
+			buffer[(pos_y * (width)) + pos_x] = ((BILINEAR_INTERPOLATION(c) * (i + 13)) & 0xFFFFFF);
 			return ;
 		}
 		z = (t_complexe){z.real_part * z.real_part - (z.imaginary_part
@@ -178,7 +271,7 @@ __kernel void mandelbrot(__global __write_only int * restrict buffer, const int 
 						 , z.imaginary_part + c.imaginary_part};
 		if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4)
 		{
-			buffer[(pos_y * (width)) + pos_x] = (((i + 14) * BASE_COLOR  ) & 0xFFFFFF);
+			buffer[(pos_y * (width)) + pos_x] = ((BILINEAR_INTERPOLATION(c) * (i + 14)) & 0xFFFFFF);
 			return ;
 		}
 		z = (t_complexe){z.real_part * z.real_part - (z.imaginary_part
@@ -187,7 +280,7 @@ __kernel void mandelbrot(__global __write_only int * restrict buffer, const int 
 						 , z.imaginary_part + c.imaginary_part};
 		if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4)
 		{
-			buffer[(pos_y * (width)) + pos_x] = (((i + 15) * BASE_COLOR  ) & 0xFFFFFF);
+			buffer[(pos_y * (width)) + pos_x] = ((BILINEAR_INTERPOLATION(c) * (i + 15)) & 0xFFFFFF);
 			return ;
 		}
 

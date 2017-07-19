@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/03 06:13:14 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/17 18:31:47 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/19 02:30:48 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ typedef void* MLX_IMG;
 typedef void* MLX_PTR;
 
 # define WINDOW_NAME "fractol"
-# define WINDOW_WIDTH 1920
-# define WINDOW_HEIGHT 1080
+# define WINDOW_WIDTH 800
+# define WINDOW_HEIGHT 800
 
 # define PI 3.14159265359
 # define K 0.5

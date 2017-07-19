@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/16 09:00:46 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/18 04:20:46 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/19 01:06:32 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,19 +92,16 @@ static void	ft_put_buffer_into_file(int fd, int *buffer, uint32_t width, uint32_
 	while (i > 0)
 	{
 		u = 0;
-		offset += width;
 		while (u < width)
 		{
-//			write(fd, buffer + ((i - 1) / width * width) + u, 3);
-			ft_memcpy(bmp_buffer + (size - ((((i - 1) / width * width) + u) * 3)), buffer + ((i - 1) / width * width) + u, 3);
+			ft_memcpy(bmp_buffer + (offset), buffer + ((i - 1) / width * width) + u, 3);
 			i--;
+			offset += 3;
 			u++;
 		}
-//		ft_memcpy(bmp_buffer + size - offset,
 		while (u & (4 - 1))
 		{
-//			write(fd, "\0", 1);
-			ft_memcpy(bmp_buffer + (size - ((((i - 1) / width * width) + u) * 3)), &(char){'\0'}, 1);
+			ft_memcpy(bmp_buffer + offset, &(char){'\0'}, 1);
 			offset++;
 			u++;
 		}
