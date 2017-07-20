@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/16 04:29:27 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/19 07:15:45 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/20 06:51:29 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	ft_cl_julia(t_mlx_data *mlx_data, t_fractal_data *fractal_data
 
 	c_distance = (t_complexe){ft_double_distance(
 			fractal_data->c.min.real_part
-			, fractal_data->c.max.real_part)
+			, fractal_data->c.max.real_part) / WINDOW_WIDTH
 			, ft_double_distance(fractal_data->c.min.imaginary_part
-			, fractal_data->c.max.imaginary_part)};
+			, fractal_data->c.max.imaginary_part) / WINDOW_HEIGHT};
 	ret = clSetKernelArg(cl_data->kernel, 0, sizeof(cl_mem), (void*)&cl_data->mem_obj);
 	ret = clSetKernelArg(cl_data->kernel, 1, sizeof(int), (void*)&win_width);
 	ret = clSetKernelArg(cl_data->kernel, 2, sizeof(int), (void*)&win_heigth);

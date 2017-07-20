@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/03 06:13:14 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/19 02:30:48 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/20 07:08:23 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ typedef void* MLX_IMG;
 typedef void* MLX_PTR;
 
 # define WINDOW_NAME "fractol"
-# define WINDOW_WIDTH 800
-# define WINDOW_HEIGHT 800
+# define WINDOW_WIDTH 1920
+# define WINDOW_HEIGHT 1080
 
 # define PI 3.14159265359
 # define K 0.5
@@ -364,6 +364,7 @@ void	ft_print_usage(void) __attribute__((noreturn));
 */
 
 # define MANDELBROT_FILENAME "./test/mandelbrot.cl"
+//# define MANDELBROT_FILENAME "./test/pertubation_test.cl"
 # define JULIA_FILENAME "./test/julia.cl"
 
 # define CL_ERR_COMMAND_QUEUE "Creation of command queue failed"

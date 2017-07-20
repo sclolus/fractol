@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.cl                                      :+:      :+:    :+:   */
+/*   pertubation_test.cl                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/19 06:42:48 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/20 04:42:47 by sclolus          ###   ########.fr       */
+/*   Created: 2017/07/20 05:08:59 by sclolus           #+#    #+#             */
+/*   Updated: 2017/07/20 05:17:40 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,8 +148,8 @@ __kernel void mandelbrot(__global __write_only int * restrict buffer, const int 
 	t_complexe						z;
 	unsigned int					i;
 
-	c = (t_complexe){cadran.min.real_part +  (distance.real_part) * pos_x
-					 , cadran.min.imaginary_part + (distance.imaginary_part) * pos_y};
+	c = (t_complexe){cadran.min.real_part +  (distance.real_part) * (width / 2)
+					 , cadran.min.imaginary_part + (distance.imaginary_part) * (height / 2)};
 /* 	buffer[(pos_y * (width)) + pos_x] = ((BILINEAR_INTERPOLATION(c)) & 0xFFFFFF); */
 /* 	return ; */
 
