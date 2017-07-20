@@ -15,7 +15,8 @@ SRC= srcs/main.c \
 	srcs/ft_pthread_init_thread_execution_data.c \
 	srcs/ft_mandelbrot.c \
 	srcs/opencl/ft_cl_mandelbrot.c\
-	srcs/opencl/ft_cl_julia.c\
+	srcs/opencl/ft_cl_julia.c \
+	srcs/opencl/ft_cl_newtown.c \
 	srcs/ft_julia.c \
 	srcs/ft_draw_fractal.c \
 	srcs/ft_draw_cl_fractal.c \
@@ -51,6 +52,7 @@ SRC= srcs/main.c \
 	srcs/ft_double_distance.c \
 	srcs/ft_handler_mouse_motion.c \
 	srcs/ft_handler_mouse_motion_julia.c \
+	srcs/ft_handler_mouse_motion_newtown.c \
 	srcs/screenshot_bmp/ft_create_screenshot.c
 #	srcs/ft_get_z_coord.c \
 	srcs/quaternions/ft_quat_rotate_points.c \
@@ -75,7 +77,7 @@ FLAGS= -L$(MLX_PATH) -I$(MLX_PATH) -lmlx -L$(LIBFT_PATH) -lft -I$(HDR_PATH) -I./
 all: submodule $(NAME)
 
 submodule:
-#	@make -C minilibx_macos
+	@make -C minilibx_macos
 	@make -C libft/
 
 $(NAME): $(OBJ)
@@ -86,7 +88,7 @@ $(NAME): $(OBJ)
 clean:
 	rm -f $(OBJ)
 	make -C $(LIBFT_PATH) clean
-#	make -C $(MLX_PATH) clean
+	make -C $(MLX_PATH) clean
 fclean: clean
 	rm -f $(NAME)
 	make -C $(LIBFT_PATH) fclean

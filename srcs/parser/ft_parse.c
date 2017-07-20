@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/08 16:46:58 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/08 16:59:00 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/20 09:17:29 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_fractal_type	ft_parse(char *fractal_name)
 {
 	char		*fractal_types[] =
-		{"mandelbrot", "julia"};
+		{"mandelbrot", "julia", "newtown"};
 	uint32_t	i;
 
 	i = 0;

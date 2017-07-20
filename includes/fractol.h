@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/03 06:13:14 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/20 07:08:23 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/20 09:44:56 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ typedef void* MLX_IMG;
 typedef void* MLX_PTR;
 
 # define WINDOW_NAME "fractol"
-# define WINDOW_WIDTH 1920
-# define WINDOW_HEIGHT 1080
+# define WINDOW_WIDTH 800
+# define WINDOW_HEIGHT 800
 
 # define PI 3.14159265359
 # define K 0.5
@@ -157,6 +157,7 @@ typedef enum	e_fractal_type
 {
 	MANDELBROT = 0,
 	JULIA = 1,
+	NEWTOWN = 2,
 	SUPPORTED_FRACTAL_NBR,
 }				t_fractal_type;
 
@@ -298,6 +299,7 @@ void			ft_handler_button4(int x, int y, void *param);
 
 int				ft_handler_mouse_motion(int x, int y, void *param);
 void			ft_handler_mouse_motion_julia(int x, int y, void *param);
+void			ft_handler_mouse_motion_newtown(int x, int y, void *param);
 
 /*
 ** Quaternions
@@ -366,6 +368,7 @@ void	ft_print_usage(void) __attribute__((noreturn));
 # define MANDELBROT_FILENAME "./test/mandelbrot.cl"
 //# define MANDELBROT_FILENAME "./test/pertubation_test.cl"
 # define JULIA_FILENAME "./test/julia.cl"
+# define NEWTOWN_FILENAME "./test/newtown.cl"
 
 # define CL_ERR_COMMAND_QUEUE "Creation of command queue failed"
 # define CL_ERR_GET_DEVICE_IDS "clGetDeviceIDs() failed"
@@ -410,6 +413,8 @@ cl_device_id		ft_get_device_id(void);
 void				ft_cl_mandelbrot(t_mlx_data *mlx_data, t_fractal_data *fractal_data
 						, t_cl_execution_data *cl_data);
 void				ft_cl_julia(t_mlx_data *mlx_data, t_fractal_data *fractal_data
+						, t_cl_execution_data *cl_data);
+void				ft_cl_newtown(t_mlx_data *mlx_data, t_fractal_data *fractal_data
 						, t_cl_execution_data *cl_data);
 
 /*
