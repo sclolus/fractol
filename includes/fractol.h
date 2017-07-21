@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/03 06:13:14 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/21 09:27:12 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/21 09:41:23 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -272,7 +272,7 @@ t_pthread_execution_data	*ft_get_t_pthread_execution_data(void);
 ** Key handling
 */
 
-# define NBR_KEY_HOOKS 11
+# define NBR_KEY_HOOKS 14
 # define INVALID_KEYS_HOOKS_NBR "Invalid keys_hooks number provided in macro expansion"
 
 int				ft_handler_keys(int keycode, void *param);
@@ -295,6 +295,9 @@ void			ft_handler_t(void *param);
 void			ft_handler_p(void *param);
 void			ft_handler_2(void *param);
 void			ft_handler_1(void *param);
+void			ft_handler_5(void *param);
+void			ft_handler_4(void *param);
+void			ft_handler_3(void *param);
 
 /*
 ** Button handling

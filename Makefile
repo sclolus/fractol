@@ -51,6 +51,9 @@ SRC= srcs/main.c \
 	srcs/ft_handler_t.c \
 	srcs/ft_handler_1.c \
 	srcs/ft_handler_2.c \
+	srcs/ft_handler_5.c \
+	srcs/ft_handler_4.c \
+	srcs/ft_handler_3.c \
 	srcs/ft_handler_buttons.c \
 	srcs/ft_handler_button5.c \
 	srcs/ft_handler_button4.c \

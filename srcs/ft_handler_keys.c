@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/26 21:05:42 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/21 04:48:22 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/21 09:40:58 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ static t_keycode_f	*ft_get_keycodes_f(void)
 		{ft_handler_t, KEY_T, 0},
 		{ft_handler_1, KEY_1, 0},
 		{ft_handler_2, KEY_2, 0},
+		{ft_handler_4, KEY_4, 0},
+		{ft_handler_5, KEY_5, 0},
+		{ft_handler_3, KEY_3, 0},
 /* 		{ft_handler_q, KEY_Q, 0}, */
 /* 		{ft_handler_a, KEY_A, 0}, */
 /* 		{ft_handler_d, KEY_D, 0}, */

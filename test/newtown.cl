@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.cl                                      :+:      :+:    :+:   */
+/*   newtown.cl                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/19 06:42:48 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/21 10:37:38 by sclolus          ###   ########.fr       */
+/*   Created: 2017/07/21 05:50:59 by sclolus           #+#    #+#             */
+/*   Updated: 2017/07/21 06:18:22 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,17 +109,6 @@ const __constant t_color_cadran	color_cadran = {
 # define DELTA_X (INTERPOLATION_X2 - INTERPOLATION_X1)
 # define DELTA_Y (INTERPOLATION_Y2 - INTERPOLATION_Y1)
 
-# define LINEAR_X1 -0
-# define LINEAR_X2 1
-# define LINEAR_Y1 0xFF0000
-# define LINEAR_Y2 0xFF0CA0
-# define LINEAR_INTERPOLATION(x) (((((int)((LINEAR_X2 - x) / (LINEAR_X2 - LINEAR_X1)) * EXTRACT_RED(LINEAR_Y1)) \
-										+ (int)(((x - LINEAR_X1) / (LINEAR_X2 - LINEAR_X1)) * EXTRACT_RED(LINEAR_Y2))) & 0xFF0000) \
-								  | ((((int)(((LINEAR_X2 - x) / (LINEAR_X2 - LINEAR_X1)) * EXTRACT_GREEN(LINEAR_Y1)) \
-									   + (int)(((x - LINEAR_X1) / (LINEAR_X2 - LINEAR_X1)) * EXTRACT_GREEN(LINEAR_Y2)))) & 0x00FF00) \
-								  | ((((int)(((LINEAR_X2 - x) / (LINEAR_X2 - LINEAR_X1)) * EXTRACT_BLUE(LINEAR_Y1)) \
-									   + (int)(((x - LINEAR_X1) / (LINEAR_X2 - LINEAR_X1)) * EXTRACT_BLUE(LINEAR_Y2)))) & 0x0000FF))
-
 # define BILINEAR_INTERPOLATION(c) (((int)((DELTA_INTERPOLATION_X_R) * (INTERPOLATION_DX(c.real_part) / DELTA_X) \
 									+ (DELTA_INTERPOLATION_Y_R) * (INTERPOLATION_DY(c.imaginary_part) / DELTA_Y) \
 									+ (DELTA_INTERPOLATION_XY_R) * (INTERPOLATION_DX(c.real_part) / DELTA_X) \
@@ -136,39 +125,30 @@ const __constant t_color_cadran	color_cadran = {
 									* (INTERPOLATION_DY(c.imaginary_part) / DELTA_Y) \
 											 + EXTRACT_BLUE(color_cadran.x0_y0.color)) & 0x0000FF))
 # define ITERATION_CHECK(c) ({	z = (t_complexe){z.real_part * z.real_part - (z.imaginary_part \
-			* z.imaginary_part) + c.real_part, 2.0 * z.real_part * z.imaginary_part + c.imaginary_part}; \
+			* z.imaginary_part), 2.0 * z.real_part * z.imaginary_part}; \
+			z = (t_complexe){sqrt(z.real_part) * (c.real_part)			\
+							 , tan(z.imaginary_part * (c.imaginary_part))}; \
 		if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4) \
 		{ \
 			buffer[(pos_y * (width)) + pos_x] = ((BILINEAR_INTERPOLATION(c) * i) & 0xFFFFFF); \
 			return ; \
 		} \
 		i++;})
-/* # define ITERATION_CHECK(c) ({	z = (t_complexe){z.real_part * z.real_part - (z.imaginary_part \ */
-/* 			* z.imaginary_part) + c.real_part, 2.0 * z.real_part * z.imaginary_part + c.imaginary_part}; \ */
-/* 			if (distance_tmp > (z.real_part * z.real_part  + z.imaginary_part * z.imaginary_part - 1)) \ */
-/* 				distance_tmp = ((z.real_part ) * (z.real_part ) + (z.imaginary_part - 1) * (z.imaginary_part - 1)); \ */
-/* 			if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4) \ */
-/* 			{															\ */
-/* 				buffer[(pos_y * (width)) + pos_x] = 0; \ */
-/* 				return ;												\ */
-/* 			}															\ */
-/* 		i++;}) */
 
 
-__kernel void mandelbrot(__global __write_only int * restrict buffer, const int width
+__kernel void newtown(__global __write_only int * restrict buffer, const int width
 						 , const int height, const t_complexe_cadran cadran
-						 , const unsigned int iteration_number, const t_complexe distance)
+						 , const unsigned int iteration_number, const t_complexe distance
+						 , const t_complexe c)
 {
-	t_complexe						c;
 	const int						pos_x = get_global_id(0);
 	const int						pos_y = get_global_id(1);
 	t_complexe						z;
 	unsigned int					i;
 
-	c = (t_complexe){cadran.min.real_part +  (distance.real_part) * pos_x
+	z = (t_complexe){cadran.min.real_part +  (distance.real_part) * pos_x
 					 , cadran.min.imaginary_part + (distance.imaginary_part) * pos_y};
 	i = 0;
-	z = (t_complexe){0, 0};
 	while (i < (iteration_number & 15))
 		ITERATION_CHECK(c);
 	while (i < iteration_number)
