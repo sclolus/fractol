@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/08 17:14:19 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/21 03:41:37 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/21 07:35:47 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	ft_handler_mouse_motion(int x, int y, void *param)
 			ft_handler_mouse_motion_julia(x, y, param);
 		else if (fractal_type == NEWTOWN)
 			ft_handler_mouse_motion_newtown(x, y, param);
+		else if (fractal_type == BERYL)
+			ft_handler_mouse_motion_beryl(x, y, param);
 	}
 	return (0);
 }

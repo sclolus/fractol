@@ -1,16 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   julia.cl                                           :+:      :+:    :+:   */
+/*   burning_ship.cl                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/19 06:42:26 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/21 05:56:15 by sclolus          ###   ########.fr       */
+/*   Created: 2017/07/21 09:22:35 by sclolus           #+#    #+#             */
+/*   Updated: 2017/07/21 09:33:45 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//# define BASE_COLOR 0xA0010A
 # define BASE_COLOR 0x101010
 
 typedef struct	s_complexe
@@ -47,6 +45,13 @@ typedef struct	s_color_cadran
 # define DISTANCE(a, b) (a > b ? a - b : b - a)
 
 /* const __constant t_color_cadran	color_cadran = { */
+/* 	{{INTERPOLATION_X1, INTERPOLATION_Y1}, 0x0000CCFF}, */
+/* 	{{INTERPOLATION_X2, INTERPOLATION_Y1}, 0x00FF55FF}, */
+/* 	{{INTERPOLATION_X1, INTERPOLATION_Y2}, 0x00C000CC}, */
+/* 	{{INTERPOLATION_X2, INTERPOLATION_Y2}, 0x0000AAFF}, */
+/* }; */
+
+/* const __constant t_color_cadran	color_cadran = { */
 /* 	{{INTERPOLATION_X1, INTERPOLATION_Y1}, 0x00010101}, */
 /* 	{{INTERPOLATION_X2, INTERPOLATION_Y1}, 0x00FA0000}, */
 /* 	{{INTERPOLATION_X1, INTERPOLATION_Y2}, 0x00C000CC}, */
@@ -69,10 +74,10 @@ typedef struct	s_color_cadran
 */
 
 const __constant t_color_cadran	color_cadran = {
-	{{INTERPOLATION_X1, INTERPOLATION_Y1}, 0x00FF0000},
-	{{INTERPOLATION_X2, INTERPOLATION_Y1}, 0x0000AA00},
+	{{INTERPOLATION_X1, INTERPOLATION_Y1}, 0x00FF00CC},
+	{{INTERPOLATION_X2, INTERPOLATION_Y1}, 0x00FF00CC},
 	{{INTERPOLATION_X1, INTERPOLATION_Y2}, 0x000000FF},
-	{{INTERPOLATION_X2, INTERPOLATION_Y2}, 0x00FF0000},
+	{{INTERPOLATION_X2, INTERPOLATION_Y2}, 0x00FF00CC},
 };
 
 
@@ -117,37 +122,34 @@ const __constant t_color_cadran	color_cadran = {
 									+ (DELTA_INTERPOLATION_XY_B) * (INTERPOLATION_DX(c.real_part) / DELTA_X) \
 									* (INTERPOLATION_DY(c.imaginary_part) / DELTA_Y) \
 											 + EXTRACT_BLUE(color_cadran.x0_y0.color)) & 0x0000FF))
-# define ITERATION_CHECK(c) ({	z = (t_complexe){z.real_part * z.real_part - (z.imaginary_part \
+# define ABS(x) (x < 0 ? -x : x)
+# define ITERATION_CHECK(c) ({	z = (t_complexe){ABS(z.real_part), ABS(z.imaginary_part)}; \
+			z = (t_complexe){z.real_part * z.real_part - (z.imaginary_part \
 			* z.imaginary_part) + c.real_part, 2.0 * z.real_part * z.imaginary_part + c.imaginary_part}; \
 		if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4) \
 		{ \
-			buffer[(pos_y * (width)) + pos_x] = (((BILINEAR_INTERPOLATION(base) * i)) & 0xFFFFFF); \
+			buffer[(pos_y * (width)) + pos_x] = ((BILINEAR_INTERPOLATION(c) * i) & 0xFFFFFF); \
 			return ; \
 		} \
 		i++;})
 
 
-
-__kernel void julia(__global __write_only int * restrict buffer, const int width
-						, const int height, const t_complexe_cadran cadran
-						, const unsigned int iteration_number, const t_complexe distance
-						, const t_complexe c)
+__kernel void burning_ship(__global __write_only int * restrict buffer, const int width
+						 , const int height, const t_complexe_cadran cadran
+						 , const unsigned int iteration_number, const t_complexe distance)
 {
+	t_complexe						c;
 	const int						pos_x = get_global_id(0);
 	const int						pos_y = get_global_id(1);
 	t_complexe						z;
-	t_complexe						base;
 	unsigned int					i;
 
-	i = 0;
-	z = (t_complexe){cadran.min.real_part +  (distance.real_part) * pos_x
+	c = (t_complexe){cadran.min.real_part +  (distance.real_part) * pos_x
 					 , cadran.min.imaginary_part + (distance.imaginary_part) * pos_y};
-//	printf("z.real_part: %lf, z.imaginary_part: %lf\n", z.real_part, z.imaginary_part);
-	base = z;
+	i = 0;
+	z = (t_complexe){0, 0};
 	while (i < (iteration_number & 15))
-	{
 		ITERATION_CHECK(c);
-	}
 	while (i < iteration_number)
 	{
 		ITERATION_CHECK(c);

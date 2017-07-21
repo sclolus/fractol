@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/03 06:13:14 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/21 03:44:56 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/21 09:27:12 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,8 @@ typedef enum	e_fractal_type
 	MANDELBROT = 0,
 	JULIA = 1,
 	NEWTOWN = 2,
+	BERYL = 3,
+	BURNING_SHIP = 4,
 	SUPPORTED_FRACTAL_NBR,
 }				t_fractal_type;
 
@@ -270,7 +272,7 @@ t_pthread_execution_data	*ft_get_t_pthread_execution_data(void);
 ** Key handling
 */
 
-# define NBR_KEY_HOOKS 9
+# define NBR_KEY_HOOKS 11
 # define INVALID_KEYS_HOOKS_NBR "Invalid keys_hooks number provided in macro expansion"
 
 int				ft_handler_keys(int keycode, void *param);
@@ -291,6 +293,8 @@ void			ft_handler_d(void *param);
 void			ft_handler_a(void *param);
 void			ft_handler_t(void *param);
 void			ft_handler_p(void *param);
+void			ft_handler_2(void *param);
+void			ft_handler_1(void *param);
 
 /*
 ** Button handling
@@ -310,6 +314,7 @@ void			ft_handler_button4(int x, int y, void *param);
 int				ft_handler_mouse_motion(int x, int y, void *param);
 void			ft_handler_mouse_motion_julia(int x, int y, void *param);
 void			ft_handler_mouse_motion_newtown(int x, int y, void *param);
+void			ft_handler_mouse_motion_beryl(int x, int y, void *param);
 
 /*
 ** Quaternions
@@ -379,6 +384,8 @@ void	ft_print_usage(void) __attribute__((noreturn));
 //# define MANDELBROT_FILENAME "./test/pertubation_test.cl"
 # define JULIA_FILENAME "./test/julia.cl"
 # define NEWTOWN_FILENAME "./test/newtown.cl"
+# define BERYL_FILENAME "./test/beryl.cl"
+# define BURNING_SHIP_FILENAME "./test/burning_ship.cl"
 
 # define CL_ERR_COMMAND_QUEUE "Creation of command queue failed"
 # define CL_ERR_GET_DEVICE_IDS "clGetDeviceIDs() failed"
@@ -403,7 +410,6 @@ typedef struct	s_cl_execution_data
 
 // typedef void	(*cl_f)(t_mlx_data *, t_fractal_data *);
 
-void	ft_test(int argc, char **argv);
 void				ft_draw_cl_fractal(t_mlx_data *mlx_data
 						, t_fractal_type fractal_type);
 void				ft_call_cl(t_mlx_data *mlx_data, t_fractal_type fractal_type);
@@ -425,6 +431,10 @@ void				ft_cl_mandelbrot(t_mlx_data *mlx_data, t_fractal_data *fractal_data
 void				ft_cl_julia(t_mlx_data *mlx_data, t_fractal_data *fractal_data
 						, t_cl_execution_data *cl_data);
 void				ft_cl_newtown(t_mlx_data *mlx_data, t_fractal_data *fractal_data
+						, t_cl_execution_data *cl_data);
+void				ft_cl_beryl(t_mlx_data *mlx_data, t_fractal_data *fractal_data
+						, t_cl_execution_data *cl_data);
+void				ft_cl_burning_ship(t_mlx_data *mlx_data, t_fractal_data *fractal_data
 						, t_cl_execution_data *cl_data);
 
 /*

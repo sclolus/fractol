@@ -1,16 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   julia.cl                                           :+:      :+:    :+:   */
+/*   beryl.cl                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/19 06:42:26 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/21 05:56:15 by sclolus          ###   ########.fr       */
+/*   Created: 2017/07/21 07:08:50 by sclolus           #+#    #+#             */
+/*   Updated: 2017/07/21 08:04:11 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//# define BASE_COLOR 0xA0010A
 # define BASE_COLOR 0x101010
 
 typedef struct	s_complexe
@@ -45,6 +44,13 @@ typedef struct	s_color_cadran
 # define INTERPOLATION_Y2 1.0
 
 # define DISTANCE(a, b) (a > b ? a - b : b - a)
+
+/* const __constant t_color_cadran	color_cadran = { */
+/* 	{{INTERPOLATION_X1, INTERPOLATION_Y1}, 0x0000CCFF}, */
+/* 	{{INTERPOLATION_X2, INTERPOLATION_Y1}, 0x00FF55FF}, */
+/* 	{{INTERPOLATION_X1, INTERPOLATION_Y2}, 0x00C000CC}, */
+/* 	{{INTERPOLATION_X2, INTERPOLATION_Y2}, 0x0000AAFF}, */
+/* }; */
 
 /* const __constant t_color_cadran	color_cadran = { */
 /* 	{{INTERPOLATION_X1, INTERPOLATION_Y1}, 0x00010101}, */
@@ -117,37 +123,37 @@ const __constant t_color_cadran	color_cadran = {
 									+ (DELTA_INTERPOLATION_XY_B) * (INTERPOLATION_DX(c.real_part) / DELTA_X) \
 									* (INTERPOLATION_DY(c.imaginary_part) / DELTA_Y) \
 											 + EXTRACT_BLUE(color_cadran.x0_y0.color)) & 0x0000FF))
-# define ITERATION_CHECK(c) ({	z = (t_complexe){z.real_part * z.real_part - (z.imaginary_part \
-			* z.imaginary_part) + c.real_part, 2.0 * z.real_part * z.imaginary_part + c.imaginary_part}; \
-		if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4) \
-		{ \
-			buffer[(pos_y * (width)) + pos_x] = (((BILINEAR_INTERPOLATION(base) * i)) & 0xFFFFFF); \
-			return ; \
-		} \
-		i++;})
+# define ITERATION_CHECK(cx) ({	tmp = a;							\
+			a = (t_complexe){k * (a.real_part + b.real_part), k * (a.imaginary_part + b.imaginary_part)}; \
+			b = (t_complexe){tmp.real_part * b.real_part - tmp.imaginary_part * b.imaginary_part, tmp.real_part * b.imaginary_part + b.real_part * tmp.imaginary_part}; \
+			if ((a.real_part * a.real_part) + (a.imaginary_part * a.imaginary_part) < 1 - 2 * sqrt((b.real_part * b.real_part) + (b.imaginary_part * b.imaginary_part))) \
+			{															\
+				tmp = (t_complexe){a.real_part, b.real_part}; \
+				buffer[(pos_y * (width)) + pos_x] = ((BILINEAR_INTERPOLATION(tmp) * i) & 0xFFFFFF); \
+				return ;												\
+			}															\
+			i++;})
 
 
-
-__kernel void julia(__global __write_only int * restrict buffer, const int width
-						, const int height, const t_complexe_cadran cadran
-						, const unsigned int iteration_number, const t_complexe distance
-						, const t_complexe c)
+__kernel void beryl(__global __write_only int * restrict buffer, const int width
+						 , const int height, const t_complexe_cadran cadran
+						 , const unsigned int iteration_number, const t_complexe distance
+						 , const t_complexe c)
 {
 	const int						pos_x = get_global_id(0);
 	const int						pos_y = get_global_id(1);
-	t_complexe						z;
-	t_complexe						base;
+	t_complexe						a;
+	t_complexe						tmp;
+	t_complexe						b;
 	unsigned int					i;
+	const double					k = 1;
 
-	i = 0;
-	z = (t_complexe){cadran.min.real_part +  (distance.real_part) * pos_x
+	a = (t_complexe){cadran.min.real_part +  (distance.real_part) * pos_x
 					 , cadran.min.imaginary_part + (distance.imaginary_part) * pos_y};
-//	printf("z.real_part: %lf, z.imaginary_part: %lf\n", z.real_part, z.imaginary_part);
-	base = z;
+	b = c;
+	i = 0;
 	while (i < (iteration_number & 15))
-	{
 		ITERATION_CHECK(c);
-	}
 	while (i < iteration_number)
 	{
 		ITERATION_CHECK(c);

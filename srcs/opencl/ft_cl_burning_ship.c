@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cl_mandelbrot.c                                 :+:      :+:    :+:   */
+/*   ft_cl_burning_ship.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/16 04:01:37 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/21 09:24:57 by sclolus          ###   ########.fr       */
+/*   Created: 2017/07/21 09:24:24 by sclolus           #+#    #+#             */
+/*   Updated: 2017/07/21 09:24:36 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	ft_cl_mandelbrot(t_mlx_data *mlx_data, t_fractal_data *fractal_data
+void	ft_cl_burning_ship(t_mlx_data *mlx_data, t_fractal_data *fractal_data
 						, t_cl_execution_data *cl_data)
 {
 	t_complexe			c_distance;

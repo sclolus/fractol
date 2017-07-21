@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/19 06:42:48 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/21 03:28:17 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/21 09:22:16 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,9 +125,7 @@ const __constant t_color_cadran	color_cadran = {
 									* (INTERPOLATION_DY(c.imaginary_part) / DELTA_Y) \
 											 + EXTRACT_BLUE(color_cadran.x0_y0.color)) & 0x0000FF))
 # define ITERATION_CHECK(c) ({	z = (t_complexe){z.real_part * z.real_part - (z.imaginary_part \
-			* z.imaginary_part), 2.0 * z.real_part * z.imaginary_part}; \
-		z = (t_complexe){z.real_part + c.real_part \
-						 , z.imaginary_part + c.imaginary_part}; \
+			* z.imaginary_part) + c.real_part, 2.0 * z.real_part * z.imaginary_part + c.imaginary_part}; \
 		if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4) \
 		{ \
 			buffer[(pos_y * (width)) + pos_x] = ((BILINEAR_INTERPOLATION(c) * i) & 0xFFFFFF); \

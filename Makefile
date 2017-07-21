@@ -1,6 +1,5 @@
 NAME= fractol
 SRC= srcs/main.c \
-	test/ft_test.c \
 	srcs/parser/ft_parse.c \
 	srcs/ft_print_usage.c \
 	srcs/ft_create_mem_block.c \
@@ -17,6 +16,8 @@ SRC= srcs/main.c \
 	srcs/opencl/ft_cl_mandelbrot.c\
 	srcs/opencl/ft_cl_julia.c \
 	srcs/opencl/ft_cl_newtown.c \
+	srcs/opencl/ft_cl_beryl.c \
+	srcs/opencl/ft_cl_burning_ship.c \
 	srcs/ft_julia.c \
 	srcs/ft_draw_fractal.c \
 	srcs/ft_draw_cl_fractal.c \
@@ -48,6 +49,8 @@ SRC= srcs/main.c \
 	srcs/ft_handler_down.c \
 	srcs/ft_handler_p.c \
 	srcs/ft_handler_t.c \
+	srcs/ft_handler_1.c \
+	srcs/ft_handler_2.c \
 	srcs/ft_handler_buttons.c \
 	srcs/ft_handler_button5.c \
 	srcs/ft_handler_button4.c \
@@ -55,6 +58,7 @@ SRC= srcs/main.c \
 	srcs/ft_handler_mouse_motion.c \
 	srcs/ft_handler_mouse_motion_julia.c \
 	srcs/ft_handler_mouse_motion_newtown.c \
+	srcs/ft_handler_mouse_motion_beryl.c \
 	srcs/screenshot_bmp/ft_create_screenshot.c
 #	srcs/ft_get_z_coord.c \
 	srcs/quaternions/ft_quat_rotate_points.c \

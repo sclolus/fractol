@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/21 03:34:16 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/21 03:41:38 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/21 04:45:54 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	ft_handler_t(void *param)
 {
-
 	t_fractal_data	*fractal_data;
 	t_fractal_type	fractal_type;
 
@@ -23,4 +22,3 @@ void	ft_handler_t(void *param)
 	if (fractal_data[fractal_type].tracking_mouse)
 		ft_get_tracking_mouse_data()[fractal_type] ^= 1;
 }
-
