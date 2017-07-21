@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/19 06:42:48 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/20 08:36:02 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/21 03:28:17 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ typedef struct	s_color_cadran
 
 # define DISTANCE(a, b) (a > b ? a - b : b - a)
 
-const __constant t_color_cadran	color_cadran = {
-	{{INTERPOLATION_X1, INTERPOLATION_Y1}, 0x0000CCFF},
-	{{INTERPOLATION_X2, INTERPOLATION_Y1}, 0x00FF55FF},
-	{{INTERPOLATION_X1, INTERPOLATION_Y2}, 0x00C000CC},
-	{{INTERPOLATION_X2, INTERPOLATION_Y2}, 0x0000AAFF},
-};
+/* const __constant t_color_cadran	color_cadran = { */
+/* 	{{INTERPOLATION_X1, INTERPOLATION_Y1}, 0x0000CCFF}, */
+/* 	{{INTERPOLATION_X2, INTERPOLATION_Y1}, 0x00FF55FF}, */
+/* 	{{INTERPOLATION_X1, INTERPOLATION_Y2}, 0x00C000CC}, */
+/* 	{{INTERPOLATION_X2, INTERPOLATION_Y2}, 0x0000AAFF}, */
+/* }; */
 
 /* const __constant t_color_cadran	color_cadran = { */
 /* 	{{INTERPOLATION_X1, INTERPOLATION_Y1}, 0x00010101}, */
@@ -75,12 +75,12 @@ const __constant t_color_cadran	color_cadran = {
 ** COOL COLORS APPROVED BY ASIA
 */
 
-/* const __constant t_color_cadran	color_cadran = { */
-/* 	{{INTERPOLATION_X1, INTERPOLATION_Y1}, 0x00FF0000}, */
-/* 	{{INTERPOLATION_X2, INTERPOLATION_Y1}, 0x0000AA00}, */
-/* 	{{INTERPOLATION_X1, INTERPOLATION_Y2}, 0x000000FF}, */
-/* 	{{INTERPOLATION_X2, INTERPOLATION_Y2}, 0x00FF0000}, */
-/* }; */
+const __constant t_color_cadran	color_cadran = {
+	{{INTERPOLATION_X1, INTERPOLATION_Y1}, 0x00FF0000},
+	{{INTERPOLATION_X2, INTERPOLATION_Y1}, 0x0000AA00},
+	{{INTERPOLATION_X1, INTERPOLATION_Y2}, 0x000000FF},
+	{{INTERPOLATION_X2, INTERPOLATION_Y2}, 0x00FF0000},
+};
 
 
 
@@ -136,23 +136,18 @@ const __constant t_color_cadran	color_cadran = {
 		i++;})
 
 
-
 __kernel void mandelbrot(__global __write_only int * restrict buffer, const int width
 						 , const int height, const t_complexe_cadran cadran
 						 , const unsigned int iteration_number, const t_complexe distance)
 {
 	t_complexe						c;
-	const int						global_id = get_global_id(0);
-	const int						pos_x = global_id % width;
-	const int						pos_y = global_id / width;
+	const int						pos_x = get_global_id(0);
+	const int						pos_y = get_global_id(1);
 	t_complexe						z;
 	unsigned int					i;
 
 	c = (t_complexe){cadran.min.real_part +  (distance.real_part) * pos_x
 					 , cadran.min.imaginary_part + (distance.imaginary_part) * pos_y};
-/* 	buffer[(pos_y * (width)) + pos_x] = ((BILINEAR_INTERPOLATION(c)) & 0xFFFFFF); */
-/* 	return ; */
-
 	i = 0;
 	z = (t_complexe){0, 0};
 	while (i < (iteration_number & 15))

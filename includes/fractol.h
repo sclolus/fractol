@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/03 06:13:14 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/20 09:44:56 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/21 03:44:56 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ typedef void* MLX_IMG;
 typedef void* MLX_PTR;
 
 # define WINDOW_NAME "fractol"
-# define WINDOW_WIDTH 800
-# define WINDOW_HEIGHT 800
+# define WINDOW_WIDTH 1920
+# define WINDOW_HEIGHT 1080
 
 # define PI 3.14159265359
 # define K 0.5
@@ -210,6 +210,8 @@ typedef struct	s_fractal_data
 	f_cl_draw_fractal	*cl_f;
 	uint32_t			degree;
 	uint32_t			iteration_number;
+	uint8_t				tracking_mouse;
+	uint8_t				pad[7];
 }				t_fractal_data;
 
 void			ft_draw_fractal(t_mlx_data *mlx_data
@@ -218,6 +220,13 @@ void			ft_draw_fractal(t_mlx_data *mlx_data
 t_fractal_data	*ft_get_t_fractal_data(void);
 void			ft_mandelbrot(t_pthread_execution_data *pthread_data);
 void			ft_julia(t_pthread_execution_data *pthread_data);
+
+
+/*
+** Mouse tracking
+*/
+
+uint8_t			*ft_get_tracking_mouse_data(void);
 
 /*
 ** Pthread drawing
@@ -261,7 +270,7 @@ t_pthread_execution_data	*ft_get_t_pthread_execution_data(void);
 ** Key handling
 */
 
-# define NBR_KEY_HOOKS 8
+# define NBR_KEY_HOOKS 9
 # define INVALID_KEYS_HOOKS_NBR "Invalid keys_hooks number provided in macro expansion"
 
 int				ft_handler_keys(int keycode, void *param);
@@ -280,6 +289,7 @@ void			ft_handler_w(void *param);
 void			ft_handler_s(void *param);
 void			ft_handler_d(void *param);
 void			ft_handler_a(void *param);
+void			ft_handler_t(void *param);
 void			ft_handler_p(void *param);
 
 /*

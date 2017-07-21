@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/19 06:42:26 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/20 06:53:30 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/21 03:31:34 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,9 +135,8 @@ __kernel void julia(__global __write_only int * restrict buffer, const int width
 						, const unsigned int iteration_number, const t_complexe distance
 						, const t_complexe c)
 {
-	const int						global_id = get_global_id(0);
-	const int						pos_x = global_id % width;
-	const int						pos_y = global_id / width;
+	const int						pos_x = get_global_id(0);
+	const int						pos_y = get_global_id(1);
 	t_complexe						z;
 	t_complexe						base;
 	unsigned int					i;

@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/16 04:29:27 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/20 06:51:29 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/21 03:30:54 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_cl_julia(t_mlx_data *mlx_data, t_fractal_data *fractal_data
 	ret = clSetKernelArg(cl_data->kernel, 6, sizeof(t_complexe), (void*)&fractal_data->z0);
 	if (ret != CL_SUCCESS)
 		ft_error_exit(1, (char*[]){CL_ERR_SET_ARG}, EXIT_FAILURE);
-	ret = clEnqueueNDRangeKernel(cl_data->cmd_queue, cl_data->kernel, 1, NULL, &(size_t){WINDOW_WIDTH * WINDOW_HEIGHT}, NULL, 0, NULL, NULL);
+	ret = clEnqueueNDRangeKernel(cl_data->cmd_queue, cl_data->kernel, 2, NULL,  (size_t[]){WINDOW_WIDTH, WINDOW_HEIGHT}, (size_t[]){8, 24}, 0, NULL, NULL);
 	if (ret != CL_SUCCESS)
 		ft_error_exit(1, (char*[]){CL_ERR_KERNEL_LAUNCH}, EXIT_FAILURE);
 	ret = clEnqueueReadBuffer(cl_data->cmd_queue, cl_data->mem_obj, CL_TRUE, 0

@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_handler_mouse_motion.c                          :+:      :+:    :+:   */
+/*   ft_get_tracking_mouse_data.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/08 17:14:19 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/21 03:41:37 by sclolus          ###   ########.fr       */
+/*   Created: 2017/07/21 03:37:28 by sclolus           #+#    #+#             */
+/*   Updated: 2017/07/21 03:43:59 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	ft_handler_mouse_motion(int x, int y, void *param)
+uint8_t	*ft_get_tracking_mouse_data(void)
 {
-	t_fractal_type	fractal_type;
+	static uint8_t	tracking_data[SUPPORTED_FRACTAL_NBR] = {
+		0, 1, 0};
 
-	fractal_type = *((t_fractal_type*)((t_fractal_type**)param)[1]);
-	if (ft_get_tracking_mouse_data()[fractal_type])
-	{
-		if (fractal_type == JULIA)
-			ft_handler_mouse_motion_julia(x, y, param);
-		else if (fractal_type == NEWTOWN)
-			ft_handler_mouse_motion_newtown(x, y, param);
-	}
-	return (0);
+	return (tracking_data);
 }
