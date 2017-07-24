@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/03 10:40:16 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/08 20:41:13 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/23 06:01:13 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ pthread_t	*ft_pthread_create_drawing_threads(t_mlx_data *mlx_data
 		pthread_data[i].mlx_data = *mlx_data;
 		pthread_data[i].f = f;
 		if (i && pthread_create(threat_tab + i, NULL
-			, &ft_pthread_draw_fractal_routine, pthread_data + i))
+			, &ft_pthread_draw_fractal_routine, pthread_data + i) == -1)
 			ft_error_exit(1, (char*[]){ERR_PTHREAD_FAIL}, EXIT_FAILURE);
 		i++;
 	}

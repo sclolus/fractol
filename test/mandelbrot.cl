@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/19 06:42:48 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/21 10:37:38 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/23 05:52:37 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,21 @@ typedef struct	s_color_cadran
 ** COOL COLORS APPROVED BY ASIA
 */
 
+/* const __constant t_color_cadran	color_cadran = { */
+/* 	{{INTERPOLATION_X1, INTERPOLATION_Y1}, 0x00FF0000}, */
+/* 	{{INTERPOLATION_X2, INTERPOLATION_Y1}, 0x0000AA00}, */
+/* 	{{INTERPOLATION_X1, INTERPOLATION_Y2}, 0x000000FF}, */
+/* 	{{INTERPOLATION_X2, INTERPOLATION_Y2}, 0x00FF0000}, */
+/* }; */
+
 const __constant t_color_cadran	color_cadran = {
-	{{INTERPOLATION_X1, INTERPOLATION_Y1}, 0x00FF0000},
-	{{INTERPOLATION_X2, INTERPOLATION_Y1}, 0x0000AA00},
-	{{INTERPOLATION_X1, INTERPOLATION_Y2}, 0x000000FF},
-	{{INTERPOLATION_X2, INTERPOLATION_Y2}, 0x00FF0000},
+	{{INTERPOLATION_X1, INTERPOLATION_Y1}, 0x00110000},
+	{{INTERPOLATION_X2, INTERPOLATION_Y1}, 0xF0000},
+	{{INTERPOLATION_X1, INTERPOLATION_Y2}, 0xF000},
+	{{INTERPOLATION_X2, INTERPOLATION_Y2}, 0xF0000},
 };
 
-
+//0x110000
 
 # define INTERPOLATION_DX(x) (x - INTERPOLATION_X1)
 # define INTERPOLATION_DY(y) (y - INTERPOLATION_Y1)
@@ -165,7 +172,7 @@ __kernel void mandelbrot(__global __write_only int * restrict buffer, const int 
 	t_complexe						z;
 	unsigned int					i;
 
-	c = (t_complexe){cadran.min.real_part +  (distance.real_part) * pos_x
+	c = (t_complexe){cadran.min.real_part + (distance.real_part) * pos_x
 					 , cadran.min.imaginary_part + (distance.imaginary_part) * pos_y};
 	i = 0;
 	z = (t_complexe){0, 0};

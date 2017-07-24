@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/03 06:13:14 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/21 09:41:23 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/24 14:13:14 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,13 @@
 # include <pthread.h>
 # include <math.h>
 # include <stdio.h> //
+# include <gmp.h>
 
 # ifdef __APPLE__
 #  include <OpenCL/opencl.h>
 # else
 #  include <CL/cl.h>
-#endif
+# endif
 
 typedef void* MLX_WIN;
 typedef void* MLX_IMG;
@@ -71,12 +72,11 @@ typedef			void (f_draw_fractal)(t_pthread_execution_data*);
 typedef struct	s_mlx_data t_mlx_data;
 typedef struct	s_fractal_data t_fractal_data;
 typedef struct	s_cl_execution_data t_cl_execution_data;
-typedef			void (f_cl_draw_fractal)(t_mlx_data *, t_fractal_data *, t_cl_execution_data *cl_data);
+typedef			void (f_cl_draw_fractal)(t_mlx_data *, t_fractal_data *, t_cl_execution_data *);
 typedef struct	s_complexe_cadran t_complexe_cadran;
 typedef struct	s_fractal_data t_fractal_data;
 typedef struct	s_win_coords t_win_coords;
 typedef struct	s_win_cadran t_win_cadran;
-
 
 typedef struct	s_complexe
 {
@@ -451,5 +451,19 @@ void				ft_cl_burning_ship(t_mlx_data *mlx_data, t_fractal_data *fractal_data
 # define SCREENSHOT_FILENAME_HEADER "fractol_screenshot_"
 
 void			ft_create_screenshot(void *buffer, uint32_t width, uint32_t height);
+
+/*
+** TEst
+*/ //
+
+typedef struct	s_complexe_perturbation
+{
+	t_complexe	*x;
+	t_complexe	*a;
+	t_complexe	*b;
+	t_complexe	*c;
+	uint32_t	iteration_number;
+	uint8_t		pad[4];
+}				t_complexe_perturbation;
 
 #endif

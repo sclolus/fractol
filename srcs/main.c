@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/25 16:54:59 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/21 04:40:20 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/24 06:30:46 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	main(int argc, char **argv)
 	t_fractal_type		fractal_type;
 
 	data = NULL;
+
 	if (argc == 2 && argv)
 	{
 		fractal_type = ft_parse(argv[1]);
