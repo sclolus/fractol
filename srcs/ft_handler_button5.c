@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/05 20:08:01 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/23 09:14:12 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/25 12:04:23 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	ft_handler_button5(int x, int y, void *param)
 	fractal_data[fractal_type].c.max.real_part = ((fractal_data[fractal_type].c.max.real_part - c_x) * ZOOM_RATIO) + c_x;
 	fractal_data[fractal_type].c.max.imaginary_part = ((fractal_data[fractal_type].c.max.imaginary_part - c_y) * ZOOM_RATIO) + c_y;
 	fractal_data[fractal_type].iteration_number += log2(fractal_data[fractal_type].iteration_number) + 1;
-	ft_draw_fractal((t_mlx_data*)((t_mlx_data**)param)[0]
-					, *((t_fractal_type*)((t_fractal_type**)param)[1]));
-/*  	ft_draw_cl_fractal((t_mlx_data*)((t_mlx_data**)param)[0] */
+/* 	ft_draw_fractal((t_mlx_data*)((t_mlx_data**)param)[0] */
 /* 					, *((t_fractal_type*)((t_fractal_type**)param)[1])); */
+ 	ft_draw_cl_fractal((t_mlx_data*)((t_mlx_data**)param)[0]
+					, *((t_fractal_type*)((t_fractal_type**)param)[1]));
 }

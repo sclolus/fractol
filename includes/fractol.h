@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/03 06:13:14 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/24 14:13:14 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/25 12:06:10 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@
 # include <pthread.h>
 # include <math.h>
 # include <stdio.h> //
-# include <gmp.h>
 
 # ifdef __APPLE__
 #  include <OpenCL/opencl.h>

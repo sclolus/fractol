@@ -81,7 +81,7 @@ CC= gcc
 CC_FLAGS= -v -Weverything -Wall -Wextra  -Ofast  -g3 -fsanitize=address -fsanitize-blacklist=my_ignores.txt
 MLX_PATH=./minilibx_macos
 LIBFT_PATH=./libft/
-FLAGS= -L$(MLX_PATH) -I$(MLX_PATH) -lmlx -L$(LIBFT_PATH) -lft -I$(HDR_PATH) -I./includes  -framework AppKit  -framework OpenGL -framework OpenCL  #-I./gmp/ -L./gmp/ -lgmp
+FLAGS= -L$(MLX_PATH) -I$(MLX_PATH) -lmlx -L$(LIBFT_PATH) -lft -I$(HDR_PATH) -I./includes  -framework AppKit  -framework OpenGL -framework OpenCL
 
 all: submodule $(NAME)
 
@@ -90,9 +90,9 @@ submodule:
 	@make -C libft/
 
 $(NAME): $(OBJ)
-	libtool --mode=link $(CC) $(CC_FLAGS) $^ $(FLAGS) -o $(NAME) ./gmp/libgmp.la
+	$(CC) $(CC_FLAGS) $^ $(FLAGS) -o $(NAME)
 %.o : %.c $(HDRS)
-	$(CC) $(CC_FLAGS) $< -c -I$(HDR_PATH) -I./includes -I$(MLX_PATH) -I./gmp -o $@
+	$(CC) $(CC_FLAGS) $< -c -I$(HDR_PATH) -I./includes -I$(MLX_PATH) -o $@
 
 clean:
 	rm -f $(OBJ)

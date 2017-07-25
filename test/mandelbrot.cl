@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/19 06:42:48 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/23 05:52:37 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/25 13:07:29 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,8 +161,11 @@ const __constant t_color_cadran	color_cadran = {
 /* 			}															\ */
 /* 		i++;}) */
 
+//			buffer[(pos_y * (width)) + pos_x] = ((BILINEAR_INTERPOLATION(c) * i) & 0xFFFFFF); \
+//			buffer[(pos_y * (width)) + pos_x] = ((int)(i - (int)(log2(log(test) / log(2)))) & 0xFFFFFF); \
 
-__kernel void mandelbrot(__global __write_only int * restrict buffer, const int width
+__kernel void mandelbrot(__global __write_only int * restrict buffer
+						 , const int width
 						 , const int height, const t_complexe_cadran cadran
 						 , const unsigned int iteration_number, const t_complexe distance)
 {
