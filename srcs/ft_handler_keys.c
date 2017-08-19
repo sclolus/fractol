@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/26 21:05:42 by sclolus           #+#    #+#             */
-/*   Updated: 2017/08/19 06:19:18 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/08/19 06:30:24 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static t_keycode_f	*ft_get_keycodes_f(void)
 	return (keycodes_f);
 }
 
-int			ft_handler_keys_release(int keycode, void *param __attribute__((unused)))
+int			ft_handler_keys_release(int keycode, void __attribute__((unused)) *param)
 {
 	static t_keycode_f	*keycodes_f = NULL;
 	uint32_t			i;

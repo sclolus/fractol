@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/26 23:12:08 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/16 08:48:33 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/08/19 06:29:35 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ void	ft_handler_down(void *param)
 
 	fractal_data = ft_get_t_fractal_data();
 	fractal_type = *((t_fractal_type*)((t_fractal_type**)param)[1]);
-	coefficient = ft_double_distance(fractal_data[fractal_type].c.min.imaginary_part
-			, fractal_data[fractal_type].c.max.imaginary_part) / WINDOW_HEIGHT * 10;
+	coefficient =
+		ft_double_distance(fractal_data[fractal_type].c.min.imaginary_part
+		, fractal_data[fractal_type].c.max.imaginary_part) / WINDOW_HEIGHT * 10;
 	fractal_data[fractal_type].c.min.imaginary_part -= coefficient;
 	fractal_data[fractal_type].c.max.imaginary_part -= coefficient;
 	ft_draw_cl_fractal((t_mlx_data*)((t_mlx_data**)param)[0]

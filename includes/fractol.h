@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/03 06:13:14 by sclolus           #+#    #+#             */
-/*   Updated: 2017/08/19 06:12:01 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/08/19 06:44:48 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -443,15 +443,5 @@ void			ft_create_screenshot(void *buffer, uint32_t width, uint32_t height);
 /*
 ** TEst
 */ //
-
-typedef struct	s_complexe_perturbation
-{
-	t_complexe	*x;
-	t_complexe	*a;
-	t_complexe	*b;
-	t_complexe	*c;
-	uint32_t	iteration_number;
-	uint8_t		pad[4];
-}				t_complexe_perturbation;
 
 #endif
