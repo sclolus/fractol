@@ -59,14 +59,6 @@ SRC= srcs/main.c \
 	srcs/ft_handler_mouse_motion_newtown.c \
 	srcs/ft_handler_mouse_motion_beryl.c \
 	srcs/screenshot_bmp/ft_create_screenshot.c
-#	srcs/ft_get_z_coord.c \
-	srcs/quaternions/ft_quat_rotate_points.c \
-	srcs/ft_handler_q.c \
-	srcs/ft_handler_e.c \
-	srcs/ft_handler_a.c \
-	srcs/ft_handler_d.c \
-	srcs/ft_handler_s.c \
-	srcs/ft_handler_w.c \
 
 HDRS= includes/fractol.h
 OBJ= $(SRC:.c=.o)
