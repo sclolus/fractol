@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/19 06:42:48 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/25 13:07:29 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/07/26 00:43:26 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ typedef struct	s_color_cadran
 # define INTERPOLATION_Y1 -1.0
 # define INTERPOLATION_Y2 1.0
 
-# define DISTANCE(a, b) (a > b ? a - b : b - a)
-
 /* const __constant t_color_cadran	color_cadran = { */
 /* 	{{INTERPOLATION_X1, INTERPOLATION_Y1}, 0x0000CCFF}, */
 /* 	{{INTERPOLATION_X2, INTERPOLATION_Y1}, 0x00FF55FF}, */
@@ -75,18 +73,11 @@ typedef struct	s_color_cadran
 ** COOL COLORS APPROVED BY ASIA
 */
 
-/* const __constant t_color_cadran	color_cadran = { */
-/* 	{{INTERPOLATION_X1, INTERPOLATION_Y1}, 0x00FF0000}, */
-/* 	{{INTERPOLATION_X2, INTERPOLATION_Y1}, 0x0000AA00}, */
-/* 	{{INTERPOLATION_X1, INTERPOLATION_Y2}, 0x000000FF}, */
-/* 	{{INTERPOLATION_X2, INTERPOLATION_Y2}, 0x00FF0000}, */
-/* }; */
-
 const __constant t_color_cadran	color_cadran = {
-	{{INTERPOLATION_X1, INTERPOLATION_Y1}, 0x00110000},
-	{{INTERPOLATION_X2, INTERPOLATION_Y1}, 0xF0000},
-	{{INTERPOLATION_X1, INTERPOLATION_Y2}, 0xF000},
-	{{INTERPOLATION_X2, INTERPOLATION_Y2}, 0xF0000},
+	{{INTERPOLATION_X1, INTERPOLATION_Y1}, 0x00FF0000},
+	{{INTERPOLATION_X2, INTERPOLATION_Y1}, 0x0000AA00},
+	{{INTERPOLATION_X1, INTERPOLATION_Y2}, 0x000000FF},
+	{{INTERPOLATION_X2, INTERPOLATION_Y2}, 0x00FF0000},
 };
 
 //0x110000
