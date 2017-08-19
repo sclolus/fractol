@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/25 16:54:59 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/24 06:30:46 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/08/19 05:09:19 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ int	main(int argc, char **argv)
 			ft_error_exit(1, (char*[]){MLX_NEW_WIN_ERROR}, EXIT_FAILURE);
 		frames = ft_get_image_frames(connector, NBR_IMAGE_FRAME);
 		ft_draw_cl_fractal(&(t_mlx_data){connector, win, frames}, fractal_type);
-		mlx_hook(win, KeyPress, KeyPressMask
+		mlx_hook(win, KEYPRESS, KEYPRESSMASK
 				 , &ft_handler_keys, (void*[]){&(t_mlx_data){connector, win, frames}, &fractal_type});
-		mlx_hook(win, KeyRelease, KeyReleaseMask
+		mlx_hook(win, KEYRELEASE, KEYRELEASEMASK
 				, &ft_handler_keys_release, (void*[]){&(t_mlx_data){connector, win, frames}, &fractal_type});
-		mlx_hook(win, ButtonPress, ButtonPressMask
+		mlx_hook(win, BUTTONPRESS, BUTTONPRESSMASK
 				, &ft_handler_buttons, (void*[]){&(t_mlx_data){connector, win, frames}, &fractal_type});
-		mlx_hook(win, MotionNotify, 0, &ft_handler_mouse_motion, (void*[]){&(t_mlx_data){connector, win, frames}, &fractal_type});
+		mlx_hook(win, MOTIONNOTIFY, 0, &ft_handler_mouse_motion, (void*[]){&(t_mlx_data){connector, win, frames}, &fractal_type});
 		mlx_loop(connector);
 	}
 	else

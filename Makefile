@@ -30,10 +30,6 @@ SRC= srcs/main.c \
 	srcs/opencl/ft_get_cl_kernel.c \
 	srcs/opencl/ft_get_cl_program_from_source.c \
 	srcs/opencl/ft_get_device_id.c \
-	srcs/quaternions/ft_get_conjugate_quat.c \
-	srcs/quaternions/ft_get_quat_magnitude.c \
-	srcs/quaternions/ft_multiply_quat.c \
-	srcs/quaternions/ft_normalize_quat.c \
 	srcs/complexes/ft_multiply_complexe.c \
 	srcs/complexes/ft_square_complexe.c \
 	srcs/complexes/ft_add_complexe.c \
@@ -65,8 +61,6 @@ SRC= srcs/main.c \
 	srcs/screenshot_bmp/ft_create_screenshot.c
 #	srcs/ft_get_z_coord.c \
 	srcs/quaternions/ft_quat_rotate_points.c \
-	srcs/ft_get_color_interpolation.c \
-	srcs/ft_get_lerp.c \
 	srcs/ft_handler_q.c \
 	srcs/ft_handler_e.c \
 	srcs/ft_handler_a.c \

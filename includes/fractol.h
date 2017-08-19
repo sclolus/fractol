@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/03 06:13:14 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/25 12:06:10 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/08/19 06:12:01 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,6 @@ typedef enum	e_fractal_type
 void			*ft_mem_block_push_back_elem(t_mem_block *mem_block
 									, void *elem, uint32_t size);
 t_mem_block		*ft_create_mem_block(uint64_t capacity);
-t_mem_block		*ft_set_lines(t_mem_block *mem_block);
 
 /*
 ** Frames handling
@@ -317,16 +316,6 @@ int				ft_handler_mouse_motion(int x, int y, void *param);
 void			ft_handler_mouse_motion_julia(int x, int y, void *param);
 void			ft_handler_mouse_motion_newtown(int x, int y, void *param);
 void			ft_handler_mouse_motion_beryl(int x, int y, void *param);
-
-/*
-** Quaternions
-*/
-
-double			ft_get_quat_magnitude(t_quat *quat);
-t_quat			ft_normalize_quat(t_quat *quat);
-t_quat			ft_get_conjugate_quat(t_quat *quat);
-t_quat			ft_multiply_quat(t_quat a, t_quat b);
-void			ft_quat_rotate_points(t_vec *axis, double angle, t_mem_block *data);
 
 /*
 ** Complexe numbers

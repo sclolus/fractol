@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/05 18:45:57 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/18 01:36:25 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/08/19 05:33:49 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,15 @@
 static t_keycode_f	*ft_get_buttoncodes_f(void)
 {
 	static t_keycode_f	keycodes_f[] = {
-//		{ft_handler_button5, Button5, 0},
-		{ft_handler_button5, 6, 0},
-		{ft_handler_button4, Button4, 0}};
+		{ft_handler_button5, BUTTON5, 0},
+		{ft_handler_button4, BUTTON4, 0}};
 
 	if (sizeof(keycodes_f) / sizeof(t_keycode_f) != NBR_BUTTON_HOOKS)
 		ft_error_exit(1, (char*[]){INVALID_BUTTONS_HOOKS_NBR}, EXIT_FAILURE);
 	return (keycodes_f);
 }
 
-int			ft_handler_buttons(int keycode, int x, int y, void *param)
+int					ft_handler_buttons(int keycode, int x, int y, void *param)
 {
 	static t_keycode_f	*keycodes_f = NULL;
 	uint32_t			i;
@@ -37,7 +36,7 @@ int			ft_handler_buttons(int keycode, int x, int y, void *param)
 		if (keycodes_f[i].keycode == keycode)
 		{
 			keycodes_f[i].f(x, y, param);
-			break;
+			break ;
 		}
 		i++;
 		if (i == NBR_BUTTON_HOOKS)
