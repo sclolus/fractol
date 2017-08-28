@@ -6,14 +6,14 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/03 10:40:16 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/23 06:01:13 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/08/19 06:48:40 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
 pthread_t	*ft_pthread_create_drawing_threads(t_mlx_data *mlx_data
-							, t_pthread_execution_data *pthread_data, f_draw_fractal *f)
+					, t_pthread_execution_data *pthread_data, f_draw_fractal *f)
 {
 	static pthread_t					threat_tab[DRAWING_THREAD_NBR + 1];
 	uint32_t							i;

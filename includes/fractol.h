@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/03 06:13:14 by sclolus           #+#    #+#             */
-/*   Updated: 2017/08/19 06:44:48 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/08/19 06:50:30 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -370,6 +370,8 @@ void	ft_print_usage(void) __attribute__((noreturn));
 /*
 ** OpenCL
 */
+
+# define KERNEL_FLAGS "-cl-fast-relaxed-math -cl-no-signed-zeros -cl-mad-enable"
 
 # define MANDELBROT_FILENAME "./test/mandelbrot.cl"
 //# define MANDELBROT_FILENAME "./test/pertubation_test.cl"

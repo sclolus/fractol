@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/16 09:00:46 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/19 01:06:32 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/08/19 06:51:23 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,5 @@ void		ft_create_screenshot(void *buffer, uint32_t width, uint32_t height)
 		ft_error(1, (char*[]){ERR_CLOSE_SCREENSHOT}, 0);
 		return ;
 	}
-	printf("%s\n", filename);
 	ft_bzero(filename + sizeof(SCREENSHOT_FILENAME_HEADER), 256 - sizeof(SCREENSHOT_FILENAME_HEADER));
 }

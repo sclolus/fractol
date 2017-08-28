@@ -6,13 +6,14 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/16 02:10:16 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/16 02:10:59 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/08/19 06:49:23 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-cl_command_queue ft_get_cl_command_queue(cl_context context, cl_device_id device_id)
+cl_command_queue	ft_get_cl_command_queue(cl_context context
+										, cl_device_id device_id)
 {
 	cl_command_queue	cmd_queue;
 	cl_int				ret;
