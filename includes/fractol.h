@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/03 06:13:14 by sclolus           #+#    #+#             */
-/*   Updated: 2017/08/29 06:23:33 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/08/29 07:41:12 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,6 +210,7 @@ typedef enum	e_fractal_type
 	NEWTOWN = 2,
 	BERYL = 3,
 	BURNING_SHIP = 4,
+	MULTIBROT = 5,
 	SUPPORTED_FRACTAL_NBR,
 }				t_fractal_type;
 
@@ -285,7 +286,7 @@ t_pthread_execution_data	*ft_get_t_pthread_execution_data(void);
 ** Key handling
 */
 
-# define NBR_KEY_HOOKS 14
+# define NBR_KEY_HOOKS 15
 # define FUCK_NORME " number provided in macro expansion"
 # define INVALID_KEYS_HOOKS_NBR "Invalid keys_hooks" FUCK_NORME
 
@@ -310,6 +311,7 @@ void			ft_handler_p(void *param);
 void			ft_handler_2(void *param);
 void			ft_handler_1(void *param);
 void			ft_handler_5(void *param);
+void			ft_handler_6(void *param);
 void			ft_handler_4(void *param);
 void			ft_handler_3(void *param);
 
@@ -375,6 +377,8 @@ void	ft_print_usage(void) __attribute__((noreturn));
 # define NEWTOWN_FILENAME "./test/newtown.cl"
 # define BERYL_FILENAME "./test/beryl.cl"
 # define BURNING_SHIP_FILENAME "./test/burning_ship.cl"
+# define MULTIBROT_FILENAME "./test/multibrot.cl"
+
 
 # define CL_ERR_COMMAND_QUEUE "Creation of command queue failed"
 # define CL_ERR_GET_DEVICE_IDS "clGetDeviceIDs() failed"
@@ -422,6 +426,10 @@ void				ft_cl_beryl(t_mlx_data *mlx_data
 void				ft_cl_burning_ship(t_mlx_data *mlx_data
 						, t_fractal_data *fractal_data
 						, t_cl_execution_data *cl_data);
+void				ft_cl_multibrot(t_mlx_data *mlx_data
+				, t_fractal_data *fractal_data
+				, t_cl_execution_data *cl_data);
+
 
 /*
 ** Screenshots
