@@ -6,13 +6,11 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/25 13:56:03 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/03 06:22:30 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/08/29 06:12:08 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-#include <stdio.h>
 
 t_mem_block	*ft_create_mem_block(uint64_t capacity)
 {

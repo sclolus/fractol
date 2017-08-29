@@ -6,13 +6,13 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 18:43:15 by sclolus           #+#    #+#             */
-/*   Updated: 2017/08/19 05:30:17 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/08/29 05:59:14 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-t_image_frame	*ft_get_image_frames(MLX_PTR connector, uint32_t nbr_frames)
+t_image_frame	*ft_get_image_frames(t_mlx_ptr connector, uint32_t nbr_frames)
 {
 	t_image_frame		*frames;
 	uint32_t			i;

@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/19 06:42:26 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/21 05:56:15 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/08/29 06:12:43 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,6 @@ __kernel void julia(__global __write_only int * restrict buffer, const int width
 	i = 0;
 	z = (t_complexe){cadran.min.real_part +  (distance.real_part) * pos_x
 					 , cadran.min.imaginary_part + (distance.imaginary_part) * pos_y};
-//	printf("z.real_part: %lf, z.imaginary_part: %lf\n", z.real_part, z.imaginary_part);
 	base = z;
 	while (i < (iteration_number & 15))
 	{

@@ -6,13 +6,13 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/21 07:22:11 by sclolus           #+#    #+#             */
-/*   Updated: 2017/08/29 01:41:07 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/08/29 05:49:20 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-inline void	ft_set_beryl_kernel_arg(t_cl_execution_data *cl_data
+static inline void	ft_set_beryl_kernel_arg(t_cl_execution_data *cl_data
 									, t_fractal_data *fractal_data)
 {
 	static int			win_width = WINDOW_WIDTH;
