@@ -1,14 +1,14 @@
- /* ************************************************************************** */
- /*                                                                            */
- /*                                                        :::      ::::::::   */
- /*   ft_cl_multilia.c                                   :+:      :+:    :+:   */
- /*                                                    +:+ +:+         +:+     */
- /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
- /*                                                +#+#+#+#+#+   +#+           */
- /*   Created: 2017/08/29 08:47:47 by sclolus           #+#    #+#             */
-/*   Updated: 2017/08/29 08:53:01 by sclolus          ###   ########.fr       */
- /*                                                                            */
- /* ************************************************************************** */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_cl_multilia.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/08/29 09:53:22 by sclolus           #+#    #+#             */
+/*   Updated: 2017/08/29 09:55:40 by sclolus          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "fractol.h"
 
@@ -26,10 +26,8 @@ static inline void	ft_set_multilia_kernel_arg(t_cl_execution_data *cl_data
 	, fractal_data->c.max.imaginary_part) / WINDOW_HEIGHT};
 	ret = clSetKernelArg(cl_data->kernel, 0, sizeof(cl_mem)
 						, (void*)&cl_data->mem_obj);
-	ret |= clSetKernelArg(cl_data->kernel, 1, sizeof(int)
-						, (void*)&win_width);
-	ret |= clSetKernelArg(cl_data->kernel, 2, sizeof(int)
-						, (void*)&win_heigth);
+	ret |= clSetKernelArg(cl_data->kernel, 1, sizeof(int), (void*)&win_width);
+	ret |= clSetKernelArg(cl_data->kernel, 2, sizeof(int), (void*)&win_heigth);
 	ret |= clSetKernelArg(cl_data->kernel, 3, sizeof(t_complexe_cadran)
 						, (void*)&fractal_data->c);
 	ret |= clSetKernelArg(cl_data->kernel, 4, sizeof(uint32_t)

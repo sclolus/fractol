@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/21 07:22:11 by sclolus           #+#    #+#             */
-/*   Updated: 2017/08/29 05:50:43 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/08/29 09:57:09 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ static inline void	ft_set_beryl_kernel_arg(t_cl_execution_data *cl_data
 		ft_error_exit(1, (char*[]){CL_ERR_SET_ARG}, EXIT_FAILURE);
 }
 
-void		ft_cl_beryl(t_mlx_data *mlx_data, t_fractal_data *fractal_data
+void				ft_cl_beryl(t_mlx_data *mlx_data
+						, t_fractal_data *fractal_data
 						, t_cl_execution_data *cl_data)
 {
 	cl_int				ret;
