@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/05 17:25:25 by sclolus           #+#    #+#             */
-/*   Updated: 2017/08/29 08:13:58 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/08/29 08:54:16 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ inline t_fractal_data	*ft_get_t_fractal_data(void)
 	, {"burning_ship", BURNING_SHIP_FILENAME, {0, 0}, {{-2, -1}, {1, 1}}
 	, *ft_julia, *ft_cl_burning_ship, 2, 32, 0, {0}},
 	{"multibrot", MULTIBROT_FILENAME, {0, 0}, {{-2, -1}, {1, 1}}
-	, *ft_julia, *ft_cl_multibrot, 2, 32, 0, {0}}};
+	, *ft_julia, *ft_cl_multibrot, 3, 32, 0, {0}},
+	{"multilia", MULTILIA_FILENAME, {0, 0}, {{-2, -1}, {1, 1}}
+	, *ft_julia, *ft_cl_multilia, 3, 32, 1, {0}}};
 
 	return (fractals_data);
 }

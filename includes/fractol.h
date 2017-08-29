@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/03 06:13:14 by sclolus           #+#    #+#             */
-/*   Updated: 2017/08/29 07:41:12 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/08/29 08:59:35 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,6 +211,7 @@ typedef enum	e_fractal_type
 	BERYL = 3,
 	BURNING_SHIP = 4,
 	MULTIBROT = 5,
+	MULTILIA = 6,
 	SUPPORTED_FRACTAL_NBR,
 }				t_fractal_type;
 
@@ -286,7 +287,7 @@ t_pthread_execution_data	*ft_get_t_pthread_execution_data(void);
 ** Key handling
 */
 
-# define NBR_KEY_HOOKS 15
+# define NBR_KEY_HOOKS 16
 # define FUCK_NORME " number provided in macro expansion"
 # define INVALID_KEYS_HOOKS_NBR "Invalid keys_hooks" FUCK_NORME
 
@@ -312,6 +313,7 @@ void			ft_handler_2(void *param);
 void			ft_handler_1(void *param);
 void			ft_handler_5(void *param);
 void			ft_handler_6(void *param);
+void			ft_handler_7(void *param);
 void			ft_handler_4(void *param);
 void			ft_handler_3(void *param);
 
@@ -378,6 +380,7 @@ void	ft_print_usage(void) __attribute__((noreturn));
 # define BERYL_FILENAME "./test/beryl.cl"
 # define BURNING_SHIP_FILENAME "./test/burning_ship.cl"
 # define MULTIBROT_FILENAME "./test/multibrot.cl"
+# define MULTILIA_FILENAME "./test/multilia.cl"
 
 
 # define CL_ERR_COMMAND_QUEUE "Creation of command queue failed"
@@ -427,8 +430,11 @@ void				ft_cl_burning_ship(t_mlx_data *mlx_data
 						, t_fractal_data *fractal_data
 						, t_cl_execution_data *cl_data);
 void				ft_cl_multibrot(t_mlx_data *mlx_data
-				, t_fractal_data *fractal_data
-				, t_cl_execution_data *cl_data);
+						, t_fractal_data *fractal_data
+						, t_cl_execution_data *cl_data);
+void				ft_cl_multilia(t_mlx_data *mlx_data
+						, t_fractal_data *fractal_data
+						, t_cl_execution_data *cl_data);
 
 
 /*

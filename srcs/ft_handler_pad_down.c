@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 06:51:08 by sclolus           #+#    #+#             */
-/*   Updated: 2017/08/29 08:08:18 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/08/29 08:40:40 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_handler_pad_down(void *param)
 
 	fractal_data = ft_get_t_fractal_data();
 	if ((fractal_type = *((t_fractal_type*)((t_fractal_type**)param)[1]))
-		== MULTIBROT)
+		== MULTIBROT || fractal_type == MULTILIA)
 	{
 		if (fractal_data[fractal_type].degree > 0)
 			fractal_data[fractal_type].degree--;

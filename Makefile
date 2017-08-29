@@ -19,6 +19,7 @@ SRC= srcs/main.c \
 	srcs/opencl/ft_cl_beryl.c \
 	srcs/opencl/ft_cl_burning_ship.c \
 	srcs/opencl/ft_cl_multibrot.c \
+	srcs/opencl/ft_cl_multilia.c \
 	srcs/ft_julia.c \
 	srcs/ft_draw_fractal.c \
 	srcs/ft_draw_cl_fractal.c \
@@ -50,6 +51,7 @@ SRC= srcs/main.c \
 	srcs/ft_handler_2.c \
 	srcs/ft_handler_5.c \
 	srcs/ft_handler_6.c \
+	srcs/ft_handler_7.c \
 	srcs/ft_handler_4.c \
 	srcs/ft_handler_3.c \
 	srcs/ft_handler_buttons.c \
