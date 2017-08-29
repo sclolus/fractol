@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/03 06:13:14 by sclolus           #+#    #+#             */
-/*   Updated: 2017/08/29 06:17:17 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/08/29 06:23:33 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ typedef enum	e_frame_state
 
 typedef struct	s_image_frame
 {
-	t_mlx_img			frame;
+	t_mlx_img		frame;
 	void			*buffer;
 	t_frame_state	state;
 	int32_t			bits_per_pixel;
@@ -138,8 +138,8 @@ typedef struct	s_image_frame
 
 typedef struct	s_mlx_data
 {
-	t_mlx_ptr			connector;
-	t_mlx_win			win;
+	t_mlx_ptr		connector;
+	t_mlx_win		win;
 	t_image_frame	*frame;
 }				t_mlx_data;
 
@@ -176,7 +176,7 @@ typedef struct	s_cl_execution_data
 	cl_mem				mem_obj;
 }				t_cl_execution_data;
 
-typedef void	(f_draw_fractal)(t_pthread_execution_data*);
+typedef void	(t_f_draw_fractal)(t_pthread_execution_data*);
 
 typedef struct	s_fractal_data
 {
@@ -184,7 +184,7 @@ typedef struct	s_fractal_data
 	char				*cl_filename;
 	t_complexe			z0;
 	t_complexe_cadran	c;
-	f_draw_fractal		*f;
+	t_f_draw_fractal	*f;
 	void				(*cl_f)(t_mlx_data *, struct s_fractal_data *
 								, t_cl_execution_data *);
 	uint32_t			degree;
@@ -193,7 +193,7 @@ typedef struct	s_fractal_data
 	uint8_t				pad[7];
 }				t_fractal_data;
 
-typedef void	(f_cl_draw_fractal)(t_mlx_data *, t_fractal_data *
+typedef void	(t_f_cl_draw_fractal)(t_mlx_data *, t_fractal_data *
 										, t_cl_execution_data *);
 typedef struct	s_quat
 {
@@ -272,7 +272,7 @@ uint8_t			*ft_get_tracking_mouse_data(void);
 
 pthread_t					*ft_pthread_create_drawing_threads(
 				t_mlx_data *mlx_data
-				, t_pthread_execution_data *pthread_data, f_draw_fractal *f);
+				, t_pthread_execution_data *pthread_data, t_f_draw_fractal *f);
 void						ft_pthread_wait_drawing_threads(
 							pthread_t *thread_tab);
 void						*ft_pthread_draw_fractal_routine(void *arg);
@@ -286,7 +286,8 @@ t_pthread_execution_data	*ft_get_t_pthread_execution_data(void);
 */
 
 # define NBR_KEY_HOOKS 14
-# define INVALID_KEYS_HOOKS_NBR "Invalid keys_hooks number provided in macro expansion"
+# define FUCK_NORME " number provided in macro expansion"
+# define INVALID_KEYS_HOOKS_NBR "Invalid keys_hooks" FUCK_NORME
 
 int				ft_handler_keys(int keycode, void *param);
 int				ft_handler_keys_release(int keycode
@@ -317,7 +318,7 @@ void			ft_handler_3(void *param);
 */
 
 # define NBR_BUTTON_HOOKS 2
-# define INVALID_BUTTONS_HOOKS_NBR "Invalid buttons_hooks number given in macro expansion"
+# define INVALID_BUTTONS_HOOKS_NBR "Invalid buttons_hooks" FUCK_NORME
 
 int				ft_handler_buttons(int keycode, int x, int y, void *param);
 void			ft_handler_button5(int x, int y, void *param);
