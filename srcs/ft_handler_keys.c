@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/26 21:05:42 by sclolus           #+#    #+#             */
-/*   Updated: 2017/08/19 06:30:24 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/08/29 01:30:19 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ static t_keycode_f	*ft_get_keycodes_f(void)
 	return (keycodes_f);
 }
 
-int			ft_handler_keys_release(int keycode, void __attribute__((unused)) *param)
+int					ft_handler_keys_release(int keycode
+									, void __attribute__((unused)) *param)
 {
 	static t_keycode_f	*keycodes_f = NULL;
 	uint32_t			i;
@@ -55,11 +56,10 @@ int			ft_handler_keys_release(int keycode, void __attribute__((unused)) *param)
 	return (0);
 }
 
-int			ft_handler_keys(int keycode, void *param)
+int					ft_handler_keys(int keycode, void *param)
 {
 	static t_keycode_f	*keycodes_f = NULL;
 	uint32_t			i;
-	uint32_t			boolean;
 
 	i = 0;
 	if (!keycodes_f)
@@ -74,17 +74,11 @@ int			ft_handler_keys(int keycode, void *param)
 		i++;
 	}
 	i = 0;
-	boolean = 0;
 	while (i < NBR_KEY_HOOKS)
 	{
 		if (keycodes_f[i].used)
-		{
 			keycodes_f[i].f(param);
-			boolean = 1;
-		}
 		i++;
-		if (i == NBR_KEY_HOOKS && !boolean)
-			break ;
 	}
 	return (0);
 }

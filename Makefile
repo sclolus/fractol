@@ -58,13 +58,14 @@ SRC= srcs/main.c \
 	srcs/ft_handler_mouse_motion_julia.c \
 	srcs/ft_handler_mouse_motion_newtown.c \
 	srcs/ft_handler_mouse_motion_beryl.c \
-	srcs/screenshot_bmp/ft_create_screenshot.c
+	srcs/screenshot_bmp/ft_create_screenshot.c \
+	srcs/screenshot_bmp/ft_normalize_random_filename.c
 
 HDRS= includes/fractol.h
 OBJ= $(SRC:.c=.o)
 HDR_PATH= ./libft/includes/
 CC= gcc
-CC_FLAGS= -v -Weverything -Wall -Wextra  -Ofast  -g3 -fsanitize=address -fsanitize-blacklist=my_ignores.txt
+CC_FLAGS= -v -Weverything -Wall -Wextra -Werror -Ofast  -g3 -fsanitize=address -fsanitize-blacklist=my_ignores.txt
 MLX_PATH=./minilibx_macos
 LIBFT_PATH=./libft/
 FLAGS= -L$(MLX_PATH) -I$(MLX_PATH) -lmlx -L$(LIBFT_PATH) -lft -I$(HDR_PATH) -I./includes  -framework AppKit  -framework OpenGL -framework OpenCL

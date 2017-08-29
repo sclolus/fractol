@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 06:49:50 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/08 17:22:34 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/08/29 01:16:37 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	ft_handler_pad_up(void *param)
 
 	fractal_data = ft_get_t_fractal_data();
 	fractal_type = MANDELBROT;
-
 	fractal_data[fractal_type].c.min.real_part *= DEZOOM_RATIO;
 	fractal_data[fractal_type].c.min.imaginary_part *= DEZOOM_RATIO;
 	fractal_data[fractal_type].c.max.real_part *= DEZOOM_RATIO;

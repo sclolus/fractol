@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/03 06:13:14 by sclolus           #+#    #+#             */
-/*   Updated: 2017/08/19 06:50:30 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/08/29 05:30:20 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -441,6 +441,7 @@ void				ft_cl_burning_ship(t_mlx_data *mlx_data, t_fractal_data *fractal_data
 # define SCREENSHOT_FILENAME_HEADER "fractol_screenshot_"
 
 void			ft_create_screenshot(void *buffer, uint32_t width, uint32_t height);
+void			ft_normalize_random_filename(char *filename);
 
 /*
 ** TEst

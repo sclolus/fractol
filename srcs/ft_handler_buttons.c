@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/05 18:45:57 by sclolus           #+#    #+#             */
-/*   Updated: 2017/08/19 05:33:49 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/08/29 04:00:03 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 static t_keycode_f	*ft_get_buttoncodes_f(void)
 {
 	static t_keycode_f	keycodes_f[] = {
-		{ft_handler_button5, BUTTON5, 0},
+//		{ft_handler_button5, BUTTON5, 0},
+		{ft_handler_button5, 6, 0},
 		{ft_handler_button4, BUTTON4, 0}};
 
 	if (sizeof(keycodes_f) / sizeof(t_keycode_f) != NBR_BUTTON_HOOKS)

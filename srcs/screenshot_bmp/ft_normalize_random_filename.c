@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_handler_mouse_motion_julia.c                    :+:      :+:    :+:   */
+/*   ft_normalize_random_filename.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/08 17:12:40 by sclolus           #+#    #+#             */
-/*   Updated: 2017/08/29 01:22:56 by sclolus          ###   ########.fr       */
+/*   Created: 2017/08/29 05:29:21 by sclolus           #+#    #+#             */
+/*   Updated: 2017/08/29 05:30:21 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	ft_handler_mouse_motion_julia(int x, int y, void *param)
+inline void	ft_normalize_random_filename(char *filename)
 {
-	t_fractal_data	*fractal_data;
+	uint32_t	i;
 
-	fractal_data = ft_get_t_fractal_data();
-	ft_get_t_fractal_data()[JULIA].z0 = (t_complexe){(double)(x)
-			/ (WINDOW_WIDTH) - 2, (double)(y) / (WINDOW_HEIGHT) - 1};
-	ft_draw_cl_fractal((t_mlx_data*)((t_mlx_data**)param)[0]
-			, *((t_fractal_type*)((t_fractal_type**)param)[1]));
+	i = 0;
+	while (filename[i])
+	{
+		if (!ft_isprint(filename[i]))
+			filename[i] = (char)(ABS(filename[i]) % (128 - ' ')) + ' ';
+		i++;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/21 07:22:11 by sclolus           #+#    #+#             */
-/*   Updated: 2017/08/19 06:46:58 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/08/29 01:41:07 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ inline void	ft_set_beryl_kernel_arg(t_cl_execution_data *cl_data
 	, fractal_data->c.max.real_part) / WINDOW_WIDTH
 	, ft_double_distance(fractal_data->c.min.imaginary_part
 	, fractal_data->c.max.imaginary_part) / WINDOW_HEIGHT};
-	ret |= clSetKernelArg(cl_data->kernel, 0, sizeof(cl_mem)
+	ret = clSetKernelArg(cl_data->kernel, 0, sizeof(cl_mem)
 						, (void*)&cl_data->mem_obj);
 	ret |= clSetKernelArg(cl_data->kernel, 1, sizeof(int)
 						, (void*)&win_width);

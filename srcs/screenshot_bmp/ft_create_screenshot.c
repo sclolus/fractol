@@ -6,24 +6,11 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/16 09:00:46 by sclolus           #+#    #+#             */
-/*   Updated: 2017/08/19 06:51:23 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/08/29 05:29:40 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-static void	ft_normalize_random_filename(char *filename)
-{
-	uint32_t	i;
-
-	i = 0;
-	while (filename[i])
-	{
-		if (!ft_isprint(filename[i]))
-			filename[i] = (char)(ABS(filename[i]) % (128 - ' ')) + ' ';
-		i++;
-	}
-}
 
 static char	*ft_get_random_filename(void)
 {
@@ -49,8 +36,8 @@ static char	*ft_get_random_filename(void)
 
 static void	ft_put_bmp_header_into_file(int fd, uint32_t size)
 {
-	static unsigned short	header_field = 0x4D42;
-	static char				buffer[18];
+	const static unsigned short		header_field = 0x4D42;
+	static char						buffer[18];
 
 	size += 54;
 	ft_memcpy(buffer, &header_field, 2);
@@ -61,7 +48,8 @@ static void	ft_put_bmp_header_into_file(int fd, uint32_t size)
 	write(fd, buffer, 18);
 }
 
-static void	ft_put_image_header_into_file(int fd, uint32_t width, uint32_t height)
+static void	ft_put_image_header_into_file(int fd, uint32_t width
+										, uint32_t height)
 {
 	static char	buffer[36];
 
@@ -78,26 +66,24 @@ static void	ft_put_image_header_into_file(int fd, uint32_t width, uint32_t heigh
 	write(fd, buffer, 36);
 }
 
-static void	ft_put_buffer_into_file(int fd, int *buffer, uint32_t width, uint32_t height)
+static void	ft_put_buffer_into_file(int fd, int *buffer
+									, uint32_t width, uint32_t height)
 {
-	static char	bmp_buffer[((WINDOW_WIDTH + 3) & ~3) * WINDOW_HEIGHT * 4];
+	static char	bmp_buffer[4 * ((WINDOW_WIDTH + 3) & ~3) * WINDOW_HEIGHT];
 	uint32_t	offset;
-	uint32_t	size;
 	uint32_t	i;
 	uint32_t	u;
 
 	i = width * height;
 	offset = 0;
-	size = ((WINDOW_WIDTH + 3) & ~3) * WINDOW_HEIGHT * 4;
 	while (i > 0)
 	{
-		u = 0;
-		while (u < width)
+		u = ~0U;
+		while (++u < width)
 		{
-			ft_memcpy(bmp_buffer + (offset), buffer + ((i - 1) / width * width) + u, 3);
-			i--;
+			ft_memcpy(bmp_buffer + (offset), buffer + ((i--
+						- 1) / width * width) + u, 3);
 			offset += 3;
-			u++;
 		}
 		while (u & (4 - 1))
 		{
@@ -106,7 +92,7 @@ static void	ft_put_buffer_into_file(int fd, int *buffer, uint32_t width, uint32_
 			u++;
 		}
 	}
-	write(fd, bmp_buffer, size);
+	write(fd, bmp_buffer, 4 * ((WINDOW_WIDTH + 3) & (~3)) * WINDOW_HEIGHT);
 }
 
 void		ft_create_screenshot(void *buffer, uint32_t width, uint32_t height)
@@ -129,5 +115,6 @@ void		ft_create_screenshot(void *buffer, uint32_t width, uint32_t height)
 		ft_error(1, (char*[]){ERR_CLOSE_SCREENSHOT}, 0);
 		return ;
 	}
-	ft_bzero(filename + sizeof(SCREENSHOT_FILENAME_HEADER), 256 - sizeof(SCREENSHOT_FILENAME_HEADER));
+	ft_bzero(filename + sizeof(SCREENSHOT_FILENAME_HEADER), 256
+			- sizeof(SCREENSHOT_FILENAME_HEADER));
 }
