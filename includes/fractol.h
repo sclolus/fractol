@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/03 06:13:14 by sclolus           #+#    #+#             */
-/*   Updated: 2017/08/30 14:08:18 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/08/30 14:19:53 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -397,13 +397,13 @@ void						ft_print_usage(void) __attribute__((noreturn));
 
 # define KERNEL_FLAGS "-cl-fast-relaxed-math -cl-no-signed-zeros -cl-mad-enable"
 
-# define MANDELBROT_FILENAME "./test/mandelbrot.cl"
-# define JULIA_FILENAME "./test/julia.cl"
-# define NEWTOWN_FILENAME "./test/newtown.cl"
-# define BERYL_FILENAME "./test/beryl.cl"
-# define BURNING_SHIP_FILENAME "./test/burning_ship.cl"
-# define MULTIBROT_FILENAME "./test/multibrot.cl"
-# define MULTILIA_FILENAME "./test/multilia.cl"
+# define MANDELBROT_FILENAME "./srcs/opencl/mandelbrot.cl"
+# define JULIA_FILENAME "./srcs/opencl/julia.cl"
+# define NEWTOWN_FILENAME "./srcs/opencl/newtown.cl"
+# define BERYL_FILENAME "./srcs/opencl/beryl.cl"
+# define BURNING_SHIP_FILENAME "./srcs/opencl/burning_ship.cl"
+# define MULTIBROT_FILENAME "./srcs/opencl/multibrot.cl"
+# define MULTILIA_FILENAME "./srcs/opencl/multilia.cl"
 
 # define CL_ERR_COMMAND_QUEUE "Creation of command queue failed"
 # define CL_ERR_GET_DEVICE_IDS "clGetDeviceIDs() failed"
