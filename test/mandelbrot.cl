@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/19 06:42:48 by sclolus           #+#    #+#             */
-/*   Updated: 2017/07/26 00:43:26 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/08/30 00:58:28 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ const __constant t_color_cadran	color_cadran = {
 # define LINEAR_INTERPOLATION(x) (((((int)((LINEAR_X2 - x) / (LINEAR_X2 - LINEAR_X1)) * EXTRACT_RED(LINEAR_Y1)) \
 										+ (int)(((x - LINEAR_X1) / (LINEAR_X2 - LINEAR_X1)) * EXTRACT_RED(LINEAR_Y2))) & 0xFF0000) \
 								  | ((((int)(((LINEAR_X2 - x) / (LINEAR_X2 - LINEAR_X1)) * EXTRACT_GREEN(LINEAR_Y1)) \
-									   + (int)(((x - LINEAR_X1) / (LINEAR_X2 - LINEAR_X1)) * EXTRACT_GREEN(LINEAR_Y2)))) & 0x00FF00) \
+ 									   + (int)(((x - LINEAR_X1) / (LINEAR_X2 - LINEAR_X1)) * EXTRACT_GREEN(LINEAR_Y2)))) & 0x00FF00) \
 								  | ((((int)(((LINEAR_X2 - x) / (LINEAR_X2 - LINEAR_X1)) * EXTRACT_BLUE(LINEAR_Y1)) \
 									   + (int)(((x - LINEAR_X1) / (LINEAR_X2 - LINEAR_X1)) * EXTRACT_BLUE(LINEAR_Y2)))) & 0x0000FF))
 
@@ -137,23 +137,10 @@ const __constant t_color_cadran	color_cadran = {
 			* z.imaginary_part) + c.real_part, 2.0 * z.real_part * z.imaginary_part + c.imaginary_part}; \
 		if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4) \
 		{ \
-			buffer[(pos_y * (width)) + pos_x] = ((BILINEAR_INTERPOLATION(c) * i) & 0xFFFFFF); \
+			buffer[(pos_y * (width)) + pos_x] = ((BILINEAR_INTERPOLATION(c) << i) & 0xFFFFFF); \
 			return ; \
 		} \
 		i++;})
-/* # define ITERATION_CHECK(c) ({	z = (t_complexe){z.real_part * z.real_part - (z.imaginary_part \ */
-/* 			* z.imaginary_part) + c.real_part, 2.0 * z.real_part * z.imaginary_part + c.imaginary_part}; \ */
-/* 			if (distance_tmp > (z.real_part * z.real_part  + z.imaginary_part * z.imaginary_part - 1)) \ */
-/* 				distance_tmp = ((z.real_part ) * (z.real_part ) + (z.imaginary_part - 1) * (z.imaginary_part - 1)); \ */
-/* 			if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4) \ */
-/* 			{															\ */
-/* 				buffer[(pos_y * (width)) + pos_x] = 0; \ */
-/* 				return ;												\ */
-/* 			}															\ */
-/* 		i++;}) */
-
-//			buffer[(pos_y * (width)) + pos_x] = ((BILINEAR_INTERPOLATION(c) * i) & 0xFFFFFF); \
-//			buffer[(pos_y * (width)) + pos_x] = ((int)(i - (int)(log2(log(test) / log(2)))) & 0xFFFFFF); \
 
 __kernel void mandelbrot(__global __write_only int * restrict buffer
 						 , const int width

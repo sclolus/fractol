@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/16 02:03:57 by sclolus           #+#    #+#             */
-/*   Updated: 2017/08/19 06:20:35 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/08/30 03:19:18 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@ t_cl_execution_data	*ft_get_cl_execution_data(t_fractal_type fractal_type)
 	}
 	if (current_fractal_type != fractal_type)
 	{
+		if (current_fractal_type != SUPPORTED_FRACTAL_NBR)
+		{
+			clReleaseProgram(cl_data.program);
+			clReleaseKernel(cl_data.kernel);
+		}
 		cl_data.program = ft_get_cl_program_from_source(cl_data.context
 							, fractal_data[fractal_type].cl_filename);
 		cl_data.kernel = ft_get_cl_kernel(cl_data.program
