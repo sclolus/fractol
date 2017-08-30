@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/03 06:13:14 by sclolus           #+#    #+#             */
-/*   Updated: 2017/08/30 07:27:43 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/08/30 14:08:18 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,6 +256,7 @@ void						ft_draw_fractal(t_mlx_data *mlx_data
 						, t_fractal_type fractal_type);
 
 t_fractal_data				*ft_get_t_fractal_data(void);
+void						ft_set_fractals_data(t_fractal_data *data);
 t_fractal_data				*ft_get_reset_data(void);
 void						ft_mandelbrot(
 							t_pthread_execution_data *pthread_data);
@@ -338,7 +339,7 @@ void						ft_handler_3(void *param);
 ** Button handling
 */
 
-# define NBR_BUTTON_HOOKS 2
+# define NBR_BUTTON_HOOKS 3
 # define INVALID_BUTTONS_HOOKS_NBR "Invalid buttons_hooks" FUCK_NORME
 
 int							ft_handler_buttons(int keycode, int x, int y
