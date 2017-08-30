@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/15 22:35:31 by sclolus           #+#    #+#             */
-/*   Updated: 2017/08/30 03:27:50 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/08/30 07:23:54 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ inline void	ft_draw_cl_fractal(t_mlx_data *mlx_data
 	static t_fractal_data		*fractal_data = NULL;
 	t_cl_execution_data			*cl_data;
 
+	if (*ft_get_render_mode() == FRACTOL_RENDER_NORMAL)
+	{
+		ft_draw_fractal(mlx_data, fractal_type);
+		return ;
+	}
 	if (!fractal_data)
 		fractal_data = ft_get_t_fractal_data();
 	cl_data = ft_get_cl_execution_data(fractal_type);

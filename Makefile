@@ -22,6 +22,7 @@ SRC= srcs/main.c \
 	srcs/opencl/ft_cl_multilia.c \
 	srcs/ft_julia.c \
 	srcs/ft_draw_fractal.c \
+	srcs/ft_get_render_mode.c \
 	srcs/ft_draw_cl_fractal.c \
 	srcs/ft_get_t_fractal_data.c \
 	srcs/ft_get_tracking_mouse_data.c \
@@ -49,6 +50,7 @@ SRC= srcs/main.c \
 	srcs/ft_handler_down.c \
 	srcs/ft_handler_p.c \
 	srcs/ft_handler_r.c \
+	srcs/ft_handler_m.c \
 	srcs/ft_handler_t.c \
 	srcs/ft_handler_1.c \
 	srcs/ft_handler_2.c \

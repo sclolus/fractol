@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/03 06:13:14 by sclolus           #+#    #+#             */
-/*   Updated: 2017/08/30 07:17:52 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/08/30 07:27:43 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -262,6 +262,15 @@ void						ft_mandelbrot(
 void						ft_julia(t_pthread_execution_data *pthread_data);
 
 /*
+** Render modes
+*/
+
+# define FRACTOL_RENDER_NORMAL 0
+# define FRACTOL_RENDER_GPU 1
+
+int32_t						*ft_get_render_mode(void);
+
+/*
 ** Mouse tracking
 */
 
@@ -289,7 +298,7 @@ t_pthread_execution_data	*ft_get_t_pthread_execution_data(void);
 ** Key handling
 */
 
-# define NBR_KEY_HOOKS 19
+# define NBR_KEY_HOOKS 20
 # define FUCK_NORME " number provided in macro expansion"
 # define INVALID_KEYS_HOOKS_NBR "Invalid keys_hooks" FUCK_NORME
 
@@ -308,6 +317,7 @@ void						ft_handler_page_down(void *param);
 void						ft_handler_pad_down(void *param);
 void						ft_handler_pad_up(void *param);
 void						ft_handler_r(void *param);
+void						ft_handler_m(void *param);
 void						ft_handler_q(void *param);
 void						ft_handler_e(void *param);
 void						ft_handler_w(void *param);
