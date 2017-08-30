@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/03 06:13:14 by sclolus           #+#    #+#             */
-/*   Updated: 2017/08/29 10:17:33 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/08/30 06:16:29 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ typedef void* t_mlx_img;
 typedef void* t_mlx_ptr;
 
 # define WINDOW_NAME "fractol"
-# define WINDOW_WIDTH 1920
-# define WINDOW_HEIGHT 1080
+# define WINDOW_WIDTH 1280
+# define WINDOW_HEIGHT 720
 
 # define PI 3.14159265359
 # define K 0.5
@@ -58,7 +58,8 @@ typedef void* t_mlx_ptr;
 
 # define ABS(x) (x < 0 ? -x : x)
 
-# define FRACTOL_USAGE "usage: ./fractol (\"mandelbrot\" | \"julia\")"
+# define PLZ " | \"burning_ship\" | \"multibrot\" | \"multilia\" | \"beryl\")"
+# define FRACTOL_USAGE "usage: ./fractol (\"mandelbrot\" | \"julia\"" PLZ
 
 /*
 ** typedef struct	s_vec t_vec;
@@ -255,6 +256,7 @@ void						ft_draw_fractal(t_mlx_data *mlx_data
 						, t_fractal_type fractal_type);
 
 t_fractal_data				*ft_get_t_fractal_data(void);
+t_fractal_data				*ft_get_reset_data(void);
 void						ft_mandelbrot(
 							t_pthread_execution_data *pthread_data);
 void						ft_julia(t_pthread_execution_data *pthread_data);
@@ -287,7 +289,7 @@ t_pthread_execution_data	*ft_get_t_pthread_execution_data(void);
 ** Key handling
 */
 
-# define NBR_KEY_HOOKS 16
+# define NBR_KEY_HOOKS 19
 # define FUCK_NORME " number provided in macro expansion"
 # define INVALID_KEYS_HOOKS_NBR "Invalid keys_hooks" FUCK_NORME
 
@@ -301,8 +303,11 @@ void						ft_handler_right(void *param);
 void						ft_handler_left(void *param);
 void						ft_handler_down(void *param);
 void						ft_handler_up(void *param);
+void						ft_handler_page_up(void *param);
+void						ft_handler_page_down(void *param);
 void						ft_handler_pad_down(void *param);
 void						ft_handler_pad_up(void *param);
+void						ft_handler_r(void *param);
 void						ft_handler_q(void *param);
 void						ft_handler_e(void *param);
 void						ft_handler_w(void *param);

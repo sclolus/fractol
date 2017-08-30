@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/19 06:42:26 by sclolus           #+#    #+#             */
-/*   Updated: 2017/08/30 01:42:56 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/08/30 03:51:57 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ const __constant t_color_cadran	color_cadran = {
 			* z.imaginary_part) + c.real_part, 2.0 * z.real_part * z.imaginary_part + c.imaginary_part}; \
 		if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4) \
 		{ \
-			buffer[(pos_y * (width)) + pos_x] = (((BILINEAR_INTERPOLATION(base) * i)) & 0xFFFFFF); \
+			buffer[(pos_y * (width)) + pos_x] = (((BILINEAR_INTERPOLATION(base) << i)) & 0xFFFFFF); \
 			return ; \
 		} \
 		i++;})

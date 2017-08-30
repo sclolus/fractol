@@ -40,12 +40,15 @@ SRC= srcs/main.c \
 	srcs/ft_handler_keys.c \
 	srcs/ft_handler_pad_up.c \
 	srcs/ft_handler_pad_down.c \
+	srcs/ft_handler_page_up.c \
+	srcs/ft_handler_page_down.c \
 	srcs/ft_handler_esc.c \
 	srcs/ft_handler_right.c \
 	srcs/ft_handler_left.c \
 	srcs/ft_handler_up.c \
 	srcs/ft_handler_down.c \
 	srcs/ft_handler_p.c \
+	srcs/ft_handler_r.c \
 	srcs/ft_handler_t.c \
 	srcs/ft_handler_1.c \
 	srcs/ft_handler_2.c \

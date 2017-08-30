@@ -6,13 +6,13 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/15 22:35:31 by sclolus           #+#    #+#             */
-/*   Updated: 2017/08/30 01:44:27 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/08/30 03:27:50 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	ft_draw_cl_fractal(t_mlx_data *mlx_data
+inline void	ft_draw_cl_fractal(t_mlx_data *mlx_data
 						, t_fractal_type fractal_type)
 {
 	static t_fractal_data		*fractal_data = NULL;

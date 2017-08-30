@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/19 06:42:48 by sclolus           #+#    #+#             */
-/*   Updated: 2017/08/30 00:58:28 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/08/30 05:28:30 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ typedef struct	s_color_cadran
 /* 	{{INTERPOLATION_X2, INTERPOLATION_Y1}, 0x0000CF00}, */
 /* 	{{INTERPOLATION_X1, INTERPOLATION_Y2}, 0x000000AF}, */
 /* 	{{INTERPOLATION_X2, INTERPOLATION_Y2}, 0x00101010}, */
-/* }; */
+/* } ;*/
 
 /*
 ** COOL COLORS APPROVED BY ASIA
@@ -137,7 +137,7 @@ const __constant t_color_cadran	color_cadran = {
 			* z.imaginary_part) + c.real_part, 2.0 * z.real_part * z.imaginary_part + c.imaginary_part}; \
 		if ((z.real_part * z.real_part) + (z.imaginary_part * z.imaginary_part) > 4) \
 		{ \
-			buffer[(pos_y * (width)) + pos_x] = ((BILINEAR_INTERPOLATION(c) << i) & 0xFFFFFF); \
+			buffer[(pos_y * (width)) + pos_x] = ((BILINEAR_INTERPOLATION(c) * i) & 0xFFFFFF); \
 			return ; \
 		} \
 		i++;})
