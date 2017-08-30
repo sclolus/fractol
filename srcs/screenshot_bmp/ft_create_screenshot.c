@@ -6,11 +6,12 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/16 09:00:46 by sclolus           #+#    #+#             */
-/*   Updated: 2017/08/29 05:29:40 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/08/30 07:15:38 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+#include <sys/stat.h>
 
 static char	*ft_get_random_filename(void)
 {
@@ -100,6 +101,7 @@ void		ft_create_screenshot(void *buffer, uint32_t width, uint32_t height)
 	char	*filename;
 	int		fd;
 
+	mkdir("./screenshots", S_IRWXU);
 	if (!(filename = ft_get_random_filename()))
 		return ;
 	if ((fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, S_IRWXU)) == -1)

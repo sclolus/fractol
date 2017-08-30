@@ -6,7 +6,7 @@
 /*   By: sclolus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/03 06:13:14 by sclolus           #+#    #+#             */
-/*   Updated: 2017/08/30 06:16:29 by sclolus          ###   ########.fr       */
+/*   Updated: 2017/08/30 07:17:52 by sclolus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -456,7 +456,7 @@ void						ft_cl_multilia(t_mlx_data *mlx_data
 # define ERR_OPEN_SCREENSHOT "failed to open() screenshot file"
 # define ERR_CLOSE_SCREENSHOT "failed to close() screenshot file"
 
-# define SCREENSHOT_FILENAME_HEADER "fractol_screenshot_"
+# define SCREENSHOT_FILENAME_HEADER "./screenshots/fractol_screenshot_"
 
 void						ft_create_screenshot(void *buffer, uint32_t width
 									, uint32_t height);
